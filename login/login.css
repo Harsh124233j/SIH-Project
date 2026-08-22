@@ -1,98 +1,95 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
     background-color: #ffffff;
-    color: #111111;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-.container {
+.login-container {
     width: 100%;
     max-width: 440px;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Top Logo Icon */
-.logo-icon {
-    width: 48px;
-    height: 48px;
-    background-color: #219150;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-}
-/* #219150*/
-.logo-icon svg {
-    width: 24px;
-    height: 24px;
-    fill: #ffffff;
 }
 
 /* Headings */
-h1 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 8px;
+.login-container h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 6px;
     text-align: center;
-    color:#1d4234;
 }
 
 .subtitle {
     font-size: 14px;
-    color: #666666;
-    margin-bottom: 32px;
+    color: #6b7280;
+    margin-bottom: 24px;
     text-align: center;
 }
 
-/* Card Wrapper */
-.login-card {
+/* Top Icon Container */
+.app-icon {
+    background-color: #111111;
+    color: #ffffff;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+/* Main Card Box */
+.card {
+    background: #ffffff;
     width: 100%;
-    border: 1px solid #e5e5e5;
-    border-radius: 16px;
     padding: 32px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border-radius: 16px;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 /* Google Button */
 .google-btn {
     width: 100%;
-    padding: 12px 16px;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    background-color: #ffffff;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
     font-size: 14px;
     font-weight: 500;
-    color: #111111;
+    color: #1f2937;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background 0.2s;
+}
+
+.google-btn img {
+    width: 18px;
+    height: 18px;
 }
 
 .google-btn:hover {
-    background-color: #f9f9f9;
-}
-
-.google-btn svg {
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
+    background: #f9fafb;
 }
 
 /* Divider */
@@ -100,46 +97,49 @@ h1 {
     display: flex;
     align-items: center;
     text-align: center;
-    margin: 24px 0;
-    color: #888888;
+    margin: 20px 0;
+    color: #9ca3af;
     font-size: 12px;
 }
 
-.divider::before, .divider::after {
+.divider::before,
+.divider::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .divider span {
-    padding: 0 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 11px;
-    color: #999999;
+    padding: 0 10px;
 }
 
-/* Form Fields */
-.form-group {
-    margin-bottom: 20px;
+/* Form Styles */
+.input-group {
+    margin-bottom: 16px;
 }
 
-.form-label-row {
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 6px;
+}
+
+.label-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: #111111;
+.label-row label {
+    margin-bottom: 0;
 }
 
 .forgot-link {
     font-size: 12px;
-    color: #555555;
+    color: #4b5563;
     text-decoration: none;
 }
 
@@ -147,77 +147,49 @@ label {
     text-decoration: underline;
 }
 
-.input-wrapper {
+.input-field {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.email-spacing {
-    margin-top: 8px;
-}
-
-.input-icon {
+.input-field i {
     position: absolute;
-    left: 12px;
-    width: 16px;
-    height: 16px;
-    color: #888888;
+    left: 14px;
+    color: #9ca3af;
+    font-size: 14px;
 }
 
-input {
+.input-field input {
     width: 100%;
-    padding: 11px 12px 11px 38px;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
+    padding: 12px 14px 12px 40px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
     font-size: 14px;
-    color: #111111;
+    color: #1f2937;
     outline: none;
     transition: border-color 0.2s;
 }
 
-input:focus {
+.input-field input:focus {
     border-color: #111111;
-}
-
-input::placeholder {
-    color: #aaaaaa;
 }
 
 /* Submit Button */
 .submit-btn {
     width: 100%;
     padding: 12px;
+    background: #111111;
+    color: #ffffff;
     border: none;
-    border-radius: 8px;
-    background-color: #219150;
-    color: #10221b;
+    border-radius: 10px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 4px;
-    transition: background-color 0.2s;
+    margin-top: 8px;
+    transition: opacity 0.2s;
 }
 
 .submit-btn:hover {
-    background-color: #10221b;
-    color:white;
-}
-
-/* Footer Signup Link */
-.footer-text {
-    margin-top: 24px;
-    font-size: 13px;
-    color: #666666;
-    text-align: center;
-}
-
-.footer-text a {
-    color: #111111;
-    font-weight: 500;
-    text-decoration: none;
-}
-
-.footer-text a:hover {
-    text-decoration: underline;
+    opacity: 0.9;
 }
