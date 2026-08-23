@@ -30,7 +30,7 @@
                       <a href="#">Explore Offbeat</a>
                       <a href="#">Guide</a>
                       <a href="#">About Us</a>
-                      <a href="login.html" class="btn ">Sign Up
+                      <a href="#" class="btn ">Sign Up
                          <svg
                               viewBox="0 0 24 24"
                               focusable="false"
@@ -161,6 +161,204 @@
 
              </div>
         </div>
+
+         <!-- service section and package section skip krdo ,isme kuch mat krna -->
+
+        <!-- service section  -->
+         <section class="service">
+            <h1>We have the best services available for you!</h1>
+            <div class="cards">
+                 <!-- 1st service  -->
+                <div class="item">
+                    <img src="./assets/1a.jpg" alt="">
+                    <h3>Flight Services</h3>
+                    <p>Arrival and departure</p>
+                </div>
+                <!-- 2nd service  -->
+                 <div class="item">
+                    <img src="./assets/2a.jpg" alt="">
+                    <h3>Food Services</h3>
+                    <p>Catering</p>
+                </div>
+                <!-- 3rd service -->
+                 <div class="item">
+                    <img src="./assets/3a.jpg" alt="">
+                    <h3>Travel Services</h3>
+                    <p>Pick-up/drop</p>
+                </div>
+                <!-- 4th service -->
+                 <div class="item">
+                    <img src="./assets/4a.jpg" alt="">
+                    <h3>Hotel Services</h3>
+                    <p>Check-in/out</p>
+                </div>
+
+            </div>
+         </section>
+
+         <!-- package section  -->
+          <section class="package">
+            <h2 >Packages</h2>
+            <!-- package-content  -->
+             <div class="package-content">
+             <div class="text-title">
+               <h3>Best Selling Destinations</h3>
+             </div>
+                <!-- 1st image -->
+                <a href="#">
+                <div class="image">
+                        <img src="./assets/p1.jpg" alt="">
+                        <h3>Starting at Rs.2,700 </h3>
+                  </div>
+              </a>
+              <!-- 2nd image  -->
+               <a href="#">
+                <div class="image">
+                        <img src="./assets/p2.jpg" alt="">
+                        <h3>Starting at Rs.4,999 </h3>
+                  </div>
+              </a>
+              <!-- 3rd image  -->
+               <a href="#">
+                <div class="image">
+                        <img src="./assets/p3.jpg" alt="">
+                        <h3>Starting at Rs.9,999</h3>
+                  </div>
+              </a>
+              <!-- 4th image  -->
+               <a href="#">
+                <div class="image">
+                        <img src="./assets/p4.jpg" alt="">
+                        <h3>Starting at Rs.30,000 </h3>
+                  </div>
+              </a>
+              <!-- 5th image  -->
+               <a href="#">
+                <div class="image">
+                        <img src="./assets/pac1.jpeg" alt="">
+                        <h3>Starting at Rs.37,700/- </h3>
+                  </div>
+              </a>
+              <!-- 6th image  -->
+               <a href="#">
+                <div class="image">
+                        <img src="./assets/pac1.jpg" alt="">
+                        <h3>Starting at Rs.47,500/- </h3>
+                  </div>
+              </a>
+              <!-- 7th image  -->
+               <a href="#">
+                <div class="image">
+                        <img src="./assets/pac3.jpg" alt="">
+                        <h3>Starting at Rs.58,500/- </h3>
+                  </div>
+              </a>
+              <!-- 8th image  -->
+               <a href="#">
+                <div class="image">
+                        <img src="./assets/pac7.jpg" alt="">
+                        <h3>Starting at Rs.59,500/- </h3>
+                  </div>
+              </a>
+              <!-- 9th image  -->
+               <a href="#">
+                <div class="image">
+                        <img src="./assets/l1.jpg" alt="">
+                        <h3>Starting at Rs.65,500/-</h3>
+                  </div>
+              </a>
+             </div>
+          </section>
+
+          <!-- booking section  -->
+           <section class="booking">
+            <!-- adding video in background -->
+             <h2>Booking</h2>
+            <video src="./assets/stone.mp4" type="video/mp4" autoplay muted loop></video>
+
+              <div class="content">
+                <h1>ADVENTURE</h1>
+                <p>See the World for Less! Explore Amazing Destinations with Our Budget-Friendly Packages.</p>
+
+                <div class="detail">
+                  <!-- is form wale action main jo link add krna ho kr dena  -->
+                  <form action="">
+                              <div class="head" >Search your Destination</div>
+
+                    <div class="destination">
+                    <label for="city" >Enter your details</label>
+                    </div>
+                    
+                <div class="form-group ">
+                    <input type="text" class="form-control" placeholder="Enter Your Name">
+                </div>
+
+                <div class="destination">
+                      <label for="city" >Enter your date</label>
+                  </div>
+
+                  <div class="form-group">
+                   <input autocomplete="off" type="date" class="form-control" placeholder="Select your date">
+                </div>
+
+                <div class="destination">
+                      <label for="city" >WHERE TO?</label>
+                  </div>
+                  <!-- select item wala div  -->
+                  <div class="form-group">
+                     <select id="destination" name="destination">
+                        <option value="agra" selected>Agra</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="jaipur">Jaipur</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="varanasi">Varanasi</option>
+                        <option value="goa">Goa</option>
+                      </select>
+                  </div>
+                  <!-- day input wala div  -->
+                <div class="form-group " style="margin-top:20px">
+                  <div class="lable_total flex">
+                     <label class="destination"  for="price">DAYS : <span id="result">5</span> 
+                      </label>
+                     </div>
+
+                <input id="mySlider" type="range" min="0" max="8" value="5"  >
+                <!-- inbuilt java script for showing current value..  -->
+                    <script>
+                                mySlider.oninput = showSliderValue;
+                                function showSliderValue() {
+                                    result.innerText = this.value;
+                                }
+                     </script>
+                 </div>
+            </form>
+                </div>
+
+                <!-- submit button tag for your input details  -->
+                 <a href="#" class="pill-btn ">
+                        <!-- SVG User Check Icon -->
+                          <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            viewBox="0 0 24 24" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            stroke-width="2.5" 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round"
+                            class="icon"
+                          >
+                            <!-- Person -->
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <!-- Checkmark -->
+                            <polyline points="16 11 18 13 22 9" />
+                          </svg>
+                        </a>
+          </div>
+
+           </section>
     </div>
+   
+    
   </body>
 </html>
