@@ -1,0 +1,24 @@
+{
+  "name": "sih-project",
+  "version": "1.0.0",
+  "description": "//For the first time to clone repo to local machine\r git clone https://github.com/Harsh124233j/SIH-Project.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harsh124233j/SIH-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Harsh124233j/SIH-Project/issues"
+  },
+  "homepage": "https://github.com/Harsh124233j/SIH-Project#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
