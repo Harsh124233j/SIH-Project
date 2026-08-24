@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Itenary</title>
+  </head>
+  <body>
+    <h3><%=finalAns["trip_overview"]%></h3>
+    <% for(let part of finalAns["summary_table"]) {%>
+       <form method="GET" action="/showItenary/<%=part["day"]%>">
+        <p>Day : <%= part["day"]%></p>
+        <p>Main Destination: <%= part["main_destination"]%></p>
+        <p>Activities : <%= part["key_activities"]%></p>
+        <p>Overnight Stay : <%= part["overnight_stay"]%></p>
+        <button>View in details</button>
+        <hr>
+       </form>
+    <%} %>
+    <h3>Nearby Transport Hubs</h3>
+    <% for(let opt of finalAns["transport_hubs"]){ %>
+        <p>Type : <%=opt["hub_type"]%></p>
+        <p>Name : <%=opt["name"]%></p>
+        <p>Estimated fare : <%=opt["estimated_fare"]%></p>
+    <% } %>
+
+    <h3>Budget Estimates :</h3>
+    <div>
+      <h2>Budget</h2>
+      <p>Accommodation : <%=finalAns["budget_estimate"]["budget"]["accommodation"]%></p>
+      <p>Local Transport : <%=finalAns["budget_estimate"]["budget"]["local_transport"]%></p>
+      <p>Intercity Transport : <%=finalAns["budget_estimate"]["budget"]["intercity_transport"]%></p>
+      <p>Entry Tickets : <%=finalAns["budget_estimate"]["budget"]["entry_tickets"]%></p>
+      <p>Food : <%=finalAns["budget_estimate"]["budget"]["food"]%></p>
+      <p>Miscelleneous : <%=finalAns["budget_estimate"]["budget"]["misc"]%></p>
+      <p><b>Total : <%=finalAns["budget_estimate"]["budget"]["total"]%></b></p>
+    </div>
+    <div>
+      <h2>Mid range</h2>
+      <p>Accommodation : <%=finalAns["budget_estimate"]["mid_range"]["accommodation"]%></p>
+      <p>Local Transport : <%=finalAns["budget_estimate"]["mid_range"]["local_transport"]%></p>
+      <p>Intercity Transport : <%=finalAns["budget_estimate"]["mid_range"]["intercity_transport"]%></p>
+      <p>Entry Tickets : <%=finalAns["budget_estimate"]["mid_range"]["entry_tickets"]%></p>
+      <p>Food : <%=finalAns["budget_estimate"]["mid_range"]["food"]%></p>
+      <p>Miscelleneous : <%=finalAns["budget_estimate"]["mid_range"]["misc"]%></p>
+      <p><b>Total : <%=finalAns["budget_estimate"]["mid_range"]["total"]%></b></p>
+    </div>
+    <div>
+      <h2>Luxury :</h2>
+      <p>Accommodation : <%=finalAns["budget_estimate"]["comfortable"]["accommodation"]%></p>
+      <p>Local Transport : <%=finalAns["budget_estimate"]["comfortable"]["local_transport"]%></p>
+      <p>Intercity Transport : <%=finalAns["budget_estimate"]["comfortable"]["intercity_transport"]%></p>
+      <p>Entry Tickets : <%=finalAns["budget_estimate"]["comfortable"]["entry_tickets"]%></p>
+      <p>Food : <%=finalAns["budget_estimate"]["comfortable"]["food"]%></p>
+      <p>Miscelleneous : <%=finalAns["budget_estimate"]["comfortable"]["misc"]%></p>
+      <p><b>Total : <%=finalAns["budget_estimate"]["comfortable"]["total"]%></b></p>
+    </div>
+  </body>
+</html>
