@@ -11,7 +11,7 @@
     "url": "git+https://github.com/Harsh124233j/SIH-Project.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Harsh, Aryan, Kavyansh, Divyansh, Himanshu, Kashvi",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
@@ -19,6 +19,14 @@
   },
   "homepage": "https://github.com/Harsh124233j/SIH-Project#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "@openrouter/sdk": "^1.2.57",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "ejs-mate": "^4.0.0",
+    "express": "^5.2.1",
+    "jsonrepair": "^3.15.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^9.9.3",
+    "nodemon": "^3.1.14"
   }
 }
