@@ -1,0 +1,882 @@
+/* =========================================================
+    RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.days-value{
+    color: #ffffff;
+}
+html,
+body {
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    overflow: hidden;
+
+    background: #10221b;
+
+    color: #ffffff;
+
+    font-family: "Inter", sans-serif;
+}
+
+
+/* =========================================================
+    COLORS
+========================================================= */
+
+:root {
+
+    /*
+        VOYARA NATURE PALETTE
+        --yellow is intentionally retained as the existing variable name
+        so no HTML/JavaScript or selector structure needs to change.
+        but the newer version had diferent color combinations so only the values fro colours har changed and not the variable names
+        Visually it now represents the required blue accent.
+    */
+    --yellow: #47addd;
+
+    --green: #219150;
+
+    --background: #10221b;
+
+    --card: #0b3d3b;
+
+    --border: rgba(71, 173, 221, 0.24);
+
+    --muted: #9ab0a8;
+
+}
+
+
+/* =========================================================
+    COMPLETE SCREEN
+========================================================= */
+
+.page {
+
+    width: 100vw;
+    height: 900px;
+
+    min-width: 0;
+    min-height: 0;
+
+    position: relative;
+
+    overflow: hidden;
+
+    /*
+        NATURE BACKGROUND
+        -------------------------------------------------------
+        The original page dimensions and positioning are untouched.
+        A scenic image is placed behind a dark green/teal overlay
+        so the planner still has the same high-contrast visual feel.
+
+        Put a suitable forest/lake image named:
+            voyara-nature-bg.jpg
+        in the same folder as this CSS file.
+
+        The gradient remains as a fallback if the image is missing.
+    */
+    background: url("bgimage2.jpg") center center / cover no-repeat;
+
+}
+
+
+/* subtle grain */
+
+.page::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.14;
+
+    background-image:
+
+        radial-gradient(
+            rgba(255,255,255,0.09) 0.5px,
+            transparent 0.5px
+        );
+
+    background-size: 4px 4px;
+
+    mix-blend-mode: soft-light;
+
+}
+
+/* =========================================================
+    PLANNER AREA
+========================================================= */
+
+.planner-wrapper {
+
+    width: 100%;
+
+    height: calc(100vh - 57px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 2;
+    overflow: hidden;
+    /* padding: 20px; */
+
+}
+
+
+/* =========================================================
+    MAIN CARD
+
+    ORIGINAL:
+        width  = 1027px
+        height = 421px
+
+    The width is restricted by BOTH:
+        1. browser width
+        2. browser height
+
+    This keeps the exact aspect ratio when shrinking.
+========================================================= */
+
+.planner-card {
+    /*
+        Original screenshot size
+        -------------------------
+        Width  = 1027px
+        Height = 421px
+        */
+
+    --scale: min(
+        1,
+        calc((100vw - 120px) / 1027),
+        calc((100vh - 115px) / 421)
+    );
+
+    width: 1027px;
+    height: 500px;
+
+    transform: scale(var(--scale));
+
+    transform-origin: center center;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    padding: 32px 33px;
+
+    border-radius: 18px;
+
+    /*
+        MAIN CARD SURFACE
+        -------------------------------------------------------
+        Width, height, padding, radius, transform and flex layout
+        are exactly the same as the original.
+        Only the visual surface, border and shadow are changed.
+    */
+    border: 1px solid rgba(71, 174, 221, 0.663);
+
+    background: rgba(103, 184, 199, 0.5);
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,0.06),
+
+        0 15px 40px
+        rgba(0,0,0,0.38);
+}
+
+
+/* =========================================================
+    LEFT CONTROLS
+========================================================= */
+
+.controls {
+
+    width: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    flex-shrink: 1;
+
+}
+
+
+.field-group {
+
+    width: 100%;
+
+    margin-bottom: 18px;
+
+}
+
+
+.field-group > label,
+.label-row label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: rgba(255, 255, 255, 0.95);
+
+    font-size: 10px;
+
+    line-height: 1;
+
+    font-weight: 500;
+
+    letter-spacing: 1.05px;
+
+}
+
+
+/* =========================================================
+    DESTINATION
+========================================================= */
+
+.select-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+}
+
+
+select {
+
+    appearance: none;
+
+    width: 100%;
+
+    height: 40px;
+
+    border: 2px solid rgba(40, 156, 210, 0.768);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    padding:
+        0 35px
+        0 14px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+}
+
+select option{
+    background: rgba(88, 158, 190, 0.7);
+}
+
+select:focus {  
+
+    border-color: rgba(88, 158, 190, 0.7);
+
+}
+
+
+.select-arrow {
+
+    position: absolute;
+
+    right: 12px;
+
+    top: 50%;
+
+    transform:
+        translateY(-55%);
+
+    color: rgba(255,255,255,0.72);
+
+    font-size: 14px;
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================================
+    DAYS
+========================================================= */
+
+.days-group {
+
+    margin-bottom: 20px;
+
+}
+
+
+.label-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 4px;
+
+}
+
+
+.label-row label {
+
+    margin-bottom: 0;
+
+}
+
+
+.days-value {
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+}
+
+.days-value {
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+}
+
+.slider-wrapper {
+
+    width: 100%;
+
+    height: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+input[type="range"] {
+
+    appearance: none;
+
+    width: 100%;
+
+    height: 3px;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: rgba(255,255,255,0.60);
+
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+
+    appearance: none;
+
+    width: 13px;
+    height: 13px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--yellow);
+
+    cursor: pointer;
+
+}
+
+
+input[type="range"]::-moz-range-thumb {
+
+    width: 13px;
+    height: 13px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: var(--yellow);
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================================
+    BUDGET
+========================================================= */
+
+.budget-group {
+
+    margin-bottom: 18px;
+
+}
+
+
+.budget-options {
+
+    width: 100%;
+
+    display: flex;
+
+    gap: 7px;
+
+}
+
+
+.budget-btn {
+
+    height: 30px;
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 0 8px;
+
+    border: 2px solid rgb(71, 174, 221);
+
+    border-radius: 18px;
+
+    background: #ffffff27;
+
+    color: rgba(255, 255, 255, 0.855);
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+}
+
+
+.budget-btn.active {
+
+    border-color: #127babe9;
+
+    color: #0e2b81;
+
+    background:
+        rgba(88, 155, 187, 0.607);
+
+}
+
+
+.budget-btn:hover {
+
+    color: #ffffff;
+
+    border-color: rgba(56, 145, 186, 0.658);
+
+}
+
+
+/* =========================================================
+    VIBE
+========================================================= */
+
+.vibe-group {
+
+    margin-bottom: 20px;
+
+}
+
+
+.vibe-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 7px;
+
+}
+
+
+.vibe-btn {
+
+    width: 100%;
+
+    min-width: 0;
+
+    height: 30px;
+
+    border: 2px solid rgba(24, 111, 152, 0.266);
+
+    border-radius: 17px;
+
+    background: #ffffff27;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+}
+
+
+.vibe-btn:hover {
+
+    color: #ffffff;
+
+    border-color: rgba(33, 145, 80, 0.79);
+
+}
+
+
+.vibe-btn.selected {
+
+    color: #09652f;
+
+    border-color: var(--green);
+
+    background:
+        rgba(33,145,80,0.08);
+
+}
+
+
+/* =========================================================
+    GENERATE BUTTON
+========================================================= */
+
+.generate-btn {
+
+    width: 100%;
+
+    height: 43px;
+
+    margin-top: auto;
+
+    border: none;
+
+    border-radius: 23px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    background: var(--yellow);
+
+    color: #121212;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.generate-btn:hover {
+
+    background: #69c2ea;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.generate-btn:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+.wand {
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================================
+    RIGHT ITINERARY
+========================================================= */
+
+.itinerary {
+
+    flex: 1;
+
+    min-width: 0;
+
+    min-height: 0;
+
+    height: 100%;
+
+    margin-left:
+
+        clamp(
+            18px,
+            2.1vw,
+            33px
+        );
+
+    border: 3px solid rgba(7, 54, 37, 0.28);
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.empty-state {
+
+    width: 100%;
+
+    padding: 0 10px;
+
+    text-align: center;
+
+}
+
+
+.empty-icon {
+
+    width: 27px;
+    height: 27px;
+
+    margin:
+        0 auto 15px;
+
+    border:
+        2px solid rgba(13, 50, 155, 0.42);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: rgba(255,255,255,0.85);
+
+    font-size: 13px;
+
+    transform:
+        rotate(-25deg);
+
+}
+
+
+.empty-state p {
+
+    color: rgba(255, 255, 255, 0.895);
+
+    font-size: 10px;
+
+    line-height: 1.55;
+
+}
+
+
+.success-icon {
+
+    color: var(--yellow);
+
+    border-color: #055024;
+
+    transform: none;
+
+}
+
+
+/* =========================================================
+    WIDTH RESPONSIVENESS
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .navigation {
+
+        gap: 12px;
+
+    }
+
+    .navigation a {
+
+        font-size: 10px;
+
+    }
+
+    .planner-wrapper {
+
+        padding:
+            15px 25px;
+
+    }
+
+}
+
+
+/* =========================================================
+    SHORT SCREEN
+========================================================= */
+
+@media (max-height: 620px) {
+
+    .planner-wrapper {
+
+        padding:
+            8px 15px;
+
+    }
+
+
+    .planner-card {
+
+        width: min(
+
+            1027px,
+
+            calc(100vw - 70px),
+
+            calc(
+                (100vh - 80px)
+                * 2.439
+            )
+
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+    VERY SHORT SCREEN
+========================================================= */
+
+@media (max-height: 500px) {
+
+    .navbar {
+
+        height: 50px;
+
+    }
+
+
+    .planner-wrapper {
+
+        height:
+            calc(100vh - 50px);
+
+        padding: 6px 12px;
+
+    }
+
+
+    .planner-card {
+
+        padding:
+            16px 20px;
+
+    }
+
+
+    .field-group {
+
+        margin-bottom: 10px;
+
+    }
+
+
+    .budget-group,
+    .vibe-group {
+
+        margin-bottom: 10px;
+
+    }
+
+
+    select {
+
+        height: 34px;
+
+    }
+
+
+    .budget-btn,
+    .vibe-btn {
+
+        height: 26px;
+
+    }
+
+
+    .generate-btn {
+
+        height: 37px;
+
+    }
+
+}

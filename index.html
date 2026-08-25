@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Voyara — Travel Planner</title>
+
+    <link rel="stylesheet" href="style2.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+    <main class="page">
+        <!-- ================= MAIN PLANNER ================= -->
+
+        <section class="planner-wrapper">
+
+            <div class="planner-card">
+
+                <!-- ================= LEFT PANEL ================= -->
+
+                <div class="controls">
+
+
+                    <!-- Destination -->
+
+                    <div class="field-group">
+
+                        <label for="destination">
+                            WHERE TO?
+                        </label>
+
+                        <div class="select-wrapper">
+
+                            <select id="destination">
+
+                                <option>Agra</option>
+                                <option>Delhi</option>
+                                <option>Jaipur</option>
+                                <option>Mumbai</option>
+                                <option>Varanasi</option>
+                                <option>Goa</option>
+
+                            </select>
+
+                            <span class="select-arrow">
+                                ⌄
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Days -->
+
+                    <div class="field-group days-group">
+
+                        <div class="label-row">
+
+                            <label for="daysSlider">
+                                HOW MANY DAYS?
+                            </label>
+
+                            <span
+                                class="days-value"
+                                id="daysValue"
+                            >
+                                4
+                            </span>
+
+                        </div>
+
+
+                        <div class="slider-wrapper">
+
+                            <input
+                                type="range"
+                                id="daysSlider"
+                                min="1"
+                                max="7"
+                                value="4"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <!-- passenger count -->
+
+                    <div class="field-group passengers-group">
+
+                    <div class="label-row">
+
+                        <label for="passengersSlider">
+                            HOW MANY PASSENGERS?
+                        </label>
+
+                        <span
+                            class="days-value"
+                            id="passengersValue"
+                        >
+                            4
+                        </span>
+
+                    </div>
+
+                    <div class="slider-wrapper">
+
+                        <input
+                            type="range"
+                            id="passengersSlider"
+                            min="1"
+                            max="7"
+                            value="4"
+                        >
+
+                    </div>
+
+                </div>
+                    <!-- Budget -->
+
+                    <div class="field-group budget-group">
+
+                        <label>
+                            BUDGET
+                        </label>
+
+
+                        <div class="budget-options">
+
+                            <button
+                                class="budget-btn"
+                                type="button"
+                            >
+                                Shoestring
+                            </button>
+
+                            <button
+                                class="budget-btn active"
+                                type="button"
+                            >
+                                Comfort
+                            </button>
+
+                            <button
+                                class="budget-btn"
+                                type="button"
+                            >
+                                Luxury
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Vibe -->
+
+                    <div class="field-group vibe-group">
+
+                        <label>
+                            YOUR VIBE
+                        </label>
+
+
+                        <div class="vibe-grid">
+
+                            <button
+                                class="vibe-btn selected"
+                                type="button"
+                            >
+                                Adventure
+                            </button>
+
+                            <button
+                                class="vibe-btn"
+                                type="button"
+                            >
+                                Slow &amp; Relaxed
+                            </button>
+
+                            <button
+                                class="vibe-btn"
+                                type="button"
+                            >
+                                Culture
+                            </button>
+
+                            <button
+                                class="vibe-btn"
+                                type="button"
+                            >
+                                Food
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Generate -->
+
+                    <button
+                        class="generate-btn"
+                        id="generateBtn"
+                        type="button"
+                    >
+
+                        <span class="wand">
+                            ✣
+                        </span>
+
+                        <span>
+                            Generate my itinerary
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- ================= RIGHT PANEL ================= -->
+
+                <div class="itinerary">
+
+                    <div
+                        class="empty-state"
+                        id="emptyState"
+                    >
+
+                        <div class="empty-icon">
+                            ◇
+                        </div>
+
+                        <p>
+                            Your day-by-day journey will appear here, with the
+                            <br>
+                            carbon you save.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ---------------------------------------------
+            DAYS SLIDER
+        --------------------------------------------- */
+
+        const slider =
+            document.getElementById("daysSlider");
+
+        const daysValue =
+            document.getElementById("daysValue");
+
+
+        slider.addEventListener("input", () => {
+
+            daysValue.textContent = slider.value;
+
+        });
+
+        /* ---------------------------------------------
+            passenger SLIDER
+        --------------------------------------------- */
+
+        const passengersSlider =
+            document.getElementById("passengersSlider");
+
+        const passengersValue =
+            document.getElementById("passengersValue");
+
+
+        passengersSlider.addEventListener("input", () => {
+
+            passengersValue.textContent = passengersSlider.value;
+
+        });
+
+
+        /* ---------------------------------------------
+            BUDGET BUTTONS
+        --------------------------------------------- */
+
+        const budgetButtons =
+            document.querySelectorAll(".budget-btn");
+
+
+        budgetButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                budgetButtons.forEach(btn => {
+
+                    btn.classList.remove("active");
+
+                });
+
+                button.classList.add("active");
+
+            });
+
+        });
+
+
+
+        /* ---------------------------------------------
+           VIBE BUTTONS
+        --------------------------------------------- */
+
+        const vibeButtons =
+            document.querySelectorAll(".vibe-btn");
+
+
+        vibeButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                vibeButtons.forEach(btn => {
+
+                    btn.classList.remove("selected");
+
+                });
+
+                button.classList.add("selected");
+
+            });
+
+        });
+
+
+
+        /* ---------------------------------------------
+           GENERATE BUTTON
+        --------------------------------------------- */
+
+        const generateButton =
+            document.getElementById("generateBtn");
+
+        const emptyState =
+            document.getElementById("emptyState");
+
+
+        generateButton.addEventListener("click", () => {
+
+            const destination =
+                document.getElementById("destination").value;
+
+            const days =
+                slider.value;
+
+
+            emptyState.innerHTML = `
+
+                <div class="empty-icon success-icon">
+                    ✓
+                </div>
+
+                <p>
+                    Your ${days}-day journey to ${destination}
+                    <br>
+                    is ready to be generated.
+                </p>
+
+            `;
+
+        });
+
+    </script>
+
+</body>
+</html>
