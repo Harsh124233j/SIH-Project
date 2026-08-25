@@ -32,7 +32,7 @@
           <a href="/offbeat">Explore Offbeat</a>
           <a href="#">Guide</a>
           <a href="#">About Us</a>
-          <a href="<%= typeof user !== 'undefined' && user ? '#' : '/login' %>" class="btn ">
+          <a href="<%= typeof user !== 'undefined' && user ? '#' : '/login' %>" class="btn">
             <%= typeof user !=='undefined' && user ? 'Welcome ' + user + '!' : 'Sign Up' %>
               <% if (!locals.user) { %>
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
