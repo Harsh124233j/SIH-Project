@@ -45,7 +45,7 @@ body {
         but the newer version had diferent color combinations so only the values fro colours har changed and not the variable names
         Visually it now represents the required blue accent.
     */
-    --yellow: #47addd;
+    --yellow: #C44E3B;
 
     --green: #219150;
 
@@ -89,7 +89,7 @@ body {
 
         The gradient remains as a fallback if the image is missing.
     */
-    background: url("bgimage2.jpg") center center / cover no-repeat;
+    background: url("bgimage4.png") center center / cover no-repeat;
 
 }
 
@@ -196,9 +196,9 @@ body {
         are exactly the same as the original.
         Only the visual surface, border and shadow are changed.
     */
-    border: 1px solid rgba(71, 174, 221, 0.663);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 
-    background: rgba(103, 184, 199, 0.5);
+    background: rgba(18, 24, 27, 0.75);
 
     box-shadow:
         inset 0 1px 0
@@ -215,7 +215,7 @@ body {
 
 .controls {
 
-    width: 300px;
+    width: 100%;
 
     display: flex;
 
@@ -224,7 +224,12 @@ body {
     min-width: 0;
 
     flex-shrink: 1;
-
+    height: 100%;
+  min-height: 580px;            /* Forces vertical room inside the box */
+  padding: 20px 32px;            /* Adds inner top/bottom and side space */
+  gap: 4px;                     /* Creates consistent vertical gaps between form controls */
+  justify-content: space-between; /* Spreads inputs top-to-bottom evenly */
+  box-sizing: border-box;
 }
 
 
@@ -474,17 +479,17 @@ input[type="range"]::-moz-range-thumb {
 
     padding: 0 8px;
 
-    border: 2px solid rgb(71, 174, 221);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
     border-radius: 18px;
 
-    background: #ffffff27;
+    background: rgba(255, 255, 255, 0.08);
 
-    color: rgba(255, 255, 255, 0.855);
+    color: #D1D5DB;
 
     font-family: inherit;
 
-    font-size: 10px;
+    font-size: 14px;
 
     cursor: pointer;
 
@@ -493,26 +498,24 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-.budget-btn.active {
-
-    border-color: #127babe9;
-
-    color: #0e2b81;
-
-    background:
-        rgba(88, 155, 187, 0.607);
-
-}
-
 
 .budget-btn:hover {
 
     color: #ffffff;
-
-    border-color: rgba(56, 145, 186, 0.658);
+    background: rgba(255, 255, 255, 0.15);
+    border-color:1px solid rgba(255, 255, 255, 0.4);
 
 }
 
+.budget-btn.active {
+
+    border: 1.5px solid #C44E3B;
+    color: #ffffff;
+
+    background:
+        rgba(196, 78, 59, 0.25);
+
+}
 
 /* =========================================================
     VIBE
@@ -545,17 +548,17 @@ input[type="range"]::-moz-range-thumb {
 
     height: 30px;
 
-    border: 2px solid rgba(24, 111, 152, 0.266);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
     border-radius: 17px;
 
-    background: #ffffff27;
+    background: rgba(255, 255, 255, 0.08);
 
-    color: #ffffff;
+    color: #D1D5DB;
 
     font-family: inherit;
 
-    font-size: 10px;
+    font-size: 15px;
 
     cursor: pointer;
 
@@ -565,22 +568,21 @@ input[type="range"]::-moz-range-thumb {
 
 
 .vibe-btn:hover {
-
+    background : rgba(255, 255, 255, 0.15);
     color: #ffffff;
-
-    border-color: rgba(33, 145, 80, 0.79);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 
 }
 
 
 .vibe-btn.selected {
 
-    color: #09652f;
+    color: #FFFFFF;
 
-    border-color: var(--green);
+    border: 1.5px solid #C44E3B;
 
     background:
-        rgba(33,145,80,0.08);
+        rgba(196, 78, 59, 0.25);
 
 }
 
@@ -596,7 +598,7 @@ input[type="range"]::-moz-range-thumb {
     height: 43px;
 
     margin-top: auto;
-
+    margin-bottom: 24px;
     border: none;
 
     border-radius: 23px;
@@ -611,7 +613,7 @@ input[type="range"]::-moz-range-thumb {
 
     background: var(--yellow);
 
-    color: #121212;
+    color: #ffffff;
 
     font-family: inherit;
 
@@ -630,7 +632,7 @@ input[type="range"]::-moz-range-thumb {
 
 .generate-btn:hover {
 
-    background: #69c2ea;
+    background: #771F23;
 
     transform:
         translateY(-1px);
