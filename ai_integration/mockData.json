@@ -1,0 +1,866 @@
+{
+  "trip_overview": "5‑day luxury itinerary in Jaipur, combining iconic sights, hidden gems, and authentic artisan experiences, with stays in reputable homestays.",
+  "itinerary": [
+    {
+      "day": 1,
+      "title": "Arrival and Cultural Immersion",
+      "schedule": [
+        {
+          "time": "08:00 AM - 09:30 AM",
+          "activity": "Arrival at Jaipur International Airport and private transfer to homestay",
+          "description": "Private taxi from airport to Samode Haveli homestay."
+        },
+        {
+          "time": "09:30 AM - 10:00 AM",
+          "activity": "Check‑in and freshen up at Samode Haveli",
+          "description": "Welcome and brief orientation at the homestay."
+        },
+        {
+          "time": "10:00 AM - 12:00 PM",
+          "activity": "Explore Bapu Bazaar and visit Galta Ji (Monkey Temple)",
+          "description": "Stroll through the local market and the hidden gem Galta Ji temple."
+        },
+        {
+          "time": "12:00 PM - 01:00 PM",
+          "activity": "Lunch at a local dhaba",
+          "description": "Traditional Rajasthani thali served at a family‑run eatery."
+        },
+        {
+          "time": "01:00 PM - 03:00 PM",
+          "activity": "Block printing workshop at Kala Kendra",
+          "description": "Hands‑on session learning traditional block printing techniques with natural dyes."
+        },
+        {
+          "time": "03:00 PM - 05:00 PM",
+          "activity": "Stroll to Ghat Ki Guni stepwell (hidden gem)",
+          "description": "Explore the lesser‑known stepwell and surrounding lanes."
+        },
+        {
+          "time": "05:00 PM - 07:00 PM",
+          "activity": "Return to homestay, relax",
+          "description": "Rest and freshen up before evening.",
+          "place_image_query": "Samode Haveli garden"
+        },
+        {
+          "time": "07:00 PM - 09:00 PM",
+          "activity": "Dinner and cultural interaction at homestay",
+          "description": "Traditional Rajasthani dinner with host family and storytelling."
+        }
+      ],
+      "artisan_experience": {
+        "workshop_name": "Kala Kendra Block Printing Workshop",
+        "craft_type": "Block Printing",
+        "authenticity_details": "Family‑run studio preserving centuries‑old block printing tradition using natural dyes and hand‑carved wooden blocks.",
+        "practical_info": "Location: Near Bapu Bazaar, Jaipur. Duration: 2 hours. Cost: INR 1,500 per person. Advance booking required.",
+        "artifact_image_query": "Kala Kendra Block Printing workshop"
+      },
+      "travel_between_locations": [
+        {
+          "from": "Jaipur International Airport",
+          "to": "Samode Haveli",
+          "distance": "13 km",
+          "estimated_time": "30 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 500"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 300"
+            }
+          ]
+        },
+        {
+          "from": "Samode Haveli",
+          "to": "Bapu Bazaar",
+          "distance": "6 km",
+          "estimated_time": "15 min",
+          "recommended_mode": "Auto‑rickshaw",
+          "options": [
+            {
+              "mode": "Auto‑rickshaw",
+              "fare": "INR 50"
+            },
+            {
+              "mode": "Private Car",
+              "fare": "INR 200"
+            }
+          ]
+        },
+        {
+          "from": "Bapu Bazaar",
+          "to": "Galta Ji",
+          "distance": "8 km",
+          "estimated_time": "20 min",
+          "recommended_mode": "Auto‑rickshaw",
+          "options": [
+            {
+              "mode": "Auto‑rickshaw",
+              "fare": "INR 60"
+            },
+            {
+              "mode": "Private Car",
+              "fare": "INR 250"
+            }
+          ]
+        },
+        {
+          "from": "Galta Ji",
+          "to": "Kala Kendra",
+          "distance": "5 km",
+          "estimated_time": "15 min",
+          "recommended_mode": "Auto‑rickshaw",
+          "options": [
+            {
+              "mode": "Auto‑rickshaw",
+              "fare": "INR 50"
+            },
+            {
+              "mode": "Private Car",
+              "fare": "INR 250"
+            }
+          ]
+        },
+        {
+          "from": "Kala Kendra",
+          "to": "Samode Haveli",
+          "distance": "7 km",
+          "estimated_time": "20 min",
+          "recommended_mode": "Auto‑rickshaw",
+          "options": [
+            {
+              "mode": "Auto‑rickshaw",
+              "fare": "INR 60"
+            },
+            {
+              "mode": "Private Car",
+              "fare": "INR 250"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "title": "Fortresses and Handicrafts",
+      "schedule": [
+        {
+          "time": "07:00 AM - 09:30 AM",
+          "activity": "Sunrise visit to Nahargarh Fort",
+          "description": "Enjoy panoramic views of Jaipur from the fort’s ramparts."
+        },
+        {
+          "time": "09:30 AM - 11:30 AM",
+          "activity": "Amber Fort exploration",
+          "description": "Guided tour of the majestic Amber Fort and its palaces."
+        },
+        {
+          "time": "11:30 AM - 12:00 PM",
+          "activity": "Transfer to Anokhi Museum of Hand Printing",
+          "description": "Short drive to the museum showcasing hand printing heritage."
+        },
+        {
+          "time": "12:00 PM - 01:00 PM",
+          "activity": "Lunch at museum cafe",
+          "description": "Light lunch served in the museum’s garden café."
+        },
+        {
+          "time": "01:00 PM - 03:00 PM",
+          "activity": "Blue pottery workshop at Kundan Studio",
+          "description": "Learn traditional blue pottery techniques with master potters."
+        },
+        {
+          "time": "03:00 PM - 04:30 PM",
+          "activity": "Visit Anokhi Museum",
+          "description": "Explore exhibits on hand printing and textile history."
+        },
+        {
+          "time": "04:30 PM - 06:00 PM",
+          "activity": "Return to homestay",
+          "description": "Rest and relax after a full day of sightseeing."
+        },
+        {
+          "time": "06:00 PM - 08:00 PM",
+          "activity": "Dinner at rooftop restaurant",
+          "description": "Scenic dinner with city views and live music."
+        }
+      ],
+      "artisan_experience": {
+        "workshop_name": "Kundan Studio Blue Pottery Workshop",
+        "craft_type": "Blue Pottery",
+        "authenticity_details": "Authentic workshop conducted by master potters from the traditional Blue Pottery community, using hand‑painted cobalt glaze.",
+        "practical_info": "Location: Near Anokhi Museum, Jaipur. Duration: 2 hours. Cost: INR 2,000 per person. Pre‑booking advised.",
+        "artifact_image_query": "Kundan Studio Blue Pottery craft"
+      },
+      "travel_between_locations": [
+        {
+          "from": "Samode Haveli",
+          "to": "Nahargarh Fort",
+          "distance": "12 km",
+          "estimated_time": "30 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 500"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 300"
+            }
+          ]
+        },
+        {
+          "from": "Nahargarh Fort",
+          "to": "Amber Fort",
+          "distance": "8 km",
+          "estimated_time": "20 min",
+          "recommended_mode": "Auto‑rickshaw",
+          "options": [
+            {
+              "mode": "Auto‑rickshaw",
+              "fare": "INR 70"
+            },
+            {
+              "mode": "Private Car",
+              "fare": "INR 250"
+            }
+          ]
+        },
+        {
+          "from": "Amber Fort",
+          "to": "Anokhi Museum",
+          "distance": "6 km",
+          "estimated_time": "15 min",
+          "recommended_mode": "Auto‑rickshaw",
+          "options": [
+            {
+              "mode": "Auto‑rickshaw",
+              "fare": "INR 60"
+            },
+            {
+              "mode": "Private Car",
+              "fare": "INR 200"
+            }
+          ]
+        },
+        {
+          "from": "Anokhi Museum",
+          "to": "Kundan Studio",
+          "distance": "2 km",
+          "estimated_time": "5 min",
+          "recommended_mode": "Walking",
+          "options": [
+            {
+              "mode": "Walking",
+              "fare": "Free"
+            }
+          ]
+        },
+        {
+          "from": "Kundan Studio",
+          "to": "Samode Haveli",
+          "distance": "10 km",
+          "estimated_time": "25 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 500"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 300"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "title": "Heritage Haveli and Village Crafts",
+      "schedule": [
+        {
+          "time": "08:00 AM - 09:30 AM",
+          "activity": "Breakfast at homestay",
+          "description": "Traditional Rajasthani breakfast served on the terrace."
+        },
+        {
+          "time": "09:30 AM - 11:30 AM",
+          "activity": "Jaigarh Fort visit",
+          "description": "Explore the historic artillery fort and its museum.",
+          "place_image_query": "Jaigarh Fort Jaipur"
+        },
+        {
+          "time": "11:30 AM - 12:00 PM",
+          "activity": "Transfer to Samode Haveli",
+          "description": "Check‑in at the luxury homestay for the night.",
+          "place_image_query": "Samode Haveli exterior"
+        },
+        {
+          "time": "12:00 PM - 01:00 PM",
+          "activity": "Lunch at homestay",
+          "description": "Royal cuisine featuring local specialties.",
+          "place_image_query": "Samode Haveli dining"
+        },
+        {
+          "time": "01:00 PM - 03:00 PM",
+          "activity": "Travel to Bagru Village for block printing workshop",
+          "description": "35 km journey through the countryside.",
+          "place_image_query": "Bagru Village map"
+        },
+        {
+          "time": "03:00 PM - 05:00 PM",
+          "activity": "Block printing workshop at Bagru",
+          "description": "Hands‑on traditional block printing using natural dyes.",
+          "place_image_query": "Bagru Block Printing workshop"
+        },
+        {
+          "time": "05:00 PM - 06:00 PM",
+          "activity": "Return to Samode Haveli",
+          "description": "Rest and unwind after the workshop.",
+          "place_image_query": "Samode Haveli garden"
+        },
+        {
+          "time": "06:00 PM - 08:00 PM",
+          "activity": "Evening walk and dinner at homestay",
+          "description": "Relaxed dinner with host family and cultural exchange.",
+          "place_image_query": "Samode Haveli evening"
+        }
+      ],
+      "artisan_experience": {
+        "workshop_name": "Bagru Handloom Block Printing Workshop",
+        "craft_type": "Block Printing",
+        "authenticity_details": "Traditional Bagru village workshop preserving natural dye techniques and hand‑carved wooden blocks.",
+        "practical_info": "Location: Bagru Village, ~35 km from Jaipur. Duration: 2 hours. Cost: INR 1,800 per person. Advance booking required.",
+        "artifact_image_query": "Bagru Block Printing workshop"
+      },
+      "travel_between_locations": [
+        {
+          "from": "Samode Haveli",
+          "to": "Jaigarh Fort",
+          "distance": "10 km",
+          "estimated_time": "25 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 500"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 300"
+            }
+          ]
+        },
+        {
+          "from": "Jaigarh Fort",
+          "to": "Samode Haveli",
+          "distance": "12 km",
+          "estimated_time": "30 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 500"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 300"
+            }
+          ]
+        },
+        {
+          "from": "Samode Haveli",
+          "to": "Bagru Village",
+          "distance": "35 km",
+          "estimated_time": "1 hour",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 800"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 500"
+            }
+          ]
+        },
+        {
+          "from": "Bagru Village",
+          "to": "Samode Haveli",
+          "distance": "35 km",
+          "estimated_time": "1 hour",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 800"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 500"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "title": "Royal Palaces and Textile Arts",
+      "schedule": [
+        {
+          "time": "08:00 AM - 09:30 AM",
+          "activity": "Breakfast",
+          "description": "Homemade breakfast served at the homestay.",
+          "place_image_query": "Samode Haveli breakfast"
+        },
+        {
+          "time": "09:30 AM - 11:30 AM",
+          "activity": "City Palace and Jantar Mantar tour",
+          "description": "Explore royal architecture and the historic astronomical observatory.",
+          "place_image_query": "City Palace Jaipur; Jantar Mantar"
+        },
+        {
+          "time": "11:30 AM - 12:00 PM",
+          "activity": "Transfer to Sanganer",
+          "description": "Drive to the weaving workshop location.",
+          "place_image_query": "Sanganer village"
+        },
+        {
+          "time": "12:00 PM - 02:00 PM",
+          "activity": "Handloom weaving workshop at Sanganer",
+          "description": "Learn traditional pit loom weaving techniques from local artisans.",
+          "place_image_query": "Sanganer Handloom workshop"
+        },
+        {
+          "time": "02:00 PM - 03:30 PM",
+          "activity": "Visit Gaitore Ki Chhatriyan",
+          "description": "Explore the royal cenotaphs set in a serene garden.",
+          "place_image_query": "Gaitore Ki Chhatriyan"
+        },
+        {
+          "time": "03:30 PM - 05:00 PM",
+          "activity": "Explore Johari Bazaar",
+          "description": "Shop for jewellery, textiles and handicrafts in the bustling market.",
+          "place_image_query": "Johari Bazaar Jaipur"
+        },
+        {
+          "time": "05:00 PM - 07:00 PM",
+          "activity": "Return to homestay",
+          "description": "Rest before evening activities.",
+          "place_image_query": "Samode Haveli"
+        },
+        {
+          "time": "07:00 PM - 09:00 PM",
+          "activity": "Dinner at heritage restaurant",
+          "description": "Fine dining experience with Rajasthani cuisine.",
+          "place_image_query": "Heritage restaurant Jaipur"
+        }
+      ],
+      "artisan_experience": {
+        "workshop_name": "Sanganer Handloom Weaving Workshop",
+        "craft_type": "Handloom Weaving",
+        "authenticity_details": "Conducted by local weavers using traditional pit looms, preserving centuries‑old textile techniques.",
+        "practical_info": "Location: Sanganer, 12 km from Jaipur. Duration: 2 hours. Cost: INR 2,200 per person. Advance reservation needed.",
+        "artifact_image_query": "Sanganer Handloom weaving"
+      },
+      "travel_between_locations": [
+        {
+          "from": "Samode Haveli",
+          "to": "City Palace",
+          "distance": "5 km",
+          "estimated_time": "15 min",
+          "recommended_mode": "Auto‑rickshaw",
+          "options": [
+            {
+              "mode": "Auto‑rickshaw",
+              "fare": "INR 50"
+            },
+            {
+              "mode": "Private Car",
+              "fare": "INR 200"
+            }
+          ]
+        },
+        {
+          "from": "City Palace",
+          "to": "Jantar Mantar",
+          "distance": "1 km",
+          "estimated_time": "5 min",
+          "recommended_mode": "Walking",
+          "options": [
+            {
+              "mode": "Walking",
+              "fare": "Free"
+            }
+          ]
+        },
+        {
+          "from": "Jantar Mantar",
+          "to": "Sanganer",
+          "distance": "12 km",
+          "estimated_time": "30 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 600"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 350"
+            }
+          ]
+        },
+        {
+          "from": "Sanganer",
+          "to": "Gaitore Ki Chhatriyan",
+          "distance": "8 km",
+          "estimated_time": "20 min",
+          "recommended_mode": "Auto‑rickshaw",
+          "options": [
+            {
+              "mode": "Auto‑rickshaw",
+              "fare": "INR 70"
+            },
+            {
+              "mode": "Private Car",
+              "fare": "INR 250"
+            }
+          ]
+        },
+        {
+          "from": "Gaitore Ki Chhatriyan",
+          "to": "Johari Bazaar",
+          "distance": "6 km",
+          "estimated_time": "15 min",
+          "recommended_mode": "Auto‑rickshaw",
+          "options": [
+            {
+              "mode": "Auto‑rickshaw",
+              "fare": "INR 60"
+            },
+            {
+              "mode": "Private Car",
+              "fare": "INR 250"
+            }
+          ]
+        },
+        {
+          "from": "Johari Bazaar",
+          "to": "Samode Haveli",
+          "distance": "10 km",
+          "estimated_time": "25 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 500"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 300"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "title": "Nature, Relaxation and Departure",
+      "schedule": [
+        {
+          "time": "08:00 AM - 09:30 AM",
+          "activity": "Breakfast",
+          "description": "Homestyle breakfast before the day's outings.",
+          "place_image_query": "Samode Haveli breakfast"
+        },
+        {
+          "time": "09:30 AM - 11:00 AM",
+          "activity": "Visit Man Sagar Lake and Jal Mahal",
+          "description": "Scenic lake view and photo opportunity at the palace‑on‑water.",
+          "place_image_query": "Man Sagar Lake Jaipur; Jal Mahal"
+        },
+        {
+          "time": "11:00 AM - 12:30 PM",
+          "activity": "Explore Ramgarh Biological Park",
+          "description": "Nature walk and wildlife spotting in the protected park.",
+          "place_image_query": "Ramgarh Biological Park"
+        },
+        {
+          "time": "12:30 PM - 01:30 PM",
+          "activity": "Lunch at a local restaurant",
+          "description": "Traditional Rajasthani meal served in a family‑run eatery.",
+          "place_image_query": "Local restaurant Ramgarh"
+        },
+        {
+          "time": "01:30 PM - 03:00 PM",
+          "activity": "Souvenir shopping at Bapu Bazaar",
+          "description": "Final shopping for textiles, handicrafts and souvenirs.",
+          "place_image_query": "Bapu Bazaar Jaipur"
+        },
+        {
+          "time": "03:00 PM - 04:00 PM",
+          "activity": "Transfer to Jaipur International Airport",
+          "description": "Private taxi to the airport for departure.",
+          "place_image_query": "Jaipur International Airport"
+        }
+      ],
+      "artisan_experience": {
+        "workshop_name": "Ramgarh Pottery Cooperative Workshop",
+        "craft_type": "Pottery",
+        "authenticity_details": "Local artisans demonstrate traditional wheel‑throwing using regional clay.",
+        "practical_info": "Location: Ramgarh, ~25 km from Jaipur. Duration: 1.5 hours. Cost: INR 1,500 per person. Booking recommended.",
+        "artifact_image_query": "Ramgarh Pottery workshop"
+      },
+      "travel_between_locations": [
+        {
+          "from": "Samode Haveli",
+          "to": "Man Sagar Lake",
+          "distance": "10 km",
+          "estimated_time": "20 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 500"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 300"
+            }
+          ]
+        },
+        {
+          "from": "Man Sagar Lake",
+          "to": "Ramgarh Biological Park",
+          "distance": "15 km",
+          "estimated_time": "30 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 600"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 350"
+            }
+          ]
+        },
+        {
+          "from": "Ramgarh Biological Park",
+          "to": "Bapu Bazaar",
+          "distance": "20 km",
+          "estimated_time": "40 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 700"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 400"
+            }
+          ]
+        },
+        {
+          "from": "Bapu Bazaar",
+          "to": "Jaipur International Airport",
+          "distance": "13 km",
+          "estimated_time": "30 min",
+          "recommended_mode": "Private Taxi",
+          "options": [
+            {
+              "mode": "Private Taxi",
+              "fare": "INR 500"
+            },
+            {
+              "mode": "Local Taxi",
+              "fare": "INR 300"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "accommodations": [
+    {
+      "day": 1,
+      "name": "Samode Haveli",
+      "type": "Luxury Homestay",
+      "price_per_night": "12,000 INR",
+      "location": "Samode, near Jaipur",
+      "facilities": [
+        "Luxury rooms",
+        "Private bathroom",
+        "Wi‑Fi",
+        "Restaurant",
+        "Pool",
+        "Garden"
+      ],
+      "why_choose": "Provides a comfortable, personalized stay close to the airport and city, ideal after arrival.",
+      "certifications_or_reviews": "Registered with Rajasthan Tourism Development Corporation; 4.8/5 rating on TripAdvisor.",
+      "hotel_image_query": "Samode Haveli Jaipur"
+    },
+    {
+      "day": 2,
+      "name": "Samode Haveli",
+      "type": "Luxury Homestay",
+      "price_per_night": "12,000 INR",
+      "location": "Samode, near Jaipur",
+      "facilities": [
+        "Luxury rooms",
+        "Private bathroom",
+        "Wi‑Fi",
+        "Restaurant",
+        "Pool",
+        "Garden"
+      ],
+      "why_choose": "Continues comfortable accommodation with easy access to day‑2 attractions.",
+      "certifications_or_reviews": "Registered with Rajasthan Tourism Development Corporation; 4.8/5 rating on TripAdvisor.",
+      "hotel_image_query": "Samode Haveli Jaipur"
+    },
+    {
+      "day": 3,
+      "name": "Samode Haveli",
+      "type": "Luxury Homestay",
+      "price_per_night": "12,000 INR",
+      "location": "Samode, near Jaipur",
+      "facilities": [
+        "Luxury rooms",
+        "Private bathroom",
+        "Wi‑Fi",
+        "Restaurant",
+        "Pool",
+        "Garden"
+      ],
+      "why_choose": "Provides a stable base for day‑3 village and fort excursions.",
+      "certifications_or_reviews": "Registered with Rajasthan Tourism Development Corporation; 4.8/5 rating on TripAdvisor.",
+      "hotel_image_query": "Samode Haveli Jaipur"
+    },
+    {
+      "day": 4,
+      "name": "Samode Haveli",
+      "type": "Luxury Homestay",
+      "price_per_night": "12,000 INR",
+      "location": "Samode, near Jaipur",
+      "facilities": [
+        "Luxury rooms",
+        "Private bathroom",
+        "Wi‑Fi",
+        "Restaurant",
+        "Pool",
+        "Garden"
+      ],
+      "why_choose": "Convenient location for day‑4 palace and market visits.",
+      "certifications_or_reviews": "Registered with Rajasthan Tourism Development Corporation; 4.8/5 rating on TripAdvisor.",
+      "hotel_image_query": "Samode Haveli Jaipur"
+    },
+    {
+      "day": 5,
+      "name": "Samode Haveli",
+      "type": "Luxury Homestay",
+      "price_per_night": "12,000 INR",
+      "location": "Samode, near Jaipur",
+      "facilities": [
+        "Luxury rooms",
+        "Private bathroom",
+        "Wi‑Fi",
+        "Restaurant",
+        "Pool",
+        "Garden"
+      ],
+      "why_choose": "Final night before departure, allowing relaxed morning before travel.",
+      "certifications_or_reviews": "Registered with Rajasthan Tourism Development Corporation; 4.8/5 rating on TripAdvisor.",
+      "hotel_image_query": "Samode Haveli Jaipur"
+    }
+  ],
+  "transport_hubs": [
+    {
+      "hub_type": "Airport",
+      "name": "Jaipur International Airport",
+      "travel_to_main_destination": "Samode Haveli",
+      "estimated_fare": "INR 500 (private taxi)"
+    },
+    {
+      "hub_type": "Railway Station",
+      "name": "Jaipur Railway Station",
+      "travel_to_main_destination": "Samode Haveli",
+      "estimated_fare": "INR 300 (taxi)"
+    },
+    {
+      "hub_type": "Bus Stand",
+      "name": "Jaipur ISBT Bus Stand",
+      "travel_to_main_destination": "Samode Haveli",
+      "estimated_fare": "INR 250 (shared taxi)"
+    }
+  ],
+  "budget_estimate": {
+    "budget": {
+      "accommodation": "Luxury Homestay: approx. 12,000 INR per night (total ~60,000 INR for 5 nights)",
+      "local_transport": "Private taxi and auto‑rickshaw: approx. 4,000 INR total",
+      "intercity_transport": "Round‑trip flight Patna‑Jaipur (economy) for 4 pax: approx. 32,000 INR",
+      "entry_tickets": "Fort and museum tickets: approx. 6,000 INR",
+      "food": "Meals at mid‑range to luxury restaurants: approx. 50,000 INR",
+      "misc": "Souvenirs, tips, contingency: approx. 5,000 INR",
+      "total": "Approx. 157,000 INR"
+    },
+    "mid_range": {
+      "accommodation": "Mid‑range homestay/guesthouse: approx. 8,000 INR per night (total ~40,000 INR)",
+      "local_transport": "Auto‑rickshaw and shared taxi: approx. 3,000 INR",
+      "intercity_transport": "Train or economy flight: approx. 25,000 INR",
+      "entry_tickets": "Approx. 5,000 INR",
+      "food": "Approx. 35,000 INR",
+      "misc": "Approx. 4,000 INR",
+      "total": "Approx. 112,000 INR"
+    },
+    "comfortable": {
+      "accommodation": "5‑star hotel or premium homestay: approx. 15,000 INR per night (total ~75,000 INR)",
+      "local_transport": "Private car hire: approx. 5,000 INR",
+      "intercity_transport": "Premium flight or train: approx. 35,000 INR",
+      "entry_tickets": "Approx. 7,000 INR",
+      "food": "Approx. 60,000 INR",
+      "misc": "Approx. 6,000 INR",
+      "total": "Approx. 188,000 INR"
+    }
+  },
+  "summary_table": [
+    {
+      "day": 1,
+      "main_destination": "Jaipur",
+      "key_activities": "Arrival, market visit, block printing workshop",
+      "overnight_stay": "Samode Haveli"
+    },
+    {
+      "day": 2,
+      "main_destination": "Jaipur",
+      "key_activities": "Amber Fort, Nahargarh Fort, blue pottery workshop",
+      "overnight_stay": "Samode Haveli"
+    },
+    {
+      "day": 3,
+      "main_destination": "Jaipur",
+      "key_activities": "Jaigarh Fort, Bagru village block printing",
+      "overnight_stay": "Samode Haveli"
+    },
+    {
+      "day": 4,
+      "main_destination": "Jaipur",
+      "key_activities": "City Palace, Jantar Mantar, weaving workshop, Gaitore Ki Chhatriyan",
+      "overnight_stay": "Samode Haveli"
+    },
+    {
+      "day": 5,
+      "main_destination": "Jaipur",
+      "key_activities": "Man Sagar Lake, Ramgarh park, departure",
+      "overnight_stay": "Departure (no overnight)"
+    }
+  ],
+  "verification_notes": "All prices and travel times are estimated based on October 2024 rates; official fares for transport, entry tickets and workshops should be confirmed with respective providers before booking."
+}

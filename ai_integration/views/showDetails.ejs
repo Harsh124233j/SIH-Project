@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details</title>
+    <link rel="stylesheet" href="/css/ai.css">
+  </head>
+  <body>
+    <h1>Day : <%=dayItenary["day"]%></h1>
+    <h2>Title : <%=dayItenary["title"]%></h2>
+    <h3>Schedule :</h3>
+    <% for(let sc of dayItenary["schedule"]){ %>
+        <div>
+            <p>Time :<%=sc["time"]%></p>
+            <p>Activity : <%=sc["activity"]%></p>
+            <p>Description : <%=sc["description"]%></p>
+        </div>
+        <hr>
+    <% } %>
+
+    <h3>Artisan Experience :</h3>
+    <ul>
+        <li>WorkShop Name : <%=dayItenary["artisan_experience"]["workshop_name"]%></li>
+        <li>Craft Type : <%=dayItenary["artisan_experience"]["craft_type"]%></li>
+        <li>Authenticity : <%=dayItenary["artisan_experience"]["authenticity_details"]%></li>   
+    </ul>
+    <h3>Travel Information</h3>
+    <% for(let option of dayItenary["travel_between_locations"]){ %>
+        <p>From : <%=option["from"]%></p>
+        <p>To : <%=option["to"]%></p>
+        <p>Distance : <%=option["distance"]%></p>
+        <p>Estimated Time : <%=option["estimated_time"]%></p>
+        <p>Recommended Mode : <%=option["recommended_mode"]%></p>
+        <p>Other options</p>
+        <ul>
+            <% for(let opt of option["options"]){%>
+                <li>Mode : <%= opt["mode"] %> , Fare : <%= opt["fare"]%></li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <h3>Accomodations :</h3>
+    <p>Name : <%=dayAccom["name"]%></p>
+    <p>Type : <%=dayAccom["type"]%></p>
+    <p>Price Per Night : <%=dayAccom["price_per_night"]%></p>
+    <p>Location : <%=dayAccom["location"]%></p>
+    <p>Facilities : </p>
+    <ul>
+        <% for(let fac of dayAccom["facilities"]){ %>
+            <li><%=fac%></li>
+        <% } %>
+    </ul>
+    <p>Why Choose?</p>
+    <p><%=dayAccom["why_choose"]%></p>
+    
+  </body>
+</html>
