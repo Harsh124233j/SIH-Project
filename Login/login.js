@@ -41,12 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // List of accounts from your screenshot
             const accounts = [
-                { name: 'Aryan Borse', email: 'aryanborse13@gmail.com', color: '#219150' },
+                { name: 'Aryan ', email: 'aryanborse13@gmail.com', color: '#219150' },
                 { name: 'Harsh', email: 'harshnarayanpathak928@gmail.com', color: '#3b82f6' },
-                { name: 'Kashvi Maurya', email: 'kashvi9112007@gmail.com', color: '#ec4899' },
+                { name: 'Kashvi ', email: 'kashvi9112007@gmail.com', color: '#ec4899' },
                 { name: 'Himanshu', email: 'suganshu@gmail.com', color: '#8b5cf6' },
                 { name: 'Divyansh', email: 'divyanshprj7@gmail.com', color: '#f59e0b' },
-                { name: 'Kavyansh Nit', email: 'kavyansh2311@gmail.com', color: '#10b981' }
+                { name: 'Kavyansh ', email: 'kavyansh2311@gmail.com', color: '#10b981' }
             ];
 
             let accountsHTML = accounts.map(acc => `
