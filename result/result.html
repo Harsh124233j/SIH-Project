@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyara Results Page</title>
+    <!-- Relative paths updated to look back into the main directory for tracker.css, and local result.css -->
+    <link rel="stylesheet" href="../tracker_page/tracker.css" onerror="this.href='../tracker.css'">
+    <link rel="stylesheet" href="result.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="page result-page-bg">
+        <div class="planner-wrapper">
+            <!-- Box shifted toward the left -->
+            <div class="planner-card shifted-left-card">
+                
+                <!-- STANDALONE RESULTS PANEL -->
+                <div class="itinerary" id="itineraryPanel" style="width: 100%; height: 100%; margin-left: 0;">
+                    <div class="results-container">
+                        
+                        <!-- Toggle Tabs -->
+                        <div class="results-tabs">
+                            <button type="button" class="tab-btn active" id="tabStays" onclick="switchTab('stays')">
+                                <span>&#127976;</span> Comfort stays
+                            </button>
+                            <button type="button" class="tab-btn" id="tabRestaurants" onclick="switchTab('restaurants')">
+                                <span>&#127860;</span> Restaurants
+                            </button>
+                        </div>
+
+                        <!-- Subtitle Status -->
+                        <div class="results-subtitle" id="resultsSubtitle">Live Results Matched</div>
+
+                        <!-- Scrollable Cards Container -->
+                        <div class="results-scroll-area" id="resultsListContent">
+                            <!-- Cards will be populated here by JavaScript -->
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Local JavaScript file -->
+    <script src="result.js"></script>
+</body>
+</html>
