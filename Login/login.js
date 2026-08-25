@@ -21,8 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('userEmail', email);
             localStorage.setItem('userName', email.split('@')[0]);
 
+            // Set cookie so Express can read it
+            document.cookie = "userName=" + encodeURIComponent(email.split('@')[0]) + "; path=/;";
+
             alert('Login successful! Redirecting to Tourism Hub...');
-            window.location.href = '../SIH/index.html';
+            window.location.href = '/';
         });
     }
 
@@ -85,8 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.setItem('userEmail', selectedEmail);
                     localStorage.setItem('userName', selectedName);
 
+                    // Set cookie so Express can read it
+                    document.cookie = "userName=" + encodeURIComponent(selectedName) + "; path=/;";
+
                     modalOverlay.remove();
-                    window.location.href = '../SIH/index.html';
+                    window.location.href = '/';
                 });
             });
 

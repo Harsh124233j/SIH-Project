@@ -30,11 +30,15 @@
                     <a href="#" class="tool">Explore Offbeat</a>
                     <a href="#" class="tool">Guide</a>
                     <a href="#" class="tool">About Us</a>
-                    <a href="/login" class="btn ">Sign Up
-                        <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
-                            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z">
-                            </path>
-                        </svg>
+                    <a href="<%= typeof user !== 'undefined' && user ? '#' : '/login' %>" class="btn ">
+                        <%= typeof user !=='undefined' && user ? 'Welcome ' + user + '!' : 'Sign Up' %>
+                            <% if (!locals.user) { %>
+                                <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
+                                    <path fill="currentColor"
+                                        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z">
+                                    </path>
+                                </svg>
+                                <% } %>
                     </a>
                 </nav>
             </div>
