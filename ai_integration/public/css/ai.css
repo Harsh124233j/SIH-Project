@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+   padding: 40px 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  box-sizing: border-box;
+   background: linear-gradient(135deg, #6060c4 0%, #47addd 100%);
+}
+
+.wrapper{
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header{
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px 32px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border:3px solid   rgb(255, 95, 116);
+}
+.header:hover{
+     transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+.header h1 {
+  margin: 0 0 6px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+.header p{
+     color: #64748b;
+     line-height:1.5;
+}
+
+.day_container{
+     background-color: #ffffff;
+    border-radius: 16px;
+    padding: 24px 32px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+}
+.day_container form{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom:1px solid #1e293b;
+}
+.day{
+    font-weight:700;
+    color:black;
+    font-size:1.2rem;
+}
+.destination{
+   margin: 0;
+  font-size: 1rem;
+  color: #475569;
+}
+.destination span{
+    font-weight:bold;
+}
+.card_detail p{
+    gap:10px;
+}
+
+.btn button{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #4f8bf9;
+  color: #ffffff;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+.btn:hover{
+    opacity:0.9;
+    transform: scale(0.98);
+}
+.item span{
+    font-weight: 700;
+}
+.item{
+     color: #64748b;
+     font-weight: 200;
+}
+/* transport hubs css  */
+.transport{
+    margin-top:2.5rem;
+}
+.hub{
+    gap:15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.hub h3{
+    font-size:1.4rem;
+}
+
+.vehicle{
+    margin-top:1.3rem;
+}
+.fee{
+     border-bottom:1px solid #1e293b;
+}
+.fee h4{
+    font-size:1.2rem;
+    width: fit-content;
+    height: 25px;
+    margin-bottom: 1px;
+}
+/* budget section css */
+.budget{
+    margin-top:3rem;
+}
+
+.budget-list {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  max-width: 900px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.budget-item {
+  padding: 14px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.budget-row {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.budget-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: #4a5568;
+}
+
+.label {
+  font-weight: 700;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.value {
+  color: #4a5568;
+  font-weight: 500;
+}
+
+
+.budget-item.total {
+  border-bottom: none;
+  padding-top: 18px;
+}
+
+.budget-item.total .label {
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.budget-item.total .value {
+  font-weight: 800;
+  color: #1a1a1a;
+  font-size: 1.15rem;
+}
+
+.budget-item.total .total-icon {
+  width: 20px;
+  height: 20px;
+  color: #1a1a1a;
+}
