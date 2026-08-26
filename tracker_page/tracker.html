@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Voyara — Travel Planner</title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
 
     <link rel="stylesheet" href="tracker.css">
 
@@ -165,10 +165,12 @@
 
                     </div>
 
+                    <!-- Date Selection -->
                     <div class="field-group date-group">
-  <label for="startDate">ENTER YOUR DATE</label>
-  <input type="date" id="startDate" />
-</div>
+                        <label for="startDate">ENTER YOUR DATE</label>
+                        <input type="date" id="startDate" />
+                    </div>
+                    
                     <!-- Vibe -->
 
                     <div class="field-group vibe-group">
@@ -213,49 +215,35 @@
                     </div>
 
 
-                    <!-- Generate -->
+                    <!-- Generate & View Results Buttons -->
 
                     <button
                         class="generate-btn"
                         id="generateBtn"
                         type="button"
                     >
-
                         <span class="wand">
                             ✣
                         </span>
-
                         <span>
                             Generate my itinerary
                         </span>
+                    </button>
 
+                    <button
+                        class="view-results-btn"
+                        id="viewStaysRestaurantsBtn"
+                        type="button"
+                    >
+                        <span class="wand">
+                            🏨
+                        </span>
+                        <span>
+                            View Restaurants & Comfort Stays
+                        </span>
                     </button>
 
                 </div>
-
-
-                <!-- ================= RIGHT PANEL ================= -->
-
-                <!-- <div class="itinerary">
-
-                    <div
-                        class="empty-state"
-                        id="emptyState"
-                    >
-
-                        <div class="empty-icon">
-                            ◇
-                        </div>
-
-                        <p>
-                            Your day-by-day journey will appear here, with the
-                            <br>
-                            carbon you save.
-                        </p>
-
-                    </div>
-
-                </div> -->
 
             </div>
 
@@ -362,10 +350,6 @@
         const generateButton =
             document.getElementById("generateBtn");
 
-        const emptyState =
-            document.getElementById("emptyState");
-
-
         generateButton.addEventListener("click", () => {
 
             const destination =
@@ -374,21 +358,33 @@
             const days =
                 slider.value;
 
+            alert(`Your ${days}-day journey to ${destination} is ready to be generated.`);
 
-            emptyState.innerHTML = `
+        });
 
-                <div class="empty-icon success-icon">
-                    ✓
-                </div>
 
-                <p>
-                    Your ${days}-day journey to ${destination}
-                    <br>
-                    is ready to be generated.
-                </p>
+        /* ---------------------------------------------
+           VIEW RESTAURANTS & COMFORT STAYS BUTTON
+        --------------------------------------------- */
 
-            `;
+        const viewStaysRestaurantsBtn = document.getElementById("viewStaysRestaurantsBtn");
 
+        viewStaysRestaurantsBtn.addEventListener("click", () => {
+            const destinationSelect = document.getElementById("destination");
+            const selectedCity = destinationSelect ? destinationSelect.value.trim().toLowerCase() : "jaipur";
+
+            const activeBudgetBtn = document.querySelector(".budget-btn.active");
+            let selectedBudget = activeBudgetBtn ? activeBudgetBtn.textContent.trim().toLowerCase() : "comfort";
+
+            if (selectedBudget === "shoestring") {
+                selectedBudget = "budget";
+            } else if (selectedBudget === "comfort") {
+                selectedBudget = "moderate";
+            } else if (selectedBudget === "luxury") {
+                selectedBudget = "luxury";
+            }
+
+            window.location.href = `../result/result.html?city=${selectedCity}&budget=${selectedBudget}`;
         });
 
     </script>
