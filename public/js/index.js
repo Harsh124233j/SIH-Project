@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.engine('html', ejs.renderFile);
+app.set('view engine', 'html'); // Allows rendering .html files as EJS templates if needed
 app.set('views', path.join(__dirname, '..'));
 
 // Helper to extract userName from cookies manually
@@ -28,6 +29,9 @@ app.get('/login', (req, res) => {
 app.get('/offbeat', (req, res) => {
     res.render('OffbeatPage/Offbeat.html', { user: getUserFromCookie(req) });
 });
+
+// Updated route to successfully render your travel tips file
+
 
 app.use(express.static(path.join(__dirname, '..', 'Login'), { index: false }));
 app.use(express.static(path.join(__dirname, '..', 'OffbeatPage'), { index: false }));
