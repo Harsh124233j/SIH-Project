@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
 
-    <link rel="stylesheet" href="tracker.css">
+    <link rel="stylesheet" href="/css/generator.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -246,148 +246,14 @@
                 </div>
 
             </div>
-
+            
         </section>
+        <%- include("./includes/footer.ejs") %>
+    </main> 
 
-    </main>
-
-
+    
     <!-- ================= JAVASCRIPT ================= -->
-
-    <script>
-
-        /* ---------------------------------------------
-            DAYS SLIDER
-        --------------------------------------------- */
-
-        const slider =
-            document.getElementById("daysSlider");
-
-        const daysValue =
-            document.getElementById("daysValue");
-
-
-        slider.addEventListener("input", () => {
-
-            daysValue.textContent = slider.value;
-
-        });
-
-        /* ---------------------------------------------
-            passenger SLIDER
-        --------------------------------------------- */
-
-        const passengersSlider =
-            document.getElementById("passengersSlider");
-
-        const passengersValue =
-            document.getElementById("passengersValue");
-
-
-        passengersSlider.addEventListener("input", () => {
-
-            passengersValue.textContent = passengersSlider.value;
-
-        });
-
-
-        /* ---------------------------------------------
-            BUDGET BUTTONS
-        --------------------------------------------- */
-
-        const budgetButtons =
-            document.querySelectorAll(".budget-btn");
-
-
-        budgetButtons.forEach(button => {
-
-            button.addEventListener("click", () => {
-
-                budgetButtons.forEach(btn => {
-
-                    btn.classList.remove("active");
-
-                });
-
-                button.classList.add("active");
-
-            });
-
-        });
-
-
-
-        /* ---------------------------------------------
-           VIBE BUTTONS
-        --------------------------------------------- */
-
-        const vibeButtons =
-            document.querySelectorAll(".vibe-btn");
-
-
-        vibeButtons.forEach(button => {
-
-            button.addEventListener("click", () => {
-
-                vibeButtons.forEach(btn => {
-
-                    btn.classList.remove("selected");
-
-                });
-
-                button.classList.add("selected");
-
-            });
-
-        });
-
-
-
-        /* ---------------------------------------------
-           GENERATE BUTTON
-        --------------------------------------------- */
-
-        const generateButton =
-            document.getElementById("generateBtn");
-
-        generateButton.addEventListener("click", () => {
-
-            const destination =
-                document.getElementById("destination").value;
-
-            const days =
-                slider.value;
-
-            alert(`Your ${days}-day journey to ${destination} is ready to be generated.`);
-
-        });
-
-
-        /* ---------------------------------------------
-           VIEW RESTAURANTS & COMFORT STAYS BUTTON
-        --------------------------------------------- */
-
-        const viewStaysRestaurantsBtn = document.getElementById("viewStaysRestaurantsBtn");
-
-        viewStaysRestaurantsBtn.addEventListener("click", () => {
-            const destinationSelect = document.getElementById("destination");
-            const selectedCity = destinationSelect ? destinationSelect.value.trim().toLowerCase() : "jaipur";
-
-            const activeBudgetBtn = document.querySelector(".budget-btn.active");
-            let selectedBudget = activeBudgetBtn ? activeBudgetBtn.textContent.trim().toLowerCase() : "comfort";
-
-            if (selectedBudget === "shoestring") {
-                selectedBudget = "budget";
-            } else if (selectedBudget === "comfort") {
-                selectedBudget = "moderate";
-            } else if (selectedBudget === "luxury") {
-                selectedBudget = "luxury";
-            }
-
-            window.location.href = `../result/result.html?city=${selectedCity}&budget=${selectedBudget}`;
-        });
-
-    </script>
+    <script src="/js/generator.js"></script>
 
 </body>
 </html>

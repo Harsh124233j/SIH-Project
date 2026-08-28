@@ -6,9 +6,10 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   box-sizing: border-box;
    object-fit: cover;
-   background: linear-gradient(120deg, #0b2545, #134074, #1d70b8, #47addd, #134074);
+   /* background: linear-gradient(120deg, #0b2545, #134074, #1d70b8, #47addd, #134074); */
+   background: url('/css/ai.jpg') no-repeat center center/cover;
   background-size: 300% 300%;
-  animation: waveMotion 8s ease infinite;
+  /* animation: waveMotion 8s ease infinite; */
 }
 
 @keyframes waveMotion {

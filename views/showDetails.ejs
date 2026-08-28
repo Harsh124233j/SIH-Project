@@ -9,7 +9,7 @@
   <body>
   <!-- Header -->
   <header class="header-card">
-    <h1 class="header-title">Day <%= dayItenary["day"] %>: <%= dayItenary["title"] %></h1>
+    <h1 class="header-title">Day <%= dayItinerary["day"] %>: <%= dayItinerary["title"] %></h1>
   </header>
 
   <!-- Schedule Section -->
@@ -18,7 +18,7 @@
   </div>
 
   <div class="budget-list">
-    <% for(let sc of dayItenary["schedule"]){ %>
+    <% for(let sc of dayItinerary["schedule"]){ %>
       <div class="budget-item">
         <p class="budget-row">
           <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -64,7 +64,7 @@
           <circle cx="12" cy="7" r="4"/>
         </svg>
         <span class="label">Workshop Name :</span>
-        <span class="value"><%= dayItenary["artisan_experience"]["workshop_name"] %></span>
+        <span class="value"><%= dayItinerary["artisan_experience"]["workshop_name"] %></span>
       </p>
       <p class="budget-row">
         <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -72,7 +72,7 @@
           <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
         </svg>
         <span class="label">Craft Type :</span>
-        <span class="value"><%= dayItenary["artisan_experience"]["craft_type"] %></span>
+        <span class="value"><%= dayItinerary["artisan_experience"]["craft_type"] %></span>
       </p>
       <p class="budget-row">
         <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -80,7 +80,7 @@
           <polyline points="22 4 12 14.01 9 11.01"/>
         </svg>
         <span class="label">Authenticity :</span>
-        <span class="value"><%= dayItenary["artisan_experience"]["authenticity_details"] %></span>
+        <span class="value"><%= dayItinerary["artisan_experience"]["authenticity_details"] %></span>
       </p>
     </div>
   </div>
@@ -91,7 +91,7 @@
   </div>
 
   <div class="budget-list">
-    <% for(let option of dayItenary["travel_between_locations"]){ %>
+    <% for(let option of dayItinerary["travel_between_locations"]){ %>
       <div class="budget-item">
         <p class="budget-row">
           <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -135,49 +135,63 @@
     <h2 class="header-title">Accommodations</h2>
   </div>
 
-  <div class="budget-list">
-    <div class="budget-item">
-      <p class="budget-row">
-        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-          <polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
-        <span class="label">Name :</span>
-        <span class="value"><%= dayAccom["name"] %> (<%= dayAccom["type"] %>)</span>
-      </p>
-      <p class="budget-row">
-        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 3h12M6 8h12M6 13l8.5 8M6 13h3a4 4 0 0 0 0-8"/>
-        </svg>
-        <span class="label">Price Per Night :</span>
-        <span class="value"><%= dayAccom["price_per_night"] %></span>
-      </p>
-      <p class="budget-row">
-        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="10" r="3"/>
-          <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
-        </svg>
-        <span class="label">Location :</span>
-        <span class="value"><%= dayAccom["location"] %></span>
-      </p>
-      <p class="budget-row">
-        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-          <polyline points="22 4 12 14.01 9 11.01"/>
-        </svg>
-        <span class="label">Facilities :</span>
-        <span class="value"><%= dayAccom["facilities"].join(", ") %></span>
-      </p>
-      <p class="budget-row">
-        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="16" x2="12" y2="12"/>
-          <line x1="12" y1="8" x2="12.01" y2="8"/>
-        </svg>
-        <span class="label">Why Choose :</span>
-        <span class="value"><%= dayAccom["why_choose"] %></span>
-      </p>
+  <% if(dayAccom){ %>
+    <div class="budget-list">
+      <div class="budget-item">
+        <p class="budget-row">
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span class="label">Name :</span>
+          <span class="value"><%= dayAccom["name"] %> (<%= dayAccom["type"] %>)</span>
+        </p>
+        <p class="budget-row">
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3h12M6 8h12M6 13l8.5 8M6 13h3a4 4 0 0 0 0-8"/>
+          </svg>
+          <span class="label">Price Per Night :</span>
+          <span class="value"><%= dayAccom["price_per_night"] %></span>
+        </p>
+        <p class="budget-row">
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
+          </svg>
+          <span class="label">Location :</span>
+          <span class="value"><%= dayAccom["location"] %></span>
+        </p>
+        <p class="budget-row">
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          <span class="label">Facilities :</span>
+          <span class="value"><%= dayAccom["facilities"].join(", ") %></span>
+        </p>
+        <p class="budget-row">
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <span class="label">Why Choose :</span>
+          <span class="value"><%= dayAccom["why_choose"] %></span>
+        </p>
+      </div>
     </div>
-  </div>
+  <% }else{ %>
+    <div class="budget-list">
+      <div class="budget-item">
+        <p class="budget-row">
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span class="label">No Accommodation Required</span>
+        </p>
+      </div>
+    </div>
+  <% } %>
 </body>
 </html>

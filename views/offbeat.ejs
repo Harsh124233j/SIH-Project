@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <!-- Custom CSS File -->
-    <link rel="stylesheet" href="Offbeat.css">
+    <link rel="stylesheet" href="/css/offbeat.css">
 </head>
 
 <body>
@@ -26,21 +26,94 @@
                 <a href="#" class="travel"> <i class="fas fa-hiking"></i> Tourism. </a>
                 <!-- about us -->
                 <nav class="navbar">
-                    <a href="/" class="tool">Home</a>
+                    <a href="#" class="tool">Home</a>
                     <a href="#" class="tool">Explore Offbeat</a>
                     <a href="#" class="tool">Guide</a>
                     <a href="#" class="tool">About Us</a>
-                    <a href="<%= typeof user !== 'undefined' && user ? '#' : '/login' %>" class="btn ">
-                        <%= typeof user !=='undefined' && user ? 'Welcome ' + user + '!' : 'Sign Up' %>
-                            <% if (!locals.user) { %>
-                                <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
-                                    <path fill="currentColor"
-                                        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z">
-                                    </path>
-                                </svg>
-                                <% } %>
+                    <a href="#" class="btn ">Sign Up
+                        <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
+                            <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z">
+                            </path>
+                        </svg>
                     </a>
                 </nav>
+            </div>
+        </div>
+        <!-- Main Body -->
+        <div class="smallbox">
+            <span id="small">
+                THE REAL STATE OF TRAVEL
+            </span>
+        </div>
+        <div class="heading">
+            <!-- Heading -->
+            <h1>Turn every journey into a story worth remembering—with experiences shaped by the people who call each
+                place home.</h1>
+        </div>
+        <div class="boxdouble">
+            <!-- 2Boxes -->
+            <div class="data1 dataM">
+                <div class="boxheader">
+                    <span class="photo photo1">
+                        <svg class="pic1" width="20" height="18" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15.0011 19V17C15.0011 15.9391 14.5797 14.9217 13.8295 14.1716C13.0792 13.4214 12.0618 13 11.0008 13H5.00032C3.93937 13 2.92187 13.4214 2.17167 14.1716C1.42146 14.9217 1 15.9391 1 17V19M15.0011 1.12793C15.8589 1.3503 16.6186 1.85119 17.161 2.55199C17.7033 3.25279 17.9976 4.11382 17.9976 4.99993C17.9976 5.88604 17.7033 6.74707 17.161 7.44787C16.6186 8.14867 15.8589 8.64956 15.0011 8.87193M21.0016 18.9999V16.9999C21.0009 16.1136 20.7059 15.2527 20.1629 14.5522C19.6199 13.8517 18.8596 13.3515 18.0014 13.1299M12.0009 5C12.0009 7.20914 10.2099 9 8.00056 9C5.79124 9 4.00024 7.20914 4.00024 5C4.00024 2.79086 5.79124 1 8.00056 1C10.2099 1 12.0009 2.79086 12.0009 5Z"
+                                stroke="#C96543" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+
+                    </span>
+                    <h2 class="inl">
+                        The Mass Tourism Problem
+                    </h2>
+                </div>
+                <p class="text">
+                    Popular tourist destinations are severely overcrowded, leaving travelers exhausted and environments
+                    strained. Meanwhile, nearby stunning heritage sites, ancient stepwells, and master local artisans
+                    remain undiscovered—struggling economically just miles away from massive crowds.
+                </p>
+                <hr class="line">
+                <div class="boxfooter">
+
+                    <span class="footerphoto1">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8.00004 5.99952V8.66618M8.00004 11.3329H8.00671M14.487 11.9997L9.15365 2.66633C9.03736 2.46114 8.86872 2.29046 8.66494 2.17171C8.46115 2.05297 8.22951 1.9904 7.99365 1.9904C7.75779 1.9904 7.52616 2.05297 7.32237 2.17171C7.11858 2.29046 6.94994 2.46114 6.83365 2.66633L1.50032 11.9997C1.38277 12.2032 1.32114 12.4343 1.32166 12.6693C1.32218 12.9044 1.38484 13.1352 1.50328 13.3382C1.62173 13.5413 1.79175 13.7094 1.99612 13.8256C2.20048 13.9417 2.43192 14.0018 2.66699 13.9997H13.3337C13.5676 13.9994 13.7973 13.9376 13.9998 13.8205C14.2023 13.7034 14.3705 13.5351 14.4873 13.3324C14.6042 13.1298 14.6657 12.8999 14.6656 12.666C14.6656 12.4321 14.604 12.2023 14.487 11.9997Z"
+                                stroke="#C96543" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+
+                    </span>
+                    <span id="redone">90% of visitor spend remains in centralized commercial nodes.</span>
+                </div>
+            </div>
+            <div class="data2 dataM">
+                <div class="boxheader">
+                    <span class="photo2">
+                        <svg class="pic2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                            d="M7 1C6.68967 1 6.3836 1.07222 6.106 1.21093L1.553 3.48793C1.38692 3.57092 1.24722 3.69851 1.14956 3.85641C1.05189 4.0143 1.0001 4.19627 1 4.38193V17.1449C0.999582 17.3156 1.04284 17.4835 1.12565 17.6327C1.20846 17.7819 1.32808 17.9074 1.47312 17.9973C1.61816 18.0872 1.78379 18.1385 1.95426 18.1464C2.12473 18.1542 2.29436 18.1182 2.447 18.0419L6.106 16.2119C6.3836 16.0732 6.68967 16.001 7 16.001C7.31033 16.001 7.6164 16.0732 7.894 16.2119L12.106 18.3179C12.3836 18.4566 12.6897 18.5289 13 18.5289C13.3103 18.5289 13.6164 18.4566 13.894 18.3179L18.447 16.0409C18.6131 15.9579 18.7528 15.8304 18.8505 15.6725C18.9481 15.5146 18.9999 15.3326 19 15.1469V2.38293C19.0003 2.21237 18.9569 2.04458 18.874 1.89551C18.7911 1.74645 18.6715 1.62106 18.5265 1.53126C18.3814 1.44147 18.2159 1.39026 18.0455 1.3825C17.8751 1.37474 17.7056 1.41069 17.553 1.48693L13.894 3.31693C13.6164 3.45565 13.3103 3.52786 13 3.52786C12.6897 3.52786 12.3836 3.45565 12.106 3.31693L7.894 1.21093C7.6164 1.07222 7.31033 1 7 1ZM13 3.52786L13 18.5273M7 1L7 16"
+                            stroke="#FAF8F5" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </span>
+                    <h2 class="inl">
+                        The Offbeat Hub Solution
+                    </h2>
+                </div>
+                <p class="text">
+                    A dynamic geo-cultural engine. When you look up Jaipur, we bypass generic commercial itineraries.
+                    Our platform routes you to a stunning lesser-known stepwell, pairs your day with a verified local
+                    family workshop (like block printing), and suggests a certified local family homestay.
+                </p>
+                <hr class="line">
+                <div class="boxfooter">
+                    <span class="footerphoto2">
+                        <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                            d="M8.10793 9.16724L9.24418 15.5617C9.25691 15.637 9.24634 15.7144 9.2139 15.7835C9.18145 15.8527 9.12868 15.9103 9.06263 15.9486C8.99658 15.9869 8.9204 16.0042 8.84428 15.998C8.76817 15.9919 8.69574 15.9626 8.63668 15.9142L5.95168 13.899C5.82206 13.8021 5.6646 13.7498 5.5028 13.7498C5.34101 13.7498 5.18355 13.8021 5.05393 13.899L2.36443 15.9135C2.30542 15.9618 2.23308 15.991 2.15705 15.9971C2.08103 16.0033 2.00493 15.9861 1.93893 15.9479C1.87292 15.9097 1.82014 15.8522 1.78762 15.7832C1.7551 15.7142 1.7444 15.637 1.75693 15.5617L2.89243 9.16724M10 5.5C10 7.98528 7.98528 10 5.5 10C3.01472 10 1 7.98528 1 5.5C1 3.01472 3.01472 1 5.5 1C7.98528 1 10 3.01472 10 5.5Z"
+                            stroke="#E6D7C3" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </span>
+                    <span>Includes a gamified "Digital Passport" - unlock badges and community rewards.</span>
+                </div>
             </div>
         </div>
         <div class="title">
@@ -274,8 +347,8 @@
                 </p>
             </div>
         </div>
+         <%- include("./includes/footer.ejs") %>
     </div>
-
+   
 </body>
-
 </html>

@@ -133,16 +133,16 @@
 }
 /* Background Image Setup */
 .slide:nth-child(1) .box {
-  background-image: url('assets/bac 4.png');
+  background-image: url('/assets/bac 4.png');
 }
 .slide:nth-child(2) .box {
-  background-image: url('assets/ghat.jpg');
+  background-image: url('/assets/ghat.jpg');
 }
 .slide:nth-child(3) .box {
-  background-image: url('assets/joy-amed-1I07SYGwuys-unsplash.jpg');
+  background-image: url('/assets/joy-amed-1I07SYGwuys-unsplash.jpg');
 }
 .slide:nth-child(4) .box {
-  background-image: url('assets/beach.jpg');
+  background-image: url('/assets/beach.jpg');
 }
 
 
