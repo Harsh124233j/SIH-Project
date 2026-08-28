@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voyara Results Page</title>
     <!-- Relative paths updated to look back into the main directory for tracker.css, and local result.css -->
-    <link rel="stylesheet" href="../tracker_page/tracker.css" onerror="this.href='../tracker.css'">
-    <link rel="stylesheet" href="result.css">
+    <link rel="stylesheet" href="/css/generator.css" onerror="this.href='/css/generator.css'">
+    <link rel="stylesheet" href="/css/result.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -43,9 +43,10 @@
 
             </div>
         </div>
+        <%- include("./includes/footer.ejs") %>
     </div>
-
+    
     <!-- Local JavaScript file -->
-    <script src="result.js"></script>
+    <script src="/js/result.js"></script>
 </body>
 </html>

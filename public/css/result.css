@@ -2,7 +2,7 @@
     RESULTS PANEL & TABS STYLING (result.css)
 ========================================================= */
 
-/* Warm Cultural Background Style for result.html */
+/* Warm Cultural Background Style for result.ejs */
 .page.result-page-bg {
     background: url("bg-travel.png") center center / cover no-repeat !important;
 }
