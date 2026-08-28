@@ -18,10 +18,3 @@ git pull origin main
 
 // for safety just keep a local copy of code on your local machine
 // also add comments in your code so that others can understand
-
-//hello jeee
-
-
-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
-
-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
