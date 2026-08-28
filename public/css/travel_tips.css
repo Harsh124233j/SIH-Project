@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;1,100;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  -webkit-transition: .2s linear;
+  transition: .2s linear;
+  scroll-behavior: smooth;
+}
+
+.container {
+  padding: 40px;
+  background-color: #ffffff;
+  color: #111827;
+  height: 100vh;
+  width: 100vw;
+}
+
+.titleHead h1{
+  
+  color: #111827;
+}
+.titleHead p{
+  color: #4b5563;
+}
+.titleHead{
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+.gridData{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+.itemsGrid{
+  display: flex;
+  border: 2px solid #e5e7eb;
+  padding: 20px;
+  border-radius: 10px;
+  gap: 10px;
+  align-items: flex-start;
+  background-color: #f8f9fa;
+  box-shadow: -15px 15px 20px rgba(78, 78, 78, 0.1);
+}
+.itemsGrid h3 {
+  color: #111827;
+  margin: 0 0 6px 0; 
+}
+.itemsGrid p {
+  color: #4b5563; 
+  margin: 0;
+}
+.icon{
+  width: 42px;
+  height: 42px;
+  border: 2px solid #d1d5db;
+  border-radius: 5px;
+  aspect-ratio: 1/1;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #edeef0;
+}
+
+.itemsGrid:hover{
+  transform: translateX(5px);
+}

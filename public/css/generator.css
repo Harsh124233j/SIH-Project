@@ -15,7 +15,6 @@ html,
 body {
     width: 100%;
     height: 100%;
-
     margin: 0;
     padding: 0;
 }
@@ -23,11 +22,8 @@ body {
 
 body {
     overflow: hidden;
-
     background: #10221b;
-
     color: #ffffff;
-
     font-family: "Inter", sans-serif;
 }
 
@@ -40,8 +36,8 @@ body {
     --yellow: #C44E3B;
     --green: #219150;
     --background: #10221b;
-    --card: #0b3d3b;
-    --border: rgba(71, 173, 221, 0.24);
+    --card: rgba(11, 61, 59, 0.2);
+    --border: rgba(255, 255, 255, 0.25);
     --muted: #9ab0a8;
 }
 
@@ -57,7 +53,7 @@ body {
     min-height: 0;
     position: relative;
     overflow: hidden;
-    background: url("bgimage4.png") center center / cover no-repeat;
+    background: url("generator1.jpg") center center / cover no-repeat;
 }
 
 
@@ -117,11 +113,13 @@ body {
     padding: 24px 33px;
     border-radius: 18px;
 
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(18, 24, 27, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(12, 20, 24, 0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.06),
-        0 15px 40px rgba(0,0,0,0.38);
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 15px 40px rgba(0,0,0,0.3);
 }
 
 
@@ -172,10 +170,10 @@ select, input[type="date"] {
     appearance: none;
     width: 100%;
     height: 36px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 9px;
     outline: none;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.03);
     color: #ffffff;
     padding: 0 35px 0 14px;
     font-family: inherit;
@@ -189,7 +187,12 @@ select option {
 }
 
 select:focus, input[type="date"]:focus {  
-    border-color: #C44E3B;
+    border-color: #38bdf8;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
 }
 
 
@@ -255,13 +258,13 @@ input[type="range"]::-webkit-slider-thumb {
     height: 12px;
     border: none;
     border-radius: 50%;
-    background: var(--yellow);
+    background: #38bdf8;
     cursor: pointer;
 }
 
 
 /* =========================================================
-    BUDGET
+    BUDGET BUTTONS
 ========================================================= */
 
 .budget-group {
@@ -283,8 +286,9 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 0 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 18px;
-    background: rgba(255, 255, 255, 0.08);
-    color: #D1D5DB;
+    /* Custom button background color (Soft Slate Blue tint) */
+    background: rgba(56, 189, 248, 0.08);
+    color: #E2E8F0;
     font-family: inherit;
     font-size: 11px;
     cursor: pointer;
@@ -294,18 +298,18 @@ input[type="range"]::-webkit-slider-thumb {
 
 .budget-btn:hover {
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(56, 189, 248, 0.2);
 }
 
 .budget-btn.active {
-    border: 1.5px solid #C44E3B;
+    border: 1.5px solid #38bdf8;
     color: #ffffff;
-    background: rgba(196, 78, 59, 0.25);
+    background: rgba(56, 189, 248, 0.35);
 }
 
 
 /* =========================================================
-    VIBE
+    VIBE BUTTONS
 ========================================================= */
 
 .vibe-group {
@@ -326,8 +330,9 @@ input[type="range"]::-webkit-slider-thumb {
     height: 28px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 17px;
-    background: rgba(255, 255, 255, 0.08);
-    color: #D1D5DB;
+    /* Custom button background color */
+    background: rgba(56, 189, 248, 0.08);
+    color: #E2E8F0;
     font-family: inherit;
     font-size: 11px;
     cursor: pointer;
@@ -336,20 +341,20 @@ input[type="range"]::-webkit-slider-thumb {
 
 
 .vibe-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(56, 189, 248, 0.2);
     color: #ffffff;
 }
 
 
 .vibe-btn.selected {
     color: #FFFFFF;
-    border: 1.5px solid #C44E3B;
-    background: rgba(196, 78, 59, 0.25);
+    border: 1.5px solid #38bdf8;
+    background: rgba(56, 189, 248, 0.35);
 }
 
 
 /* =========================================================
-    BUTTONS
+    ACTION BUTTONS
 ========================================================= */
 
 .generate-btn {
@@ -361,19 +366,20 @@ input[type="range"]::-webkit-slider-thumb {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: var(--yellow);
+    /* Custom primary color (Cyan/Sky blue gradient feel) */
+    background: linear-gradient(135deg, #0ea5e9, #2563eb);
     color: #ffffff;
     font-family: inherit;
     font-size: 11px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
     margin-top: 4px;
 }
 
 
 .generate-btn:hover {
-    background: #771F23;
+    opacity: 0.9;
     transform: translateY(-1px);
 }
 
@@ -387,7 +393,7 @@ input[type="range"]::-webkit-slider-thumb {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.06);
     color: #ffffff;
     font-family: inherit;
     font-size: 11px;

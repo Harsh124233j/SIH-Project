@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 
 <head>
@@ -14,7 +14,6 @@
 
   <!-- custom css file link  -->
   <link rel="stylesheet" href="/css/style.css">
-
 </head>
 
 <body>
@@ -30,7 +29,7 @@
         <nav class="navbar">
           <a href="/">Home</a>
           <a href="/offbeat">Explore Offbeat</a>
-          <a href="#">Guide</a>
+          <a href="/guide">Guide</a> <!-- Links to your travel tips route -->
           <a href="/aboutus">About Us</a>
           <a href="<%= typeof user !== 'undefined' && user ? '#' : '/login' %>" class="btn">
             <%= typeof user !=='undefined' && user ? 'Welcome ' + user + '!' : 'Sign Up' %>
@@ -38,24 +37,20 @@
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
                 </svg>
-                <% } %>
+              <% } %>
           </a>
         </nav>
       </div>
+
       <!-- pic section -->
       <div class="pic-setion">
         <!-- first pic  -->
-
         <div class="slide">
           <div class="box first">
             <div class="content_box">
               <h3>Kerala</h3>
-              <p> Kerala is a coastal state located on the tropical Malabar Coast of southwestern India,
-                along the Arabian Sea. It is known for its serene palm-fringed backwaters,
-                rich cultural traditions, and diverse natural landscapes, including lush tea plantations,
-                mist-covered Western Ghats mountains, and rich wildlife sanctuaries</p>
+              <p>Kerala is a coastal state located on the tropical Malabar Coast of southwestern India, along the Arabian Sea. It is known for its serene palm-fringed backwaters, rich cultural traditions, and diverse natural landscapes...</p>
               <a href="/generator" class="btn ">Plan Your Trip
-                <!-- teer wala svg tag -->
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
                 </svg>
@@ -69,12 +64,8 @@
           <div class="box second">
             <div class="content_box">
               <h3>Varanasi</h3>
-              <p> The Varanasi Ghats are a series of historic stone riverfront steps lining the
-                sacred Ganges River in Uttar Pradesh, northern India. They are known for their profound spiritual
-                significance, ancient temples and palaces, and vibrant daily rituals, including early-morning holy dips,
-                centuries-old cremation rites, and the evening Ganga Aarti ceremonies..</p>
+              <p>The Varanasi Ghats are a series of historic stone riverfront steps lining the sacred Ganges River in Uttar Pradesh, northern India...</p>
               <a href="/generator" class="btn">Plan Your Trip
-                <!-- teer wala svg tag -->
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
                 </svg>
@@ -88,12 +79,8 @@
           <div class="box third">
             <div class="content_box">
               <h3>Kashmir</h3>
-              <p>Kashmir is a picturesque valley region located in the northernmost part of the Indian
-                subcontinent, cradled between the Great Himalayas and the Pir Panjal mountain range.
-                It is known for its iconic wooden shikaras drifting on Dal Lake, Mughal-era terraced gardens,
-                and breathtaking natural landscape and forests.</p>
+              <p>Kashmir is a picturesque valley region located in the northernmost part of the Indian subcontinent, cradled between the Great Himalayas...</p>
               <a href="/generator" class="btn">Plan Your Trip
-                <!-- teer wala svg tag -->
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
                 </svg>
@@ -107,12 +94,8 @@
           <div class="box fourth">
             <div class="content_box">
               <h3>Goa</h3>
-              <p>Goa is a coastal state located in southwestern India along the Konkan region,
-                bordering the Arabian Sea. It is known for its sun-drenched golden beaches, vibrant nightlife,
-                Portuguese colonial-era architecture and historic churches, and lush tropical landscapes featuring spice
-                plantations and scenic waterfalls. </p>
+              <p>Goa is a coastal state located in southwestern India along the Konkan region, bordering the Arabian Sea...</p>
               <a href="/generator" class="btn">Plan Your Trip
-                <!-- teer wala svg tag -->
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
                 </svg>
@@ -123,118 +106,56 @@
 
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
-
       </div>
     </div>
-
-    <!-- service section and package section skip krdo ,isme kuch mat krna -->
 
     <!-- service section  -->
     <section class="service">
       <h1>We have the best services available for you!</h1>
       <div class="cards">
-        <!-- 1st service  -->
         <div class="item">
           <img src="./assets/1a.jpg" alt="">
           <h3>Flight Services</h3>
           <p>Arrival and departure</p>
         </div>
-        <!-- 2nd service  -->
         <div class="item">
           <img src="./assets/2a.jpg" alt="">
           <h3>Food Services</h3>
           <p>Catering</p>
         </div>
-        <!-- 3rd service -->
         <div class="item">
           <img src="./assets/3a.jpg" alt="">
           <h3>Travel Services</h3>
           <p>Pick-up/drop</p>
         </div>
-        <!-- 4th service -->
         <div class="item">
           <img src="./assets/4a.jpg" alt="">
           <h3>Hotel Services</h3>
           <p>Check-in/out</p>
         </div>
-
       </div>
     </section>
 
     <!-- package section  -->
     <section class="package">
       <h2>Packages</h2>
-      <!-- package-content  -->
       <div class="package-content">
         <div class="text-title">
           <h3>Best Selling Destinations</h3>
         </div>
-        <!-- 1st image -->
-        <a href="#">
-          <div class="image">
-            <img src="/assets/p1.jpg" alt="">
-            <h3>Starting at Rs.2,700 </h3>
-          </div>
-        </a>
-        <!-- 2nd image  -->
-        <a href="#">
-          <div class="image">
-            <img src="/assets/p2.jpg" alt="">
-            <h3>Starting at Rs.4,999 </h3>
-          </div>
-        </a>
-        <!-- 3rd image  -->
-        <a href="#">
-          <div class="image">
-            <img src="/assets/p3.jpg" alt="">
-            <h3>Starting at Rs.9,999</h3>
-          </div>
-        </a>
-        <!-- 4th image  -->
-        <a href="#">
-          <div class="image">
-            <img src="/assets/p4.jpg" alt="">
-            <h3>Starting at Rs.30,000 </h3>
-          </div>
-        </a>
-        <!-- 5th image  -->
-        <a href="#">
-          <div class="image">
-            <img src="/assets/pac1.jpeg" alt="">
-            <h3>Starting at Rs.37,700/- </h3>
-          </div>
-        </a>
-        <!-- 6th image  -->
-        <a href="#">
-          <div class="image">
-            <img src="/assets/pac1.jpg" alt="">
-            <h3>Starting at Rs.47,500/- </h3>
-          </div>
-        </a>
-        <!-- 7th image  -->
-        <a href="#">
-          <div class="image">
-            <img src="/assets/pac3.jpg" alt="">
-            <h3>Starting at Rs.58,500/- </h3>
-          </div>
-        </a>
-        <!-- 8th image  -->
-        <a href="#">
-          <div class="image">
-            <img src="/assets/pac7.jpg" alt="">
-            <h3>Starting at Rs.59,500/- </h3>
-          </div>
-        </a>
-        <!-- 9th image  -->
-        <a href="#">
-          <div class="image">
-            <img src="/assets/l1.jpg" alt="">
-            <h3>Starting at Rs.65,500/-</h3>
-          </div>
-        </a>
+        <a href="#"><div class="image"><img src="/assets/p1.jpg" alt=""><h3>Starting at Rs.2,700 </h3></div></a>
+        <a href="#"><div class="image"><img src="/assets/p2.jpg" alt=""><h3>Starting at Rs.4,999 </h3></div></a>
+        <a href="#"><div class="image"><img src="/assets/p3.jpg" alt=""><h3>Starting at Rs.9,999</h3></div></a>
+        <a href="#"><div class="image"><img src="/assets/p4.jpg" alt=""><h3>Starting at Rs.30,000 </h3></div></a>
+        <a href="#"><div class="image"><img src="/assets/pac1.jpeg" alt=""><h3>Starting at Rs.37,700/- </h3></div></a>
+        <a href="#"><div class="image"><img src="/assets/pac1.jpg" alt=""><h3>Starting at Rs.47,500/- </h3></div></a>
+        <a href="#"><div class="image"><img src="/assets/pac3.jpg" alt=""><h3>Starting at Rs.58,500/- </h3></div></a>
+        <a href="#"><div class="image"><img src="/assets/pac7.jpg" alt=""><h3>Starting at Rs.59,500/- </h3></div></a>
+        <a href="#"><div class="image"><img src="/assets/l1.jpg" alt=""><h3>Starting at Rs.65,500/-</h3></div></a>
       </div>
     </section>
-     <%- include("./includes/footer.ejs") %>
+    
+    <%- include("./includes/footer.ejs") %>
   </div>
  
   <script src="/js/index.js"></script>

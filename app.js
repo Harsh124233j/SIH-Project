@@ -49,6 +49,8 @@ app.get('/offbeat', (req, res) => {
     res.render('offbeat.ejs', { user: getUserFromCookie(req) });
 });
 
+
+
 // generator work 
 let loginSuccessfull = false;
 app.get("/generator", (req, res)=>{
