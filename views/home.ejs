@@ -12,26 +12,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-  <!-- custom css file link  -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
   <div class="wrapper">
-    <!-- nav bar  -->
     <div class="home">
-      <!-- logo section  -->
       <div class="logo">
-        <!-- travel bar -->
         <a href="#" class="travel"> <i class="fas fa-hiking"></i> Tourism. </a>
-        <!-- about us -->
         <nav class="navbar">
           <a href="/">Home</a>
           <a href="/offbeat">Explore Offbeat</a>
-          <a href="/guide">Guide</a> <!-- Links to your travel tips route -->
-          <a href="/aboutus">About Us</a>
-          <a href="<%= typeof user !== 'undefined' && user ? '#' : '/login' %>" class="btn">
+          <a href="/guide">Guide</a> <a href="/aboutus">About Us</a>
+          
+          <a href="<%= typeof user !== 'undefined' && user ? '#' : '/login' %>" class="btn" id="user-greeting-btn">
             <%= typeof user !=='undefined' && user ? 'Welcome ' + user + '!' : 'Sign Up' %>
               <% if (!locals.user) { %>
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
@@ -42,9 +37,7 @@
         </nav>
       </div>
 
-      <!-- pic section -->
       <div class="pic-setion">
-        <!-- first pic  -->
         <div class="slide">
           <div class="box first">
             <div class="content_box">
@@ -59,7 +52,6 @@
           </div>
         </div>
 
-        <!-- second pic  -->
         <div class="slide">
           <div class="box second">
             <div class="content_box">
@@ -74,7 +66,6 @@
           </div>
         </div>
 
-        <!-- third pic  -->
         <div class="slide">
           <div class="box third">
             <div class="content_box">
@@ -89,7 +80,6 @@
           </div>
         </div>
 
-        <!-- fourth pic  -->
         <div class="slide">
           <div class="box fourth">
             <div class="content_box">
@@ -109,7 +99,6 @@
       </div>
     </div>
 
-    <!-- service section  -->
     <section class="service">
       <h1>We have the best services available for you!</h1>
       <div class="cards">
@@ -136,7 +125,6 @@
       </div>
     </section>
 
-    <!-- package section  -->
     <section class="package">
       <h2>Packages</h2>
       <div class="package-content">
@@ -159,6 +147,31 @@
   </div>
  
   <script src="/js/index.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userBtn = document.getElementById('user-greeting-btn');
+      if (userBtn) {
+        userBtn.addEventListener('click', (e) => {
+          // Check if the button currently displays a welcome message (i.e. user is logged in)
+          if (userBtn.textContent.includes('Welcome')) {
+            e.preventDefault();
+            
+            // Clear client-side storage data
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+
+            // Clear the cookie so Express server stops recognizing the logged-in user
+            document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+            // Redirect user back to the login page
+            window.location.href = '/login';
+          }
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
