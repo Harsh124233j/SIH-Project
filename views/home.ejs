@@ -25,14 +25,14 @@
           <a href="/">Home</a>
           <a href="/offbeat">Explore Offbeat</a>
           <a href="/guide">Guide</a> <a href="/aboutus">About Us</a>
-          
+
           <a href="<%= typeof user !== 'undefined' && user ? '#' : '/login' %>" class="btn" id="user-greeting-btn">
             <%= typeof user !=='undefined' && user ? 'Welcome ' + user + '!' : 'Sign Up' %>
-              <% if (!locals.user) { %>
+              <% if (typeof user==='undefined' || !user) { %>
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
                 </svg>
-              <% } %>
+                <% } %>
           </a>
         </nav>
       </div>
@@ -42,7 +42,9 @@
           <div class="box first">
             <div class="content_box">
               <h3>Kerala</h3>
-              <p>Kerala is a coastal state located on the tropical Malabar Coast of southwestern India, along the Arabian Sea. It is known for its serene palm-fringed backwaters, rich cultural traditions, and diverse natural landscapes...</p>
+              <p>Kerala is a coastal state located on the tropical Malabar Coast of southwestern India, along the
+                Arabian Sea. It is known for its serene palm-fringed backwaters, rich cultural traditions, and diverse
+                natural landscapes...</p>
               <a href="/generator" class="btn ">Plan Your Trip
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
@@ -56,7 +58,8 @@
           <div class="box second">
             <div class="content_box">
               <h3>Varanasi</h3>
-              <p>The Varanasi Ghats are a series of historic stone riverfront steps lining the sacred Ganges River in Uttar Pradesh, northern India...</p>
+              <p>The Varanasi Ghats are a series of historic stone riverfront steps lining the sacred Ganges River in
+                Uttar Pradesh, northern India...</p>
               <a href="/generator" class="btn">Plan Your Trip
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
@@ -70,7 +73,8 @@
           <div class="box third">
             <div class="content_box">
               <h3>Kashmir</h3>
-              <p>Kashmir is a picturesque valley region located in the northernmost part of the Indian subcontinent, cradled between the Great Himalayas...</p>
+              <p>Kashmir is a picturesque valley region located in the northernmost part of the Indian subcontinent,
+                cradled between the Great Himalayas...</p>
               <a href="/generator" class="btn">Plan Your Trip
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
@@ -84,7 +88,8 @@
           <div class="box fourth">
             <div class="content_box">
               <h3>Goa</h3>
-              <p>Goa is a coastal state located in southwestern India along the Konkan region, bordering the Arabian Sea...</p>
+              <p>Goa is a coastal state located in southwestern India along the Konkan region, bordering the Arabian
+                Sea...</p>
               <a href="/generator" class="btn">Plan Your Trip
                 <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon">
                   <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
@@ -131,21 +136,57 @@
         <div class="text-title">
           <h3>Best Selling Destinations</h3>
         </div>
-        <a href="#"><div class="image"><img src="/assets/p1.jpg" alt=""><h3>Starting at Rs.2,700 </h3></div></a>
-        <a href="#"><div class="image"><img src="/assets/p2.jpg" alt=""><h3>Starting at Rs.4,999 </h3></div></a>
-        <a href="#"><div class="image"><img src="/assets/p3.jpg" alt=""><h3>Starting at Rs.9,999</h3></div></a>
-        <a href="#"><div class="image"><img src="/assets/p4.jpg" alt=""><h3>Starting at Rs.30,000 </h3></div></a>
-        <a href="#"><div class="image"><img src="/assets/pac1.jpeg" alt=""><h3>Starting at Rs.37,700/- </h3></div></a>
-        <a href="#"><div class="image"><img src="/assets/pac1.jpg" alt=""><h3>Starting at Rs.47,500/- </h3></div></a>
-        <a href="#"><div class="image"><img src="/assets/pac3.jpg" alt=""><h3>Starting at Rs.58,500/- </h3></div></a>
-        <a href="#"><div class="image"><img src="/assets/pac7.jpg" alt=""><h3>Starting at Rs.59,500/- </h3></div></a>
-        <a href="#"><div class="image"><img src="/assets/l1.jpg" alt=""><h3>Starting at Rs.65,500/-</h3></div></a>
+        <a href="#">
+          <div class="image"><img src="/assets/p1.jpg" alt="">
+            <h3>Starting at Rs.2,700 </h3>
+          </div>
+        </a>
+        <a href="#">
+          <div class="image"><img src="/assets/p2.jpg" alt="">
+            <h3>Starting at Rs.4,999 </h3>
+          </div>
+        </a>
+        <a href="#">
+          <div class="image"><img src="/assets/p3.jpg" alt="">
+            <h3>Starting at Rs.9,999</h3>
+          </div>
+        </a>
+        <a href="#">
+          <div class="image"><img src="/assets/p4.jpg" alt="">
+            <h3>Starting at Rs.30,000 </h3>
+          </div>
+        </a>
+        <a href="#">
+          <div class="image"><img src="/assets/pac1.jpeg" alt="">
+            <h3>Starting at Rs.37,700/- </h3>
+          </div>
+        </a>
+        <a href="#">
+          <div class="image"><img src="/assets/pac1.jpg" alt="">
+            <h3>Starting at Rs.47,500/- </h3>
+          </div>
+        </a>
+        <a href="#">
+          <div class="image"><img src="/assets/pac3.jpg" alt="">
+            <h3>Starting at Rs.58,500/- </h3>
+          </div>
+        </a>
+        <a href="#">
+          <div class="image"><img src="/assets/pac7.jpg" alt="">
+            <h3>Starting at Rs.59,500/- </h3>
+          </div>
+        </a>
+        <a href="#">
+          <div class="image"><img src="/assets/l1.jpg" alt="">
+            <h3>Starting at Rs.65,500/-</h3>
+          </div>
+        </a>
       </div>
     </section>
-    
+
     <%- include("./includes/footer.ejs") %>
   </div>
- 
+
   <script src="/js/index.js"></script>
 
   <script>
@@ -156,7 +197,7 @@
           // Check if the button currently displays a welcome message (i.e. user is logged in)
           if (userBtn.textContent.includes('Welcome')) {
             e.preventDefault();
-            
+
             // Clear client-side storage data
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userEmail');
