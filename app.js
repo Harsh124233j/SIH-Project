@@ -81,7 +81,7 @@ let finalAns;
 
 
 app.get("/showItinerary", (req, res)=>{
-    if((Object.keys(req.query).length) === 0){
+      if((Object.keys(req.query).length) === 0){
       console.log("Please select a valid date and place to visit !!");
       return res.render("home.ejs");
     }
