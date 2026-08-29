@@ -81,6 +81,10 @@ let finalAns;
 
 
 app.get("/showItinerary", (req, res)=>{
+    if((Object.keys(req.query).length) === 0){
+      console.log("Please select a valid date and place to visit !!");
+      return res.render("home.ejs");
+    }
   res.render("show.ejs", {queryParams : req.query});
 });
 
@@ -161,7 +165,7 @@ app.get("/api/streamItinerary", async (req, res)=>{
 
 // showing data for a particular day
 app.get("/showItinerary/:day", (req, res) => {
-    // if data for day 1 is called before generating itinerary then send to home 
+    // if data for day 1 is called before generating itinerary then send to home
   if (!finalAns) {
     return res.render("home.ejs");
   }
