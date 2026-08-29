@@ -16,62 +16,101 @@
   scroll-behavior: smooth;
 }
 
+body {
+  /* Set the background image to cover the entire page */
+  background: url('guide.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
 .container {
   padding: 40px;
-  background-color: #ffffff;
-  color: #111827;
-  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4); /* Dark overlay to make content readable over bright aurora */
+  color: #ffffff;
+  min-height: 100vh;
   width: 100vw;
 }
 
-.titleHead h1{
-  
-  color: #111827;
+.titleHead h1 {
+  font-size: 3rem;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
-.titleHead p{
-  color: #4b5563;
+
+.titleHead p {
+  color: #e0fbfc;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
-.titleHead{
-  margin-bottom: 100px;
+
+.titleHead {
+  margin-bottom: 50px;
   text-align: center;
 }
 
-.gridData{
+.gridData {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.itemsGrid{
+
+/* Transparent glassmorphism effect for the boxes */
+.itemsGrid {
   display: flex;
-  border: 2px solid #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px;
-  border-radius: 10px;
-  gap: 10px;
+  border-radius: 12px;
+  gap: 15px;
   align-items: flex-start;
-  background-color: #f8f9fa;
-  box-shadow: -15px 15px 20px rgba(78, 78, 78, 0.1);
+  background-color: rgba(15, 23, 42, 0.55); /* Semi-transparent dark background */
+  backdrop-filter: blur(10px); /* Frosted glass look */
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
+
 .itemsGrid h3 {
-  color: #111827;
+  color: #ffffff;
   margin: 0 0 6px 0; 
+  font-weight: 600;
 }
+
 .itemsGrid p {
-  color: #4b5563; 
+  color: #cbd5e1; 
+  font-size: 0.9rem;
   margin: 0;
+  text-transform: none; /* Keeps description sentences naturally capitalized/punctuated */
 }
-.icon{
-  width: 42px;
-  height: 42px;
-  border: 2px solid #d1d5db;
-  border-radius: 5px;
+
+.icon {
+  width: 45px;
+  height: 45px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   aspect-ratio: 1/1;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #edeef0;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.itemsGrid:hover{
-  transform: translateX(5px);
+.itemsGrid:hover {
+  transform: translateY(-5px); /* Lift up nicely on hover */
+  background-color: rgba(15, 23, 42, 0.75);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive design adjustments for smaller screens */
+@media (max-width: 900px) {
+  .gridData {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .gridData {
+    grid-template-columns: 1fr;
+  }
 }
