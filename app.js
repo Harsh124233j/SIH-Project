@@ -49,6 +49,9 @@ app.get('/offbeat', (req, res) => {
     res.render('offbeat.ejs', { user: getUserFromCookie(req) });
 });
 
+app.get("/guide", (req, res)=>{
+    res.render("travel_tips.ejs");
+})
 
 
 // generator work 
