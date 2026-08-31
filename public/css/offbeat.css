@@ -26,6 +26,8 @@
     background-position: center;
     background-attachment: fixed;
     padding-bottom: 50px;
+    position: relative;
+   
 }
 
 .home {
@@ -33,28 +35,10 @@
     height: 16%;
     position: relative;
     border: 1px solid transparent;
+    
 }
 
-.home:hover {
-    background-color: rgba(0, 0, 0, 0.85);
-    z-index: 100;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom-left-radius: 100% 60%;
-    border-bottom-right-radius: 100% 60%;
 
-    .navbar a {
-        color: #4ade80;
-    }
-
-    .travel {
-        color: #4ade80;
-    }
-
-    .btn {
-        border: 0.2rem solid #4ade80;
-        color: #4ade80;
-    }
-}
 
 .logo {
     width: 80rem;
@@ -119,7 +103,7 @@
 }
 
 .btn:hover {
-    background-color: #4ade80;
+    background-color: #10221b;
     color: #000;
     border-color: #4ade80;
 }
@@ -328,4 +312,11 @@
         margin: 1rem 0;
         position: relative;
     }
+}
+.last{
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    /* bottom:0; */
+   top:100%;
 }
