@@ -5,12 +5,10 @@ const mockData = require("./mockData.json");
 const express = require("express");
 const app = express();
 const ejsMate = require("ejs-mate");
-const mongoose = require("mongoose");
 const getPrompt = require("./getPrompt.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const NodeCache = require("node-cache");
-const { text } = require("stream/consumers");
 const appCache = new NodeCache({stdTTL : 86400});
 app.use(methodOverride("_method"));
 

@@ -87,8 +87,8 @@ body {
     width: 100vw;
     left: 50%;
     right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    margin-left: -50%;
+    /* margin-right: -50vw; */
     overflow: hidden;
     padding: 25px 0;
     mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);

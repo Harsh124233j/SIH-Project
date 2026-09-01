@@ -6,19 +6,26 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: url('/assets/bg.png') center/cover no-repeat fixed;
+  position: relative;
   color: #17324d;
 }
-
-body::before {
+.body_img{
+  width:100%;
+  height:860px;
+  position: fixed;
+  top:0;
+  left:0;
+  background-position: fixed;
+}
+/* body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(219, 232, 246, 0.22);
-  backdrop-filter: blur(1px);
-}
+
+} */
 
 .wrapper {
   position: relative;
@@ -28,6 +35,7 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 22px;
+  
 }
 
 .header,
@@ -42,8 +50,8 @@ body::before {
 .transport .header.hub,
 .budget .header.hub,
 .fee,
-.budget-list {
-  background: rgba(237, 244, 251, 0.82);
+.budget-list,#summary_container {
+  background: rgba(190, 224, 240, 0.35);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.44);
   border-radius: 24px;
@@ -106,7 +114,7 @@ body::before {
   padding: 14px 18px;
   border-radius: 16px;
   border: 1px solid rgba(135, 170, 209, 0.3);
-  background: #f4f8fc;
+  background: rgba(168, 201, 218, 0.35);    
 }
 
 .day-card+.day-card {
