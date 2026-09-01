@@ -98,7 +98,6 @@
   font-size: 8rem;
   color: white;
   padding-top: .5rem;
-  
 }
 .content_box p{
     font-family: cursive;
@@ -365,134 +364,102 @@
   transform: scale(1.03);
 }
 
-/* booking section css
-.booking{
-  margin-top:5rem;
-  width:100%;
-  height:100%;
-  position: relative;
-}
-.booking h2{
-  text-align: center;
-  font-size: 30px;
-  font-weight: 650;
-  padding-bottom: 10px;
-  line-height: 2;
-}
-.booking video{
-  position: relative;
-  object-fit: cover;
+/* review  */
+.review{
   width: 100%;
-  height: 860px;
-  pointer-events: none;
-
+  height: auto;
+ margin-top: 6rem;
+}
+.reviews-section {
+    overflow: hidden;
+    text-align: left;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.content{
-  
-  position:absolute;
-  top:8rem;
-  left:5%;
-  text-decoration: none;
-  
-  color: rgb(255, 255, 255);
-  padding: 14px 17px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.content h1{
-
- font-size: 10vh;
-  text-shadow: 2px black;
-  transition: ease 0.3s;
-}
-.content h1:hover {
-  color: transparent;
-  -webkit-text-stroke: 1px white;
-}
-.content p{
-  font-size:2rem;
-  text-align:center;
-  margin-bottom:4rem;
-
-}
-.detail{
-  width:30%;
-  background-color: #ffffff27;
-  padding:20px 30px;
-  margin:auto;
-  border-top:1px solid #ffffff6e;
-  border-left:1px solid #ffffff6e;
-  border-radius:15px;
-} 
-.head{
-  text-align: center;
-  color:#ddd;
-  font-size:1.2rem;
-}
-.destination{
-  margin-top:1rem;
-  margin-bottom:0;
-  text-align:left;
-  font-size:0.99rem;
-}
-.form-group{
-  appearance: none;
-  background: none;
-  border-bottom:1px solid #ccc;
-  text-align:left;
-}
-input, select {
-  background: transparent !important; 
-  color: #ffffff;                   
-  border: none;                       
-  outline: none;                     
-  padding: 8px 4px;
-  font-size: 16px;
-  width: 100%;
+.reviews-section h3 {
+    color: black;
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 25px;
 }
 
-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-.pill-btn {
-  display: inline-block;
-  padding: 14px 32px;
-  background-color: #ffffff;
-  border-radius: 100vw; 
-  line-height: 0;     
-  margin-top:20px;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
 }
 
-.pill-btn svg {
-  width: 20px;
-  height: 20px;
-  stroke: #0b3d3b;
+.marquee-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: scrollHorizontal 35s linear infinite;
 }
-.pill-btn:hover {
-  transform: scale(1.04);
-  opacity:0.7;
-} */
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+.review-card {
+    /* background: rgba(10, 35, 28, 0.65); */
+    background: #445056;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px 25px;
+    border-radius: 14px;
+    width: 320px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.review-text {
+    color: #F3F7F2;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.review-author {
+    color: #4ade80;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: right;
+}
+
+@keyframes scrollHorizontal {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50% - 15px));
+    }
+}
+
+
 
 /* rating section  */
+
 .rating{
   width:100%;
   height:auto;
-  margin-top: 4rem;
-
+  margin-top: 1rem;
+ margin-bottom: 3rem;
 }
 .rating h2{
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 650;
   margin-top: 40px;
   margin-bottom: 10px;
   line-height: 2;
   text-align: center;
+
 }
 .rating p{
   text-align: center;
@@ -512,8 +479,8 @@ input::placeholder {
 
 .card {
     flex: 1;
-    height: 340px;
-    padding: 37px 30px;
+    height: 300px;
+    padding: 30px 25px;
     border-radius: 23px;
 
     /* Semi-transparent background so the background image shows through */
@@ -552,19 +519,16 @@ input::placeholder {
     color: #3a4a44;
 }
 
-
-
-
 .icon-circle1,
 .icon-circle2,
 .icon-circle3,
 .icon-circle4 {
 
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
 
-    min-width: 100px;
-    min-height: 100px;
+    min-width: 80px;
+    min-height: 80px;
 
     border-radius: 50%;
 
@@ -614,9 +578,7 @@ input::placeholder {
 }
 
 
-/* =========================
-    NUMBER
-   ========================= */
+/* number  */
 
 .card h2 {
     margin: 0 0 15px;
@@ -628,9 +590,6 @@ input::placeholder {
 
     line-height: 1;
 }
-
-
-
 .card h3 {
     margin: 0 0 10px;
 
@@ -641,9 +600,6 @@ input::placeholder {
 
     line-height: 1.2;
 }
-
-
-
 .card p {
     margin: 0;
 
@@ -653,3 +609,5 @@ input::placeholder {
 
     max-width: 400px;
 }
+
+  
