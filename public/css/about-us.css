@@ -8,7 +8,7 @@
 body {
     min-height: 100vh;
     background: linear-gradient(rgba(10, 20, 35, 0.35), rgba(10, 20, 35, 0.45)),
-                url('/css/about-us.jpg') no-repeat center center fixed;
+                url('/css/messi.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
     display: flex;
@@ -53,7 +53,7 @@ body {
     letter-spacing: 2px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #f7b731;
+    color: #10b981;
     margin-bottom: 12px;
 }
 
@@ -84,11 +84,11 @@ body {
 /* Continuous Horizontal Scrolling Track */
 .marquee-container {
     position: relative;
-    width: 100vw;
+    width: 100%;
     left: 50%;
     right: 50%;
     margin-left: -50%;
-    /* margin-right: -50vw; */
+    /* margin-right: 200%; */
     overflow: hidden;
     padding: 25px 0;
     mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
@@ -130,7 +130,7 @@ body {
 .team-card:hover {
     transform: translateY(-8px) scale(1.02);
     background: rgba(15, 23, 42, 0.8);
-    border-color: rgba(247, 183, 49, 0.7);
+    border-color: #0a6244;
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
 }
 
@@ -138,14 +138,14 @@ body {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background: rgba(247, 183, 49, 0.2);
-    border: 1.5px solid rgba(247, 183, 49, 0.6);
+    background: #b2ead7;
+    border: 1.5px solid #0a6244;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
     font-size: 1.8rem;
-    color: #f7b731;
+    color: #096b4a;
     animation: floatIcon 3.5s ease-in-out infinite;
 }
 
@@ -177,6 +177,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
+    margin-bottom: 1.5rem;
 }
 
 .contact-card {
@@ -210,7 +211,7 @@ body {
 
 .contact-item i {
     font-size: 1.4rem;
-    color: #f7b731;
+    color: #10b981;
     margin-top: 4px;
 }
 
@@ -255,7 +256,7 @@ body {
 }
 
 .social-icons a:hover {
-    background: #f7b731;
+    background: #10b981;
     color: #0b132b;
     transform: translateY(-4px);
 }
@@ -288,11 +289,11 @@ body {
 .input-group input:focus,
 .input-group textarea:focus {
     background: rgba(255, 255, 255, 0.14);
-    border-color: #f7b731;
+    border-color: #10b981;
 }
 
 .submit-btn {
-    background: #f7b731;
+    background:#10b981;
     color: #0b132b;
     border: none;
     border-radius: 12px;
@@ -308,7 +309,7 @@ body {
 }
 
 .submit-btn:hover {
-    background: #ffa801;
+    background: #0a6244;
     transform: translateY(-2px);
 }
 
