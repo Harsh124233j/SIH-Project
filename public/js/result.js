@@ -1,6 +1,4 @@
-// =========================================================
-// RESULTS CONTROLLER LOGIC (result.js) - EXPANDED (MIN 4 OPTIONS)
-// =========================================================
+
 
 const travelDatabase = {
     jaipur: {

@@ -53,12 +53,7 @@ app.get("/guide", (req, res)=>{
 
 
 // generator work 
-let loginSuccessfull = false;
 app.get("/generator", (req, res)=>{
-    // while(!loginSuccessfull){
-    //     res.render("login.ejs", {loginSuccessfull});
-    // }
-
     res.render("generator.ejs");
 })
 
@@ -81,7 +76,7 @@ let finalAns;
 app.get("/showItinerary", (req, res)=>{
       if((Object.keys(req.query).length) === 0){
       console.log("Please select a valid date and place to visit !!");
-      return res.render("home.ejs");
+      return res.send("404! Page not found");
     }
   res.render("show.ejs", {queryParams : req.query});
 });
@@ -104,7 +99,7 @@ app.get("/api/streamItinerary", async (req, res)=>{
       return res.end();
     }
 
-    const conditions = `${req.query.place}  for ${req.query.days} days; arriving from ${location}, in ${req.query.month}; ${req.query.noOfTravelers} travelers; ${req.query.budget}.`;
+    const conditions = `${place}  for ${days} days; arriving from ${location}, in ${month}; ${noOfTravelers} travelers; ${budget}.`;
     // getting prompt from other file 
     const request = getPrompt(conditions);
 
@@ -165,7 +160,7 @@ app.get("/api/streamItinerary", async (req, res)=>{
 app.get("/showItinerary/:day", (req, res) => {
     // if data for day 1 is called before generating itinerary then send to home
   if (!finalAns) {
-    return res.render("home.ejs");
+    return res.send("404! Page not found");
   }
   let { day } = req.params;
   const dayNum = Number(day);
