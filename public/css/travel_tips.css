@@ -17,15 +17,13 @@
 }
 
 body {
-  /* Set the background image to cover the entire page */
-  background: url('palmer.jpg') no-repeat center center fixed ;
-  background-position: center bottom;
-
+  background: url('ronaldo.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 .container {
   padding: 40px;
-  background-color: rgba(0, 0, 0, 0.4); /* Dark overlay to make content readable over bright aurora */
+  background-color: transparent;
   color: #ffffff;
   min-height: 100vh;
   width: 100vw;
@@ -59,47 +57,51 @@ body {
 /* Transparent glassmorphism effect for the boxes */
 .itemsGrid {
   display: flex;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 14px;
   gap: 15px;
   align-items: flex-start;
-  background-color: rgba(15, 23, 42, 0.55); /* Semi-transparent dark background */
-  backdrop-filter: blur(10px); /* Frosted glass look */
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  background: rgba(181, 180, 180, 0.14); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
 }
 
 .itemsGrid h3 {
-  color: #ffffff;
+  color: #0f172a;
   margin: 0 0 6px 0; 
-  font-weight: 600;
+  font-weight: 700;
+  text-shadow: none;
 }
 
 .itemsGrid p {
-  color: #cbd5e1; 
-  font-size: 0.9rem;
+  color: #1e293b; 
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
   margin: 0;
-  text-transform: none; /* Keeps description sentences naturally capitalized/punctuated */
+  text-transform: none;
+  text-shadow: none;
 }
 
 .icon {
   width: 45px;
   height: 45px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   aspect-ratio: 1/1;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .itemsGrid:hover {
-  transform: translateY(-5px); /* Lift up nicely on hover */
-  background-color: rgba(15, 23, 42, 0.75);
-  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.22); 
+  border-color: rgba(255, 255, 255, 0.45);
 }
 
 /* Responsive design adjustments for smaller screens */
