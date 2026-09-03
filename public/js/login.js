@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('userEmail', email);
+            sessionStorage.setItem('userName', email.split('@')[0]);
+
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('userEmail', email);
             localStorage.setItem('userName', email.split('@')[0]);
@@ -83,6 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.addEventListener('click', () => {
                     const selectedName = item.getAttribute('data-name');
                     const selectedEmail = item.getAttribute('data-email');
+
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    sessionStorage.setItem('userEmail', selectedEmail);
+                    sessionStorage.setItem('userName', selectedName);
 
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem('userEmail', selectedEmail);
