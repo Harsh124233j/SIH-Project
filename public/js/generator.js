@@ -1,6 +1,6 @@
-/* ---------------------------------------------
-    DAYS SLIDER
---------------------------------------------- */
+
+    // DAYS SLIDER
+
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const slider =
     document.getElementById("daysSlider");
@@ -16,9 +16,9 @@ slider.addEventListener("input", () => {
 
 });
 
-/* ---------------------------------------------
-    passenger SLIDER
---------------------------------------------- */
+
+    // passenger SLIDER
+
 
 const passengersSlider =
     document.getElementById("passengersSlider");
@@ -34,9 +34,9 @@ passengersSlider.addEventListener("input", () => {
 });
 
 
-/* ---------------------------------------------
-    BUDGET BUTTONS
---------------------------------------------- */
+
+    // BUDGET BUTTONS
+
 
 const budgetButtons =
     document.querySelectorAll(".budget-btn");
@@ -60,9 +60,9 @@ budgetButtons.forEach(button => {
 
 
 
-/* ---------------------------------------------
-    VIBE BUTTONS
---------------------------------------------- */
+
+    // VIBE BUTTONS
+
 
 const vibeButtons =
     document.querySelectorAll(".vibe-btn");
@@ -86,9 +86,9 @@ vibeButtons.forEach(button => {
 
 
 
-/* ---------------------------------------------
-    GENERATE BUTTON
---------------------------------------------- */
+
+    // GENERATE BUTTON
+
 
 const generateButton =
     document.getElementById("generateBtn");
@@ -119,9 +119,9 @@ generateButton.addEventListener("click", () => {
 });
 
 
-/* ---------------------------------------------
-    VIEW RESTAURANTS & COMFORT STAYS BUTTON
---------------------------------------------- */
+
+    // VIEW RESTAURANTS & COMFORT STAYS BUTTON
+
 
 const viewStaysRestaurantsBtn = document.getElementById("viewStaysRestaurantsBtn");
 
