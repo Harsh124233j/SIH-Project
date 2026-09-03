@@ -107,26 +107,26 @@
     <section class="service">
       <h1>We have the best services available for you!</h1>
       <div class="cards">
-        <div class="item">
-          <img src="./assets/1a.jpg" alt="">
+        <a href="https://www.skyscanner.co.in/" target="_blank" rel="noopener noreferrer" class="item">
+          <img src="./assets/1a.jpg" alt="Flight Services">
           <h3>Flight Services</h3>
           <p>Arrival and departure</p>
-        </div>
-        <div class="item">
-          <img src="./assets/2a.jpg" alt="">
+        </a>
+        <a href="https://www.zomato.com/" target="_blank" rel="noopener noreferrer" class="item">
+          <img src="./assets/2a.jpg" alt="Food Services">
           <h3>Food Services</h3>
           <p>Catering</p>
-        </div>
-        <div class="item">
-          <img src="./assets/3a.jpg" alt="">
+        </a>
+        <a href="https://www.redbus.in/" target="_blank" rel="noopener noreferrer" class="item">
+          <img src="./assets/3a.jpg" alt="Travel Services">
           <h3>Travel Services</h3>
           <p>Pick-up/drop</p>
-        </div>
-        <div class="item">
-          <img src="./assets/4a.jpg" alt="">
+        </a>
+        <a href="https://www.booking.com/" target="_blank" rel="noopener noreferrer" class="item">
+          <img src="./assets/4a.jpg" alt="Hotel Services">
           <h3>Hotel Services</h3>
           <p>Check-in/out</p>
-        </div>
+        </a>
       </div>
     </section>
 
@@ -302,22 +302,40 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const userBtn = document.getElementById('user-greeting-btn');
+
+      // If user has not explicitly logged in during this active session,
+      // clear any lingering cookies and reset button to 'Sign Up'
+      const isSessionLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+      if (!isSessionLoggedIn) {
+        document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userName');
+
+        if (userBtn) {
+          userBtn.href = '/login';
+          userBtn.removeAttribute('title');
+          userBtn.innerHTML = `Sign Up <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>`;
+        }
+      } else if (userBtn && userBtn.textContent.includes('Welcome')) {
+        userBtn.title = "Click to log out";
+      }
+
       if (userBtn) {
         userBtn.addEventListener('click', (e) => {
-          // Check if the button currently displays a welcome message (i.e. user is logged in)
+          // If clicked while logged in, log out cleanly
           if (userBtn.textContent.includes('Welcome')) {
             e.preventDefault();
 
-            // Clear client-side storage data
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('userEmail');
+            sessionStorage.removeItem('userName');
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userEmail');
             localStorage.removeItem('userName');
 
-            // Clear the cookie so Express server stops recognizing the logged-in user
             document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-            // Redirect user back to the login page
-            window.location.href = '/login';
+            window.location.href = '/logout';
           }
         });
       }

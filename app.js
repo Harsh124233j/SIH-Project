@@ -47,6 +47,11 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
     res.render('login.ejs');
 });
+
+app.get('/logout', (req, res) => {
+    res.setHeader('Set-Cookie', 'userName=; Max-Age=0; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
+    res.redirect('/');
+});
 app.get('/aboutus', (req, res) => {
     res.render('about-us.ejs');
 });
