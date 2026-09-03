@@ -10,6 +10,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const NodeCache = require("node-cache");
 const appCache = new NodeCache({stdTTL : 86400});
+const { getWeatherAndPacking, getBookingLinks } = require("./bookingService.js");
 app.use(methodOverride("_method"));
 
 app.engine("ejs", ejsMate);
@@ -22,7 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 // Home page work 
-
+//hi
 // Helper to extract userName from cookies manually
 function getUserFromCookie(req) {
     if (req.headers.cookie) {
@@ -156,6 +157,19 @@ app.get("/api/streamItinerary", async (req, res)=>{
 });
 
 
+// Dedicated Real-Time Booking Page
+app.get("/booking", (req, res) => {
+  const { city = "Jaipur", budget = "moderate" } = req.query;
+  res.render("booking.ejs", { selectedCity: city, selectedBudget: budget });
+});
+
+// Real-Time Booking Deep Links Generator (Skyscanner, Google Flights, Booking.com, IRCTC, RedBus)
+app.get("/api/booking-options", (req, res) => {
+  const { origin = "Prayagraj", destination = "Jaipur", hotel = "", hubType = "" } = req.query;
+  const links = getBookingLinks({ origin, destination, hotelName: hotel, hubType });
+  res.json(links);
+});
+
 // showing data for a particular day
 app.get("/showItinerary/:day", (req, res) => {
     // if data for day 1 is called before generating itinerary then send to home
@@ -179,9 +193,14 @@ app.get("/showItinerary/:day", (req, res) => {
       break;
     }
   }
+
+  // Generate real booking deep links for this day's accommodation and transit
+  const destination = (dayAccom && dayAccom.location) ? dayAccom.location : "Jaipur";
+  const hotelName = (dayAccom && dayAccom.name) ? dayAccom.name : "";
+  const bookingLinks = getBookingLinks({ origin: "Prayagraj", destination, hotelName });
   
   // rendering details 
-  res.render("showDetails.ejs", { dayItinerary, dayAccom });
+  res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks });
 });
 
 
