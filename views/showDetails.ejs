@@ -127,6 +127,29 @@
             <span class="value"><%= opt["fare"] %></span>
           </p>
         <% } %>
+
+        <div class="transit-quick-links">
+          <a href="https://www.google.com/maps/dir/?api=1&origin=<%= encodeURIComponent(option['from']) %>&destination=<%= encodeURIComponent(option['to']) %>" 
+             target="_blank" rel="noopener noreferrer" class="mini-transit-btn maps-btn">
+            🗺️ Google Maps Navigation
+          </a>
+          <% if(option['recommended_mode'].toLowerCase().includes('train') || option['recommended_mode'].toLowerCase().includes('rail')) { %>
+            <a href="https://www.confirmtkt.com/rts/search?from=<%= encodeURIComponent(option['from']) %>&to=<%= encodeURIComponent(option['to']) %>" 
+               target="_blank" rel="noopener noreferrer" class="mini-transit-btn train-btn">
+              🚆 Book Train on IRCTC/ConfirmTkt
+            </a>
+          <% } else if(option['recommended_mode'].toLowerCase().includes('bus')) { %>
+            <a href="https://www.redbus.in/bus-tickets/<%= encodeURIComponent(option['from'].toLowerCase()) %>-to-<%= encodeURIComponent(option['to'].toLowerCase()) %>" 
+               target="_blank" rel="noopener noreferrer" class="mini-transit-btn bus-btn">
+              🚌 Book Bus on RedBus
+            </a>
+          <% } else { %>
+            <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=<%= encodeURIComponent(option['to']) %>" 
+               target="_blank" rel="noopener noreferrer" class="mini-transit-btn cab-btn">
+              🚕 Check Cab Rates
+            </a>
+          <% } %>
+        </div>
       </div>
     <% } %>
   </div>
@@ -179,6 +202,22 @@
           <span class="label">Why Choose :</span>
           <span class="value"><%= dayAccom["why_choose"] %></span>
         </p>
+
+        <!-- REAL BOOKING ACTION BUTTONS -->
+        <div class="booking-card-actions">
+          <a href="<%= (typeof bookingLinks !== 'undefined' && bookingLinks && bookingLinks.hotels) ? bookingLinks.hotels.bookingCom : 'https://www.booking.com/searchresults.html?ss=' + encodeURIComponent(dayAccom['name'] + ' ' + dayAccom['location']) %>" 
+             target="_blank" rel="noopener noreferrer" class="live-booking-btn bookingcom-btn">
+            <span class="btn-emoji">🏨</span> Book on Booking.com <span class="arr-icon">&nearr;</span>
+          </a>
+          <a href="<%= (typeof bookingLinks !== 'undefined' && bookingLinks && bookingLinks.hotels) ? bookingLinks.hotels.googleHotels : 'https://www.google.com/travel/hotels/' + encodeURIComponent(dayAccom['location']) + '?q=' + encodeURIComponent(dayAccom['name']) %>" 
+             target="_blank" rel="noopener noreferrer" class="live-booking-btn ghotels-btn">
+            <span class="btn-emoji">🔍</span> Compare Google Hotels <span class="arr-icon">&nearr;</span>
+          </a>
+          <a href="<%= (typeof bookingLinks !== 'undefined' && bookingLinks && bookingLinks.hotels) ? bookingLinks.hotels.agoda : 'https://www.agoda.com/search?text=' + encodeURIComponent(dayAccom['name']) %>" 
+             target="_blank" rel="noopener noreferrer" class="live-booking-btn agoda-btn">
+            <span class="btn-emoji">🏷️</span> Agoda Live Deals <span class="arr-icon">&nearr;</span>
+          </a>
+        </div>
       </div>
     </div>
   <% }else{ %>

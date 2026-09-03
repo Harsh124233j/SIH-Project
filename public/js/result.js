@@ -274,6 +274,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedCity = urlParams.get('city') || 'jaipur';
     const selectedBudget = urlParams.get('budget') || 'moderate';
 
+    // Link the Booking button to the dedicated booking portal with current city and budget
+    const btnBooking = document.getElementById('btnGoBooking');
+    if (btnBooking) {
+        btnBooking.href = `/booking?city=${encodeURIComponent(selectedCity)}&budget=${encodeURIComponent(selectedBudget)}`;
+    }
+
     const cityData = travelDatabase[selectedCity] || travelDatabase['jaipur'];
     const budgetData = cityData[selectedBudget] || cityData['moderate'];
 
@@ -312,16 +318,31 @@ function generateCardsHTML(items, category) {
         return `<div class="empty-state" style="text-align:center; padding:20px; color:#2c1810;"><p>No ${category} found for this filter combination.</p></div>`;
     }
 
-    return items.map(item => `
-        <div class="result-card">
-            <div class="result-header">
-                <span class="result-title">${item.name}</span>
-                <span class="result-rating">&#9733; ${item.rating}</span>
+    return items.map(item => {
+        const isStay = (category === 'stays');
+        const bookingUrl = isStay
+            ? `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(item.name + ' ' + item.address)}`
+            : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' ' + item.address)}`;
+
+        const actionText = isStay ? "🏨 Book on Booking.com &nearr;" : "📍 View Location &nearr;";
+        const actionClass = isStay ? "result-book-btn stay-book" : "result-book-btn map-link";
+
+        return `
+            <div class="result-card">
+                <div class="result-header">
+                    <span class="result-title">${item.name}</span>
+                    <span class="result-rating">&#9733; ${item.rating}</span>
+                </div>
+                <div class="result-address">${item.address}</div>
+                <div class="result-actions-row" style="margin-top: 10px; margin-bottom: 8px;">
+                    <a href="${bookingUrl}" target="_blank" rel="noopener noreferrer" class="${actionClass}" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 8px; background: #003580; color: #ffffff; transition: 0.2s ease;">
+                        ${actionText}
+                    </a>
+                </div>
+                <div class="result-footer">
+                    <span>&#128508; ROUTE FROM CITY CENTRE &bull; ${item.reviews}</span>
+                </div>
             </div>
-            <div class="result-address">${item.address}</div>
-            <div class="result-footer">
-                <span>&#128508; ROUTE FROM CITY CENTRE &bull; ${item.reviews}</span>
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }

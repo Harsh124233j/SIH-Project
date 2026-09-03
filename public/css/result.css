@@ -74,6 +74,24 @@
     box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
 }
 
+/* Booking Redirect Button */
+.tab-btn.booking-btn-special {
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+    border: 1.5px solid #38bdf8;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+    transition: all 0.2s ease;
+}
+
+.tab-btn.booking-btn-special:hover {
+    background: linear-gradient(135deg, #0369a1, #0284c7);
+    border-color: #7dd3fc;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(56, 189, 248, 0.55);
+}
+
 /* Subtitle adapted for bright readability */
 .results-subtitle {
     text-align: center;
