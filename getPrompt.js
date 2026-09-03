@@ -1,4 +1,4 @@
-module.exports = (conditions) => {
+module.exports = (conditions, language) => {
 return `I am planning a small tour of **${conditions}**. Create a detailed, practical, and well-structured **day-by-day travel itinerary** for me.
 
 Please follow these requirements:
@@ -55,5 +55,6 @@ Present the final answer in a clean format with:
 
 Make the itinerary practical for a real traveler, not just a generic list of tourist attractions.
 And give this whole data in JSON structure format, so that we can easily work on this, also do not write anything more than required information
-Also give all prices in Indian Rupees.`
+Also give all prices in Indian Rupees.
+CRITICAL INSTRUCTION: Generate the actual content, descriptions, and details in ${language}. However, the JSON keys MUST remain exactly as requested in English.`
 }

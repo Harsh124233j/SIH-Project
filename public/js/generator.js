@@ -106,13 +106,15 @@ generateButton.addEventListener("click", () => {
 
     const destination =
     document.getElementById("destination").value;
+    const language =
+    document.getElementById("language").value;
     const noOfTravelers = passengersSlider.value;
     const days =
         slider.value;
     const dateObj = dateInput.valueAsDate;
     if(dateObj){
         const month = months[dateObj.getMonth()];
-        window.location.href = `../showItinerary?place=${destination}&month=${month}&days=${days}&noOfTravelers=${noOfTravelers}&budget=${budget}`
+        window.location.href = `../showItinerary?place=${destination}&month=${month}&days=${days}&noOfTravelers=${noOfTravelers}&budget=${budget}&language=${language}`
     }else{
         alert("please select a valid date");
     }
