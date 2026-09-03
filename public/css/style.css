@@ -270,26 +270,31 @@
 .item{
   width:150px;
   height:234px;
-   border:1px solid #d3d3d3;
-  border-radius:5px;
-   padding: 10px ;
-  transition: all 0.7s ease 0s; 
+  border:1px solid #d3d3d3;
+  border-radius:8px;
+  padding: 10px;
+  transition: all 0.3s ease; 
   cursor: pointer;
   display: flex;
   flex-direction: column;
   place-items: center;
+  text-decoration: none;
+  color: inherit;
+  background-color: #ffffff;
 }
 .item img{
   height: 50px;
   width: 50px;
   padding: 10px;
   margin-bottom: 15px;
+  transition: transform 0.3s ease;
 }
 .item h3{
-   font-size: 20px;
+  font-size: 20px;
   margin-bottom: 5px;
   font-weight: 550;
   text-align: center;
+  color: #111827;
 }
 .item p{
   text-align: center;
@@ -297,10 +302,16 @@
   color: #808080;
 }
 .item:hover{
-  transform: translateX(3px);
-   box-shadow: 5px 20px 50px rgba(78, 78, 78, 0.1);
-  border: 1px solid transparent;
-  border-radius: 0px;
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ffffff;
+}
+.item:focus,
+.item:focus-visible {
+  outline: none;
+}
+.item:hover img{
+  transform: scale(1.1);
 }
 
 /* package section css */
