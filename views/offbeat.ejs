@@ -361,22 +361,40 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const userBtn = document.getElementById('user-greeting-btn');
+
+            // If user has not explicitly logged in during this active session,
+            // clear any lingering cookies and reset button to 'Sign Up'
+            const isSessionLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+            if (!isSessionLoggedIn) {
+                document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userName');
+
+                if (userBtn) {
+                    userBtn.href = '/login';
+                    userBtn.removeAttribute('title');
+                    userBtn.innerHTML = `Sign Up <svg viewBox="0 0 24 24" focusable="false" class="w-5 h-5 skew-x-[-20deg] arrow-icon"><path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>`;
+                }
+            } else if (userBtn && userBtn.textContent.includes('Welcome')) {
+                userBtn.title = "Click to log out";
+            }
+
             if (userBtn) {
                 userBtn.addEventListener('click', (e) => {
-                    // Check if the button currently displays a welcome message (i.e. user is logged in)
+                    // If clicked while logged in, log out cleanly
                     if (userBtn.textContent.includes('Welcome')) {
                         e.preventDefault();
 
-                        // Clear client-side storage data
+                        sessionStorage.removeItem('isLoggedIn');
+                        sessionStorage.removeItem('userEmail');
+                        sessionStorage.removeItem('userName');
                         localStorage.removeItem('isLoggedIn');
                         localStorage.removeItem('userEmail');
                         localStorage.removeItem('userName');
 
-                        // Clear the cookie so Express server stops recognizing the logged-in user
                         document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-                        // Redirect user back to the login page
-                        window.location.href = '/login';
+                        window.location.href = '/logout';
                     }
                 });
             }
