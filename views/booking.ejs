@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Booking Portal — Real-Time Bookings</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/booking.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="booking-navbar">
+    <a href="/" class="brand-logo">
+      <i class="fas fa-hiking"></i> Tourism.
+    </a>
+    <div class="nav-actions">
+      <a href="/offbeat" class="nav-back-link">
+        <i class="fas fa-compass"></i> Explore Offbeat
+      </a>
+      <a href="javascript:history.back()" class="nav-back-link" id="navBackLink">
+        <i class="fas fa-arrow-left"></i> Back to Results
+      </a>
+    </div>
+  </header>
+
+  <main class="booking-container">
+    
+    <!-- Hero Section -->
+    <section class="booking-hero">
+      <div class="hero-pill">
+        <span class="pulse-circle"></span> Live Partner Integrations
+      </div>
+      <h1>Book Your Travel & Stays</h1>
+      <p>
+        Compare live prices, check real-time seat availability, and book directly across verified partners with pre-filled route parameters.
+      </p>
+    </section>
+
+    <!-- Route & Trip Controls -->
+    <section class="route-selector-card">
+      <form class="route-form" onsubmit="event.preventDefault(); updateBookingLinks();">
+        
+        <!-- Origin City -->
+        <div class="form-group">
+          <label for="originInput"><i class="fas fa-location-dot"></i> Departing From</label>
+          <div class="input-with-icon">
+            <i class="fas fa-plane-departure"></i>
+            <input type="text" id="originInput" class="route-input" value="Prayagraj" placeholder="e.g., Prayagraj, Delhi, Lucknow" />
+          </div>
+        </div>
+
+        <!-- Destination City -->
+        <div class="form-group">
+          <label for="destInput"><i class="fas fa-map-pin"></i> Destination</label>
+          <div class="input-with-icon">
+            <i class="fas fa-plane-arrival"></i>
+            <select id="destInput" class="route-select">
+              <option value="Jaipur">Jaipur</option>
+              <option value="Varanasi">Varanasi</option>
+              <option value="Goa">Goa</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Agra">Agra</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Kerala">Kerala</option>
+              <option value="Udaipur">Udaipur</option>
+              <option value="Manali">Manali</option>
+              <option value="Rishikesh">Rishikesh</option>
+              <option value="Amritsar">Amritsar</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Travel Timing -->
+        <div class="form-group">
+          <label for="monthInput"><i class="fas fa-calendar-alt"></i> Travel Period</label>
+          <div class="input-with-icon">
+            <i class="fas fa-clock"></i>
+            <select id="monthInput" class="route-select">
+              <option value="Upcoming">Flexible / Upcoming</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <button type="button" class="update-route-btn" onclick="updateBookingLinks()">
+            <i class="fas fa-sync-alt"></i> Update Links
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- Categories Grid -->
+    <section class="booking-categories-grid">
+
+      <!-- FLIGHTS -->
+      <div class="category-card">
+        <div class="card-header">
+          <div class="cat-icon-wrap flight-icon-bg">
+            <i class="fas fa-plane"></i>
+          </div>
+          <div class="card-header-text">
+            <h3>Flight Tickets</h3>
+            <span>Airlines & Aggregators</span>
+          </div>
+        </div>
+        <p class="card-description">
+          Find cheapest airfares, check nonstop flight routes, and compare price calendars.
+        </p>
+        <div class="platform-links-list">
+          <a href="#" id="link_skyscanner" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">Skyscanner</span>
+              <span class="brand-tag">Compare all airlines</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+          <a href="#" id="link_gflights" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">Google Flights</span>
+              <span class="brand-tag">Live fare tracker</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+          <a href="#" id="link_makemytrip_flight" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">MakeMyTrip Flights</span>
+              <span class="brand-tag">Instant booking discounts</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- TRAINS -->
+      <div class="category-card">
+        <div class="card-header">
+          <div class="cat-icon-wrap train-icon-bg">
+            <i class="fas fa-train"></i>
+          </div>
+          <div class="card-header-text">
+            <h3>Train Tickets</h3>
+            <span>Indian Railways & PNR</span>
+          </div>
+        </div>
+        <p class="card-description">
+          Check live train berth availability, confirm probability, and book railway tickets.
+        </p>
+        <div class="platform-links-list">
+          <a href="#" id="link_confirmtkt" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">ConfirmTkt</span>
+              <span class="brand-tag">Train seat availability & PNR</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+          <a href="#" id="link_irctc" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">IRCTC Portal</span>
+              <span class="brand-tag">Official Railway Booking</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+          <a href="#" id="link_mmt_train" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">MakeMyTrip Trains</span>
+              <span class="brand-tag">Tatkal & Alternate Routes</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- BUSES -->
+      <div class="category-card">
+        <div class="card-header">
+          <div class="cat-icon-wrap bus-icon-bg">
+            <i class="fas fa-bus"></i>
+          </div>
+          <div class="card-header-text">
+            <h3>Intercity Buses</h3>
+            <span>AC Volvo & Sleeper Coaches</span>
+          </div>
+        </div>
+        <p class="card-description">
+          Reserve comfortable sleeper, semi-sleeper, and state transport buses with live boarding points.
+        </p>
+        <div class="platform-links-list">
+          <a href="#" id="link_redbus" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">RedBus</span>
+              <span class="brand-tag">India's largest bus portal</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+          <a href="#" id="link_abhibus" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">AbhiBus</span>
+              <span class="brand-tag">State & private bus routes</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- STAYS & HOMESTAYS -->
+      <div class="category-card">
+        <div class="card-header">
+          <div class="cat-icon-wrap hotel-icon-bg">
+            <i class="fas fa-hotel"></i>
+          </div>
+          <div class="card-header-text">
+            <h3>Stays & Homestays</h3>
+            <span>Heritage Havelis & Eco-Stays</span>
+          </div>
+        </div>
+        <p class="card-description">
+          Find certified local homestays, boutique heritage properties, and certified accommodations.
+        </p>
+        <div class="platform-links-list">
+          <a href="#" id="link_bookingcom" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">Booking.com</span>
+              <span class="brand-tag">Homestays & verified hotels</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+          <a href="#" id="link_ghotels" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">Google Hotels</span>
+              <span class="brand-tag">Map view & price comparison</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+          <a href="#" id="link_agoda" target="_blank" rel="noopener noreferrer" class="booking-action-tile">
+            <div class="tile-brand">
+              <span class="brand-name">Agoda</span>
+              <span class="brand-tag">Exclusive discounts & reviews</span>
+            </div>
+            <span class="tile-arrow">&nearr;</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer Note -->
+    <footer class="booking-footer">
+      <p>
+        <i class="fas fa-shield-alt"></i> All booking links open official partner portals in a secure new tab with your itinerary parameters pre-filled.
+      </p>
+    </footer>
+
+  </main>
+
+  <script>
+    // Initialize parameters from query string or server variables
+    const initialCity = "<%= typeof selectedCity !== 'undefined' ? selectedCity : 'Jaipur' %>";
+    const initialBudget = "<%= typeof selectedBudget !== 'undefined' ? selectedBudget : 'moderate' %>";
+
+    const originInput = document.getElementById("originInput");
+    const destInput = document.getElementById("destInput");
+    const navBackLink = document.getElementById("navBackLink");
+
+    // Match destination select option
+    if (initialCity) {
+      for (let i = 0; i < destInput.options.length; i++) {
+        if (destInput.options[i].value.toLowerCase() === initialCity.toLowerCase()) {
+          destInput.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    // Set back link to return to result page with current params
+    if (navBackLink) {
+      navBackLink.href = `/showResults?city=${encodeURIComponent(initialCity.toLowerCase())}&budget=${encodeURIComponent(initialBudget.toLowerCase())}`;
+    }
+
+    const IATA_MAP = {
+      prayagraj: "ixd",
+      allahabad: "ixd",
+      jaipur: "jai",
+      delhi: "del",
+      "new delhi": "del",
+      mumbai: "bom",
+      bombay: "bom",
+      varanasi: "vns",
+      goa: "goi",
+      agra: "agr",
+      kerala: "cok",
+      kochi: "cok",
+      udaipur: "udr",
+      manali: "kuu",
+      rishikesh: "ded",
+      amritsar: "atq",
+      bangalore: "blr",
+      bengaluru: "blr",
+      chennai: "maa",
+      kolkata: "ccu",
+      hyderabad: "hyd",
+      pune: "pnq",
+      lucknow: "lko",
+      ahmedabad: "amd",
+      chandigarh: "ixc",
+      srinagar: "sxr"
+    };
+
+    function updateBookingLinks() {
+      const origin = (originInput.value || "Prayagraj").trim();
+      const destination = (destInput.value || "Jaipur").trim();
+      
+      const encOrigin = encodeURIComponent(origin);
+      const encDest = encodeURIComponent(destination);
+      const originLower = origin.toLowerCase();
+      const destLower = destination.toLowerCase();
+
+      const oIata = IATA_MAP[originLower] || "ixd";
+      const dIata = IATA_MAP[destLower] || "jai";
+
+      // 1. Flights
+      // Skyscanner uses route path /transport/flights/originIata/destIata/
+      const skyUrl = (IATA_MAP[originLower] && IATA_MAP[destLower])
+        ? `https://www.skyscanner.co.in/transport/flights/${oIata}/${dIata}/`
+        : `https://www.google.com/travel/flights?q=flights+from+${encOrigin}+to+${encDest}`;
+      document.getElementById("link_skyscanner").href = skyUrl;
+
+      // Google Flights
+      document.getElementById("link_gflights").href = 
+        `https://www.google.com/travel/flights?q=flights+from+${encOrigin}+to+${encDest}`;
+
+      // MakeMyTrip Flights
+      document.getElementById("link_makemytrip_flight").href = 
+        `https://www.makemytrip.com/flight/search?itinerary=${oIata.toUpperCase()}-${dIata.toUpperCase()}`;
+
+      // 2. Trains
+      // ConfirmTkt
+      document.getElementById("link_confirmtkt").href = 
+        `https://www.confirmtkt.com/trains/${encodeURIComponent(originLower)}-to-${encodeURIComponent(destLower)}-train-tickets`;
+
+      // IRCTC Portal
+      document.getElementById("link_irctc").href = 
+        `https://www.irctc.co.in/nget/train-search`;
+
+      // MakeMyTrip Trains
+      document.getElementById("link_mmt_train").href = 
+        `https://www.makemytrip.com/railways/`;
+
+      // 3. Buses
+      // RedBus
+      document.getElementById("link_redbus").href = 
+        `https://www.redbus.in/bus-tickets/${encodeURIComponent(originLower)}-to-${encodeURIComponent(destLower)}`;
+
+      // AbhiBus
+      document.getElementById("link_abhibus").href = 
+        `https://www.abhibus.com/bus_search/${encodeURIComponent(originLower)}/${encodeURIComponent(destLower)}`;
+
+      // 4. Stays & Homestays
+      // Booking.com
+      document.getElementById("link_bookingcom").href = 
+        `https://www.booking.com/searchresults.html?ss=${encDest}`;
+
+      // Google Hotels
+      document.getElementById("link_ghotels").href = 
+        `https://www.google.com/travel/hotels/${encDest}`;
+
+      // Agoda
+      document.getElementById("link_agoda").href = 
+        `https://www.agoda.com/search?text=${encDest}`;
+    }
+
+    // Run on load
+    updateBookingLinks();
+
+    // Auto-update on destination change
+    destInput.addEventListener("change", updateBookingLinks);
+    originInput.addEventListener("input", updateBookingLinks);
+  </script>
+
+</body>
+</html>

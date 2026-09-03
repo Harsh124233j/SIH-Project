@@ -119,3 +119,103 @@ body > * {
     gap: 6px 10px;
   }
 }
+
+/* =========================================================
+   REAL BOOKING & TRANSIT ACTION BUTTONS (detail.css)
+   ========================================================= */
+.booking-card-actions {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(58, 93, 130, 0.25);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.live-booking-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(15, 33, 54, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.live-booking-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(15, 33, 54, 0.18);
+}
+
+.bookingcom-btn {
+  background: #003580;
+  color: #ffffff;
+}
+
+.ghotels-btn {
+  background: #ffffff;
+  color: #1a73e8;
+  border: 1px solid rgba(26, 115, 232, 0.35);
+}
+
+.agoda-btn {
+  background: #2b2b2b;
+  color: #ff9900;
+}
+
+.arr-icon {
+  font-size: 1.05rem;
+  margin-left: 2px;
+}
+
+.transit-quick-links {
+  margin-top: 12px;
+  padding-left: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.mini-transit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(58, 93, 130, 0.25);
+  color: #1b3554;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.mini-transit-btn:hover {
+  transform: translateY(-1px);
+  background: #ffffff;
+}
+
+.train-btn:hover {
+  border-color: #ea580c;
+  color: #ea580c;
+}
+
+.bus-btn:hover {
+  border-color: #d84e55;
+  color: #d84e55;
+}
+
+.cab-btn:hover {
+  border-color: #000000;
+  color: #000000;
+}
+
+.maps-btn:hover {
+  border-color: #16a34a;
+  color: #16a34a;
+}
