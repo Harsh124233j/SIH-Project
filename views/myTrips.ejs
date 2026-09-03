@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <h2>Welcome <%= user %>, Here are your Saved Trips:</h2>
+    <hr>
+    
+    <div class="row">
+        <% if (trips.length === 0) { %>
+            <p>You haven't saved any trips yet!</p>
+        <% } else { %>
+            <% trips.forEach(trip => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title"><%= trip.place %></h4>
+                            <p class="card-text"><strong>Duration:</strong> <%= trip.days %> Days</p>
+                            <p class="card-text"><strong>Month:</strong> <%= trip.month %></p>
+                            
+                            <!-- Trip Overview (JSON se data nikal kar dikhaya) -->
+                            <p class="text-muted small">
+                                <%= trip.itineraryData.trip_overview %>
+                            </p>
+                            
+                            <a href="#" class="btn btn-primary">View Full Itinerary</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</div>

@@ -339,7 +339,18 @@
 
 </div>
         </div>
-
+      
+    <form action="/save-trip" method="POST">
+    <input type="hidden" name="place" value="<%= queryParams.place %>">
+    <input type="hidden" name="days" value="<%= queryParams.days %>">
+    <input type="hidden" name="month" value="<%= queryParams.month %>">
+    <input type="hidden" name="noOfTravelers" value="<%= queryParams.noOfTravelers %>">
+    <input type="hidden" name="budget" value="<%= queryParams.budget %>">
+    
+    <button type="submit" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+        💾 Save to My Trips
+    </button>
+</form>
    </div>
    <div id="verf_notes">
    </div>

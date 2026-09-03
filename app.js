@@ -1,7 +1,10 @@
 const { OpenRouter } = require("@openrouter/sdk");
+
+const User = require("./models/User");
 require("dotenv").config();
 const { jsonrepair } = require("jsonrepair");
 const mockData = require("./mockData.json");
+const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
 const ejsMate = require("ejs-mate");
@@ -21,7 +24,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
+mongoose.connect("mongodb://127.0.0.1:27017/sih-travel")
+    .then(() => console.log("MongoDB Connected Successfully!"))
+    .catch(err => console.log("MongoDB Connection Error:", err));
 
+let user_id, place, months, days;
 // Home page work 
 //hi
 // Helper to extract userName from cookies manually
@@ -39,11 +46,6 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.render('login.ejs');
-});
-
-app.get('/logout', (req, res) => {
-    res.setHeader('Set-Cookie', 'userName=; Max-Age=0; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
-    res.redirect('/');
 });
 app.get('/aboutus', (req, res) => {
     res.render('about-us.ejs');
@@ -87,13 +89,29 @@ app.get("/showItinerary", (req, res)=>{
   res.render("show.ejs", {queryParams : req.query});
 });
 
+app.get("/mytrips", async (req, res) => {
+    const userName = getUserFromCookie(req);
+    if (!userName) {
+        return res.redirect("/login"); // Agar login nahi hai toh wapas bhej dein
+    }
+    try {
+        // Database se is user ki saari trips find karein (Latest pehle)
+        const userTrips = await Trip.find({ userName: userName }).sort({ savedAt: -1 });
+        
+        res.render("mytrips.ejs", { trips: userTrips, user: userName });
+    } catch (err) {
+        console.error(err);
+        res.send("Error loading your trips");
+    }
+});
+
 app.get("/api/streamItinerary", async (req, res)=>{
   res.setHeader("Content-type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
   try {
     const location = "Prayagraj";
-    const {place, month, days, noOfTravelers, budget, language} = req.query;
+    let {place, month, days, noOfTravelers, budget, language} = req.query;
 
     // Cache Key Generate
     const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}_${language}`.toLowerCase();
@@ -113,7 +131,7 @@ app.get("/api/streamItinerary", async (req, res)=>{
     const completion = await openrouter.chat.send({
       chatRequest: {
         max_tokens: 4000,
-        model: "nvidia/nemotron-3-ultra-550b-a55b:free",
+        model: "openrouter/free",
         response_format: {
           type: "json_object",
         },
@@ -175,6 +193,43 @@ app.get("/api/booking-options", (req, res) => {
   res.json(links);
 });
 
+app.post("/save-trip", async (req, res) => {
+    // Cookie se user nikalna
+    const userName = getUserFromCookie(req);
+    if (!userName) {
+        return res.status(401).send("Please login to save trips.");
+    }
+    const { place, days, month, noOfTravelers, budget } = req.body;
+    
+    // Wahi same Cache Key banayen jo api/streamItinerary mein banai thi
+    const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}`.toLowerCase();
+    
+    // Cache se generated JSON (finalAns) nikalein
+    const generatedData = appCache.get(cacheKey);
+    if (!generatedData) {
+        return res.status(400).send("No itinerary found to save. Please generate again.");
+    }
+    try {
+        // Naya Trip document banakar MongoDB mein save karein
+        const newTrip = new Trip({
+            userName: userName,
+            place: place,
+            days: days,
+            month: month,
+            budgetType: budget,
+            itineraryData: generatedData
+        });
+        
+        await newTrip.save();
+        console.log("Trip saved successfully!");
+        res.redirect("/mytrips"); // Save hone ke baad My Trips page par bhej dein
+        
+    } catch (err) {
+        console.error("Error saving trip:", err);
+        res.status(500).send("Error saving trip");
+    }
+});
+
 // showing data for a particular day
 app.get("/showItinerary/:day", (req, res) => {
     // if data for day 1 is called before generating itinerary then send to home
@@ -208,7 +263,46 @@ app.get("/showItinerary/:day", (req, res) => {
   res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks });
 });
 
+// 1. API route to Toggle (Add/Remove) Favorite via AJAX
+app.post("/api/favorites/toggle", async (req, res) => {
+    const userName = getUserFromCookie(req);
+    if (!userName) return res.status(401).json({ error: "Please login first" });
 
+    const { cityName, activityTitle, description } = req.body;
+
+    try {
+        // Pehle check karein ki kya ye jagah already user ki favorite hai?
+        const existingFav = await Favorite.findOne({ userName, activityTitle });
+
+        if (existingFav) {
+            // Agar already hai, toh iska matlab user ne Heart (Un-favorite) kiya hai -> Delete kar do
+            await Favorite.findByIdAndDelete(existingFav._id);
+            return res.json({ message: "Removed from favorites", status: "removed" });
+        } else {
+            // Agar nahi hai, toh Naya Favorite Save kar do
+            const newFav = new Favorite({ userName, cityName, activityTitle, description });
+            await newFav.save();
+            return res.json({ message: "Added to favorites", status: "added" });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+// 2. Wishlist Page Route (Jahan saare favorites dikhenge)
+app.get("/wishlist", async (req, res) => {
+    const userName = getUserFromCookie(req);
+    if (!userName) return res.redirect("/login");
+
+    try {
+        const favorites = await Favorite.find({ userName }).sort({ savedAt: -1 });
+        res.render("wishlist.ejs", { favorites, user: userName });
+    } catch (err) {
+        console.error(err);
+        res.send("Error loading wishlist");
+    }
+});
 
 app.listen(8080, () => {
     console.log(`Server listening on port 8080`);
