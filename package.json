@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Harsh124233j/SIH-Project#readme",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@openrouter/sdk": "^1.2.57",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",

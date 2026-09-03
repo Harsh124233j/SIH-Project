@@ -54,12 +54,7 @@ app.get("/guide", (req, res)=>{
 
 
 // generator work 
-let loginSuccessfull = false;
 app.get("/generator", (req, res)=>{
-    // while(!loginSuccessfull){
-    //     res.render("login.ejs", {loginSuccessfull});
-    // }
-
     res.render("generator.ejs");
 })
 
@@ -82,7 +77,7 @@ let finalAns;
 app.get("/showItinerary", (req, res)=>{
       if((Object.keys(req.query).length) === 0){
       console.log("Please select a valid date and place to visit !!");
-      return res.render("home.ejs");
+      return res.send("404! Page not found");
     }
   res.render("show.ejs", {queryParams : req.query});
 });
@@ -93,10 +88,10 @@ app.get("/api/streamItinerary", async (req, res)=>{
   res.setHeader("Connection", "keep-alive");
   try {
     const location = "Prayagraj";
-    const {place, month, days, noOfTravelers, budget} = req.query;
+    const {place, month, days, noOfTravelers, budget, language} = req.query;
 
     // Cache Key Generate
-    const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}`.toLowerCase();
+    const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}_${language}`.toLowerCase();
     //. Cache Check: Agar data mil jaye toh instantly return karein (0ms AI wait)
     if (appCache.has(cacheKey)) {
       const cachedData = appCache.get(cacheKey);
@@ -105,9 +100,9 @@ app.get("/api/streamItinerary", async (req, res)=>{
       return res.end();
     }
 
-    const conditions = `${req.query.place}  for ${req.query.days} days; arriving from ${location}, in ${req.query.month}; ${req.query.noOfTravelers} travelers; ${req.query.budget}.`;
+    const conditions = `${place}  for ${days} days; arriving from ${location}, in ${month}; ${noOfTravelers} travelers; ${budget}.`;
     // getting prompt from other file 
-    const request = getPrompt(conditions);
+    const request = getPrompt(conditions, language);
 
     //making the api call
     const completion = await openrouter.chat.send({
@@ -122,7 +117,7 @@ app.get("/api/streamItinerary", async (req, res)=>{
             role: "system",
             // schema of the ai response 
             content:
-              'You are a strict data-formatting API. Your only job is to generate a travel itinerary based on the user\'s constraints and return it strictly as a JSON object matching the exact schema provided below. Do not include conversational filler, greetings, or markdown code blocks outside the JSON.\n\nEXPECTED JSON SCHEMA:\n{\n  "trip_overview": "String - A short summary of the trip",\n  "transport_hubs": [\n    {\n      "hub_type": "String - Airport, Station, Bus Stand",\n      "name": "String",\n      "travel_to_main_destination": "String",\n      "estimated_fare": "String"\n    }\n  ],\n  "budget_estimate": {\n    "budget": {\n      "accommodation": "String",\n      "local_transport": "String",\n      "intercity_transport": "String",\n      "entry_tickets": "String",\n      "food": "String",\n      "misc": "String",\n      "total": "String"\n    },\n    "mid_range": {\n      "accommodation": "String",\n      "local_transport": "String",\n      "intercity_transport": "String",\n      "entry_tickets": "String",\n      "food": "String",\n      "misc": "String",\n      "total": "String"\n    },\n    "comfortable": {\n      "accommodation": "String",\n      "local_transport": "String",\n      "intercity_transport": "String",\n      "entry_tickets": "String",\n      "food": "String",\n      "misc": "String",\n      "total": "String"\n    }\n  },\n  "accommodations": [\n    {\n      "day": "Number",\n      "name": "String",\n      "type": "String - e.g., Homestay",\n      "price_per_night": "String",\n      "location": "String",\n      "facilities": ["String"],\n      "why_choose": "String",\n      "certifications_or_reviews": "String"\n    }\n  ],\n  "itinerary": [\n    {\n      "day": "Number",\n      "title": "String - Theme of the day",\n      "schedule": [\n        {\n          "time": "String - e.g., 09:00 AM - 11:30 AM",\n          "activity": "String",\n          "description": "String - Details including hidden gems"\n        }\n      ],\n      "artisan_experience": {\n        "workshop_name": "String - Verified name or type",\n        "craft_type": "String",\n        "authenticity_details": "String",\n        "practical_info": "String"\n      },\n      "travel_between_locations": [\n        {\n          "from": "String",\n          "to": "String",\n          "distance": "String",\n          "estimated_time": "String",\n          "recommended_mode": "String",\n          "options": [\n            {\n              "mode": "String - e.g., Local Bus, Private Taxi",\n              "fare": "String"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  "verification_notes": "String - Note which prices/times are official vs estimated",\n  "summary_table": [\n    {\n      "day": "Number",\n      "main_destination": "String",\n      "key_activities": "String",\n      "overnight_stay": "String"\n    }\n  ]\n}',
+              'You are a strict data-formatting API. Your only job is to generate a travel itinerary based on the user\'s constraints and return it strictly as a JSON object matching the exact schema provided below. Do not include conversational filler, greetings, or markdown code blocks outside the JSON.\n\n IMPORTANT: Write all descriptive text, summaries, and details in ${language}. BUT, keep all the JSON keys EXACTLY as they are in the schema below (in English). Only translate the string values.\n\n EXPECTED JSON SCHEMA:\n{\n  "trip_overview": "String - A short summary of the trip",\n  "transport_hubs": [\n    {\n      "hub_type": "String - Airport, Station, Bus Stand",\n      "name": "String",\n      "travel_to_main_destination": "String",\n      "estimated_fare": "String"\n    }\n  ],\n  "budget_estimate": {\n    "budget": {\n      "accommodation": "String",\n      "local_transport": "String",\n      "intercity_transport": "String",\n      "entry_tickets": "String",\n      "food": "String",\n      "misc": "String",\n      "total": "String"\n    },\n    "mid_range": {\n      "accommodation": "String",\n      "local_transport": "String",\n      "intercity_transport": "String",\n      "entry_tickets": "String",\n      "food": "String",\n      "misc": "String",\n      "total": "String"\n    },\n    "comfortable": {\n      "accommodation": "String",\n      "local_transport": "String",\n      "intercity_transport": "String",\n      "entry_tickets": "String",\n      "food": "String",\n      "misc": "String",\n      "total": "String"\n    }\n  },\n  "accommodations": [\n    {\n      "day": "Number",\n      "name": "String",\n      "type": "String - e.g., Homestay",\n      "price_per_night": "String",\n      "location": "String",\n      "facilities": ["String"],\n      "why_choose": "String",\n      "certifications_or_reviews": "String"\n    }\n  ],\n  "itinerary": [\n    {\n      "day": "Number",\n      "title": "String - Theme of the day",\n      "schedule": [\n        {\n          "time": "String - e.g., 09:00 AM - 11:30 AM",\n          "activity": "String",\n          "description": "String - Details including hidden gems"\n        }\n      ],\n      "artisan_experience": {\n        "workshop_name": "String - Verified name or type",\n        "craft_type": "String",\n        "authenticity_details": "String",\n        "practical_info": "String"\n      },\n      "travel_between_locations": [\n        {\n          "from": "String",\n          "to": "String",\n          "distance": "String",\n          "estimated_time": "String",\n          "recommended_mode": "String",\n          "options": [\n            {\n              "mode": "String - e.g., Local Bus, Private Taxi",\n              "fare": "String"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  "verification_notes": "String - Note which prices/times are official vs estimated",\n  "summary_table": [\n    {\n      "day": "Number",\n      "main_destination": "String",\n      "key_activities": "String",\n      "overnight_stay": "String"\n    }\n  ]\n}',
           },
           {
             role: "user",
@@ -179,7 +174,7 @@ app.get("/api/booking-options", (req, res) => {
 app.get("/showItinerary/:day", (req, res) => {
     // if data for day 1 is called before generating itinerary then send to home
   if (!finalAns) {
-    return res.render("home.ejs");
+    return res.send("404! Page not found");
   }
   let { day } = req.params;
   const dayNum = Number(day);

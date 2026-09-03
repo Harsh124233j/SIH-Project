@@ -1,6 +1,6 @@
-/* ---------------------------------------------
-    DAYS SLIDER
---------------------------------------------- */
+
+    // DAYS SLIDER
+
 let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const slider =
     document.getElementById("daysSlider");
@@ -16,9 +16,9 @@ slider.addEventListener("input", () => {
 
 });
 
-/* ---------------------------------------------
-    passenger SLIDER
---------------------------------------------- */
+
+    // passenger SLIDER
+
 
 const passengersSlider =
     document.getElementById("passengersSlider");
@@ -34,9 +34,9 @@ passengersSlider.addEventListener("input", () => {
 });
 
 
-/* ---------------------------------------------
-    BUDGET BUTTONS
---------------------------------------------- */
+
+    // BUDGET BUTTONS
+
 
 const budgetButtons =
     document.querySelectorAll(".budget-btn");
@@ -60,9 +60,9 @@ budgetButtons.forEach(button => {
 
 
 
-/* ---------------------------------------------
-    VIBE BUTTONS
---------------------------------------------- */
+
+    // VIBE BUTTONS
+
 
 const vibeButtons =
     document.querySelectorAll(".vibe-btn");
@@ -86,9 +86,9 @@ vibeButtons.forEach(button => {
 
 
 
-/* ---------------------------------------------
-    GENERATE BUTTON
---------------------------------------------- */
+
+    // GENERATE BUTTON
+
 
 const generateButton =
     document.getElementById("generateBtn");
@@ -106,22 +106,24 @@ generateButton.addEventListener("click", () => {
 
     const destination =
     document.getElementById("destination").value;
+    const language =
+    document.getElementById("language").value;
     const noOfTravelers = passengersSlider.value;
     const days =
         slider.value;
     const dateObj = dateInput.valueAsDate;
     if(dateObj){
         const month = months[dateObj.getMonth()];
-        window.location.href = `../showItinerary?place=${destination}&month=${month}&days=${days}&noOfTravelers=${noOfTravelers}&budget=${budget}`
+        window.location.href = `../showItinerary?place=${destination}&month=${month}&days=${days}&noOfTravelers=${noOfTravelers}&budget=${budget}&language=${language}`
     }else{
         alert("please select a valid date");
     }
 });
 
 
-/* ---------------------------------------------
-    VIEW RESTAURANTS & COMFORT STAYS BUTTON
---------------------------------------------- */
+
+    // VIEW RESTAURANTS & COMFORT STAYS BUTTON
+
 
 const viewStaysRestaurantsBtn = document.getElementById("viewStaysRestaurantsBtn");
 
