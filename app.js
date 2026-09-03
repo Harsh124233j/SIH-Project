@@ -1,5 +1,5 @@
 const { OpenRouter } = require("@openrouter/sdk");
-const Trip = require("./models/Trip");
+
 const User = require("./models/User");
 require("dotenv").config();
 const { jsonrepair } = require("jsonrepair");
@@ -46,11 +46,6 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.render('login.ejs');
-});
-
-app.get('/logout', (req, res) => {
-    res.setHeader('Set-Cookie', 'userName=; Max-Age=0; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
-    res.redirect('/');
 });
 app.get('/aboutus', (req, res) => {
     res.render('about-us.ejs');
@@ -136,7 +131,7 @@ app.get("/api/streamItinerary", async (req, res)=>{
     const completion = await openrouter.chat.send({
       chatRequest: {
         max_tokens: 4000,
-        model: "nvidia/nemotron-3-ultra-550b-a55b:free",
+        model: "openrouter/free",
         response_format: {
           type: "json_object",
         },
