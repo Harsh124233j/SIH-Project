@@ -144,3 +144,4 @@ viewStaysRestaurantsBtn.addEventListener("click", () => {
 
     window.location.href = `../showResults?city=${selectedCity}&budget=${selectedBudget}`;
 });
+

@@ -1,29 +1,278 @@
-<div class="container mt-5">
-    <h2>Welcome <%= user %>, Here are your Saved Trips:</h2>
-    <hr>
-    
-    <div class="row">
-        <% if (trips.length === 0) { %>
-            <p>You haven't saved any trips yet!</p>
-        <% } else { %>
-            <% trips.forEach(trip => { %>
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h4 class="card-title"><%= trip.place %></h4>
-                            <p class="card-text"><strong>Duration:</strong> <%= trip.days %> Days</p>
-                            <p class="card-text"><strong>Month:</strong> <%= trip.month %></p>
-                            
-                            <!-- Trip Overview (JSON se data nikal kar dikhaya) -->
-                            <p class="text-muted small">
-                                <%= trip.itineraryData.trip_overview %>
-                            </p>
-                            
-                            <a href="/myTrips/saved/<%=trip._id%>" class="btn btn-primary">View Full Itinerary</a>
-                        </div>
-                    </div>
-                </div>
-            <% }) %>
-        <% } %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Saved Trips — Tourism Hub</title>
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- My Trips Custom Stylesheet -->
+  <link rel="stylesheet" href="/css/my_trip.css" />
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="mytrips-navbar">
+    <a href="/" class="brand-logo">
+      <i class="fas fa-hiking"></i> Tourism.
+    </a>
+
+    <nav class="nav-menu">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/offbeat" class="nav-link">Explore Offbeat</a>
+      <a href="/myTrips" class="nav-link active">My Trips</a>
+      <a href="/guide" class="nav-link">Guide</a>
+      <a href="/aboutus" class="nav-link">About Us</a>
+    </nav>
+
+    <div class="nav-user-actions">
+      <div class="user-badge-pill" title="Logged in as <%= user %>">
+        <i class="fas fa-user-circle"></i>
+        <span><%= user %></span>
+      </div>
+      <a href="/generator" class="nav-plan-btn">
+        <i class="fas fa-plus"></i>
+        <span>Plan Trip</span>
+      </a>
+      <a href="/logout" class="nav-logout-btn" title="Log Out">
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
     </div>
-</div>
+  </header>
+
+  <!-- Main Content Dashboard -->
+  <main class="mytrips-main-container">
+    
+    <!-- Hero Header -->
+    <section class="dashboard-hero">
+      <div class="hero-pill-tag">
+        <i class="fas fa-compass"></i> Personal Travel Journal
+      </div>
+      <h1>Welcome Back, <span class="user-highlight"><%= user %></span></h1>
+      <p class="hero-subtitle">
+        Your collection of handcrafted AI itineraries. Browse complete day-by-day routes, explore cultural highlights, and book live stays & travel.
+      </p>
+
+      <!-- Stats Bar -->
+      <div class="hero-stats-bar">
+        <div class="stat-pill">
+          <i class="fas fa-route"></i>
+          <span><strong><%= trips.length %></strong> <%= trips.length === 1 ? 'Trip Saved' : 'Trips Saved' %></span>
+        </div>
+        <% 
+          const uniquePlaces = new Set(trips.map(t => t.place ? t.place.trim() : '')).size; 
+        %>
+        <div class="stat-pill">
+          <i class="fas fa-map-marked-alt"></i>
+          <span><strong><%= uniquePlaces %></strong> <%= uniquePlaces === 1 ? 'Unique Destination' : 'Unique Destinations' %></span>
+        </div>
+      </div>
+    </section>
+
+    <% if (trips.length > 0) { %>
+      <!-- Search & Filter Controls -->
+      <section class="controls-bar">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="tripSearchInput" placeholder="Search by destination (e.g., Mumbai, Jaipur)..." />
+        </div>
+
+        <div class="filter-chips-group">
+          <button class="filter-btn active" data-filter="all">All Trips</button>
+          <button class="filter-btn" data-filter="luxury">Luxury</button>
+          <button class="filter-btn" data-filter="moderate">Moderate</button>
+          <button class="filter-btn" data-filter="budget">Budget</button>
+        </div>
+      </section>
+    <% } %>
+
+    <!-- Trips Grid -->
+    <section class="trips-grid" id="tripsGrid">
+      <% if (trips.length === 0) { %>
+        <!-- Empty State Card -->
+        <div class="empty-state-card">
+          <div class="empty-icon-wrapper">
+            <i class="fas fa-map-location-dot"></i>
+          </div>
+          <h3>No Saved Trips Yet</h3>
+          <p>
+            You haven't saved any travel itineraries yet. Explore our AI-powered travel planner to generate a tailored journey across India and save it to your personal journal.
+          </p>
+          <a href="/generator" class="empty-cta-btn">
+            <i class="fas fa-magic"></i> Plan Your First Trip
+          </a>
+
+          <div class="empty-shortcuts">
+            <span>Try popular destinations:</span>
+            <a href="/generator">Jaipur</a>
+            <a href="/generator">Goa</a>
+            <a href="/generator">Kerala</a>
+            <a href="/generator">Varanasi</a>
+            <a href="/generator">Kashmir</a>
+          </div>
+        </div>
+      <% } else { %>
+        <!-- Render Saved Trip Cards -->
+        <% trips.forEach(trip => { 
+             const budgetLower = (trip.budgetType || 'moderate').toLowerCase();
+             const placeLower = (trip.place || '').toLowerCase();
+             const daysCount = trip.days || 1;
+        %>
+          <article class="trip-card" data-place="<%= placeLower %>" data-budget="<%= budgetLower %>">
+            
+            <!-- Card Visual Banner -->
+            <div class="card-banner">
+              <div class="card-banner-top">
+                <span class="card-saved-date">
+                  <i class="far fa-calendar-check"></i>
+                  <%= trip.savedAt ? new Date(trip.savedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : (trip.month || 'Saved') %>
+                </span>
+              </div>
+              <h3 class="trip-destination-title">
+                <i class="fas fa-map-pin"></i>
+                <%= trip.place %>
+              </h3>
+            </div>
+
+            <!-- Card Body Content -->
+            <div class="card-body">
+              
+              <!-- Meta Tags Row -->
+              <div class="trip-meta-row">
+                <span class="meta-chip">
+                  <i class="fas fa-clock"></i> <%= daysCount %> <%= daysCount === 1 ? 'Day' : 'Days' %>
+                </span>
+                <% if (trip.month) { %>
+                  <span class="meta-chip">
+                    <i class="fas fa-calendar-alt"></i> <%= trip.month %>
+                  </span>
+                <% } %>
+                <% if (trip.budgetType) { %>
+                  <span class="meta-chip budget-<%= budgetLower %>">
+                    <i class="fas fa-wallet"></i> <%= trip.budgetType.charAt(0).toUpperCase() + trip.budgetType.slice(1) %>
+                  </span>
+                <% } %>
+              </div>
+
+              <!-- Trip Overview Text -->
+              <div class="trip-overview-box">
+                <p>
+                  <% if (trip.itineraryData && trip.itineraryData.trip_overview) { %>
+                    <%= trip.itineraryData.trip_overview %>
+                  <% } else { %>
+                    Tailored itinerary for <%= trip.place %> spanning <%= daysCount %> days with local sights, authentic cultural stops, and curated transport routes.
+                  <% } %>
+                </p>
+              </div>
+
+              <!-- Day 1 Preview Highlight -->
+              <% if (trip.itineraryData && trip.itineraryData.itinerary && trip.itineraryData.itinerary.length > 0) { 
+                   const firstDay = trip.itineraryData.itinerary[0];
+                   const firstActivity = firstDay.title || (firstDay.schedule && firstDay.schedule[0] ? firstDay.schedule[0].activity : 'Arrival & Exploration');
+              %>
+                <div class="trip-highlights-snippet">
+                  <i class="fas fa-sparkles"></i>
+                  <span><strong>Day 1 Highlight:</strong> <%= firstActivity %></span>
+                </div>
+              <% } %>
+
+              <!-- Card Action Buttons Group -->
+              <div class="card-actions">
+                <a href="/myTrips/saved/<%= trip._id %>" class="btn-view-itinerary">
+                  <i class="fas fa-map"></i>
+                  <span>View Itinerary</span>
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+
+                <a href="/booking?city=<%= encodeURIComponent(trip.place) %>&budget=<%= encodeURIComponent(trip.budgetType || 'moderate') %>" class="btn-book-travel" title="Book Flights, Trains, Buses & Stays for <%= trip.place %>">
+                  <i class="fas fa-ticket-alt"></i>
+                  <span>Book Stays & Rides</span>
+                </a>
+
+                <form action="/myTrips/delete/<%= trip._id %>" method="POST" onsubmit="return confirm('Are you sure you want to remove this trip to <%= trip.place %> from your saved collection?');" class="delete-trip-form">
+                  <button type="submit" class="btn-delete-trip" title="Delete Saved Trip">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </form>
+              </div>
+
+            </div>
+          </article>
+        <% }) %>
+
+        <!-- No Filter Match Container (Hidden by default) -->
+        <div class="no-filter-match" id="noFilterMatch">
+          <i class="fas fa-search-location"></i>
+          <h4>No matching saved trips found</h4>
+          <p>Try searching for a different destination or clearing your budget filter.</p>
+        </div>
+      <% } %>
+    </section>
+
+  </main>
+
+  <!-- Interactive Client-side Search & Filter Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById("tripSearchInput");
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const tripCards = document.querySelectorAll(".trip-card");
+      const noFilterMatch = document.getElementById("noFilterMatch");
+
+      if (!tripCards.length) return;
+
+      let currentFilter = "all";
+      let currentQuery = "";
+
+      function filterTrips() {
+        let visibleCount = 0;
+
+        tripCards.forEach(card => {
+          const place = card.getAttribute("data-place") || "";
+          const budget = card.getAttribute("data-budget") || "";
+
+          const matchesQuery = !currentQuery || place.includes(currentQuery);
+          const matchesFilter = (currentFilter === "all") || (budget === currentFilter);
+
+          if (matchesQuery && matchesFilter) {
+            card.style.display = "flex";
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (noFilterMatch) {
+          noFilterMatch.style.display = (visibleCount === 0) ? "block" : "none";
+        }
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          currentQuery = e.target.value.trim().toLowerCase();
+          filterTrips();
+        });
+      }
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterButtons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.getAttribute("data-filter") || "all";
+          filterTrips();
+        });
+      });
+    });
+  </script>
+
+  <!-- Standard Website Footer -->
+  <%- include("./includes/footer.ejs") %>
+
+</body>
+</html>
