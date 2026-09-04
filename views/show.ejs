@@ -340,20 +340,42 @@
 </div>
         </div>
       
-    <form action="/save-trip" method="POST">
+  <form action="/save-trip" method="POST" onsubmit="checkEvent(event)">
     <input type="hidden" name="place" value="<%= queryParams.place %>">
     <input type="hidden" name="days" value="<%= queryParams.days %>">
     <input type="hidden" name="month" value="<%= queryParams.month %>">
     <input type="hidden" name="noOfTravelers" value="<%= queryParams.noOfTravelers %>">
     <input type="hidden" name="budget" value="<%= queryParams.budget %>">
+    <input type="hidden" name="language" value="<%= queryParams.language %>">
     
-    <button type="submit" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+    <button id="savingBtn" type="submit" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
         💾 Save to My Trips
     </button>
-</form>
+  </form>
+  <script>
+    function checkEvent(e) {
+      // show.js mein aapne 'Completed!' set kiya hai (exclamation mark ke sath)
+      if(document.getElementById("loading-spinner").innerText !== "Completed!") {
+        e.preventDefault(); // Page refresh roko
+        alert("Please wait for itinerary to generate completely!");
+       }
+    }
+  </script>
+
    </div>
    <div id="verf_notes">
    </div>
+
+   <script>
+    // Agar backend se savedItinerary pass hua hai (Database se view karte waqt)
+      <% if (typeof savedItinerary !== 'undefined' && savedItinerary != null) { %>
+          // Database data ko Client-side JSON object mein convert karo
+          window.savedItinerary = <%- JSON.stringify(savedItinerary) %>;
+      <% } else { %>
+          // Normal generation ke waqt (AI wala) ise khali rakho
+          window.savedItinerary = undefined;
+      <% } %>
+  </script>
    <script type="module" src="/js/show.js"></script>
   </body>
 </html>
