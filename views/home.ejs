@@ -24,7 +24,10 @@
         <nav class="navbar">
           <a href="/">Home</a>
           <a href="/offbeat">Explore Offbeat</a>
-          <a href="/guide">Guide</a> <a href="/aboutus">About Us</a>
+          <a href="/myTrips">My Trips</a>
+          <a href="/guide">Guide</a> 
+          <a href="/aboutus">About Us</a>
+          
 
           <a href="<%= typeof user !== 'undefined' && user ? '#' : '/login' %>" class="btn" id="user-greeting-btn">
             <%= typeof user !=='undefined' && user ? 'Welcome ' + user + '!' : 'Sign Up' %>

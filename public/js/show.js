@@ -200,5 +200,11 @@ function updateUI(data) {
         document.getElementById("verf_notes").innerText = data.verification_notes;
     }
 }
+if (typeof window.savedItinerary !== 'undefined') {
+    updateUI(window.savedItinerary); // Direct object pass kiya hai
+} else {
+    startStream();
+}
 
-startStream();
+
+
