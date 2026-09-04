@@ -320,3 +320,59 @@
     /* bottom:0; */
    top:100%;
 }
+
+/* ── Floating Emergency SOS Button ── */
+.emergency-fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(220, 38, 38, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border: 2px solid rgba(255, 100, 100, 0.6);
+    box-shadow: 0 6px 24px rgba(220, 38, 38, 0.5), 0 2px 8px rgba(0,0,0,0.4);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    overflow: visible;
+}
+
+.emergency-fab:hover {
+    background: rgba(185, 28, 28, 0.95);
+    border-color: rgba(255, 150, 150, 0.9);
+    box-shadow: 0 10px 35px rgba(220, 38, 38, 0.75), 0 4px 12px rgba(0,0,0,0.5);
+    transform: translateY(-3px) scale(1.04);
+    color: #ffffff;
+}
+
+.emergency-fab-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+}
+
+/* Pulsing ring around the button */
+.emergency-pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50px;
+    border: 2px solid rgba(220, 38, 38, 0.6);
+    animation: sos-ring 1.8s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes sos-ring {
+    0%   { transform: scale(1);   opacity: 0.7; }
+    80%  { transform: scale(1.2); opacity: 0; }
+    100% { transform: scale(1.2); opacity: 0; }
+}
