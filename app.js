@@ -11,7 +11,7 @@ const getPrompt = require("./getPrompt.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const NodeCache = require("node-cache");
-const appCache = new NodeCache({stdTTL : 86400});
+const appCache = new NodeCache({ stdTTL: 86400 });
 const { getWeatherAndPacking, getBookingLinks } = require("./bookingService.js");
 app.use(methodOverride("_method"));
 
@@ -24,49 +24,49 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 mongoose.connect("mongodb://127.0.0.1:27017/sih-travel")
-    .then(() => console.log("MongoDB Connected Successfully!"))
-    .catch(err => console.log("MongoDB Connection Error:", err));
+  .then(() => console.log("MongoDB Connected Successfully!"))
+  .catch(err => console.log("MongoDB Connection Error:", err));
 
 // Home page work 
 //hi
 // Helper to extract userName from cookies manually
 function getUserFromCookie(req) {
-    if (req.headers.cookie) {
-        const match = req.headers.cookie.match(/(?:^|; )userName=([^;]*)/);
-        if (match) return decodeURIComponent(match[1]);
-    }
-    return null;
+  if (req.headers.cookie) {
+    const match = req.headers.cookie.match(/(?:^|; )userName=([^;]*)/);
+    if (match) return decodeURIComponent(match[1]);
+  }
+  return null;
 }
 
 app.get('/', (req, res) => {
-    res.render('home.ejs', { user: getUserFromCookie(req) });
+  res.render('home.ejs', { user: getUserFromCookie(req) });
 });
 
 app.get('/login', (req, res) => {
-    res.render('login.ejs');
+  res.render('login.ejs');
 });
 app.get('/aboutus', (req, res) => {
-    res.render('about-us.ejs');
+  res.render('about-us.ejs');
 });
 
 app.get('/offbeat', (req, res) => {
-    res.render('offbeat.ejs', { user: getUserFromCookie(req) });
+  res.render('offbeat.ejs', { user: getUserFromCookie(req) });
 });
 
-app.get("/guide", (req, res)=>{
-    res.render("travel_tips.ejs");
+app.get("/guide", (req, res) => {
+  res.render("travel_tips.ejs");
 })
 
 
 // generator work 
-app.get("/generator", (req, res)=>{
-    res.render("generator.ejs");
+app.get("/generator", (req, res) => {
+  res.render("generator.ejs");
 })
 
 // result showing
-app.get("/showResults", (req, res)=>{
-    let {selectedCity, selectedBudget} = req.query;
-    res.render("result.ejs", {selectedCity, selectedBudget});
+app.get("/showResults", (req, res) => {
+  let { selectedCity, selectedBudget } = req.query;
+  res.render("result.ejs", { selectedCity, selectedBudget });
 })
 
 // ai-integration work
@@ -79,16 +79,16 @@ const openrouter = new OpenRouter({
 let finalAns;
 
 
-app.get("/showItinerary", (req, res)=>{
-      if((Object.keys(req.query).length) === 0){
-      console.log("Please select a valid date and place to visit !!");
-      return res.send("404! Page not found");
-    }
-  res.render("show.ejs", {queryParams : req.query});
+app.get("/showItinerary", (req, res) => {
+  if ((Object.keys(req.query).length) === 0) {
+    console.log("Please select a valid date and place to visit !!");
+    return res.send("404! Page not found");
+  }
+  res.render("show.ejs", { queryParams: req.query });
 });
 
 
-app.get("/api/streamItinerary", async (req, res)=>{
+app.get("/api/streamItinerary", async (req, res) => {
   res.setHeader("Content-type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
@@ -101,7 +101,7 @@ app.get("/api/streamItinerary", async (req, res)=>{
     //. Cache Check: Agar data mil jaye toh instantly return karein (0ms AI wait)
     if (appCache.has(cacheKey)) {
       const cachedData = appCache.get(cacheKey);
-      res.write(`data: ${JSON.stringify({type : 'full', data : cachedData})}\n\n`);
+      res.write(`data: ${JSON.stringify({ type: 'full', data: cachedData })}\n\n`);
       res.write("data: [DONE]\n\n");
       return res.end();
     }
@@ -232,19 +232,19 @@ EXPECTED JSON SCHEMA:
     });
 
     let fullRawString = "";
-    for await(const chunk of completion){
+    for await (const chunk of completion) {
       const textChunk = chunk.choices[0]?.delta?.content || "";
-      if(textChunk){
+      if (textChunk) {
         fullRawString += textChunk;
         process.stdout.write(textChunk);
-        res.write(`data: ${JSON.stringify({type: 'chunk', text: textChunk})}\n\n`);
+        res.write(`data: ${JSON.stringify({ type: 'chunk', text: textChunk })}\n\n`);
       }
     }
 
     const cleanString = fullRawString.replace(/<think>[\s\S]*?<\/think>/gi, "").replace(/```json/gi, "").replace(/```/g, "").trim();
     const jsonMatch = cleanString.match(/\{[\s\S]*\}/);
 
-    if(jsonMatch){
+    if (jsonMatch) {
       const repairedJson = jsonrepair(jsonMatch[0]);
       finalAns = JSON.parse(repairedJson);
       appCache.set(cacheKey, finalAns);
@@ -252,7 +252,7 @@ EXPECTED JSON SCHEMA:
 
     res.write("data: [DONE]\n\n");
     res.end();
-  }catch(err){
+  } catch (err) {
     console.error(err);
     res.write(`data: ${JSON.stringify({ type: 'error', message: "Failed to generate." })}\n\n`);
     res.end();
@@ -287,9 +287,9 @@ for (let accom of finalAns["accommodations"]) {
   const destination = (dayAccom && dayAccom.location) ? dayAccom.location : "Jaipur";
   const hotelName = (dayAccom && dayAccom.name) ? dayAccom.name : "";
   const bookingLinks = getBookingLinks({ origin: "Prayagraj", destination, hotelName });
-  
+
   // rendering details 
-  res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks });
+  res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks, MAP_API_KEY: process.env.MAP_API_KEY });
 });
 
 
@@ -381,5 +381,5 @@ app.get("/myTrips/saved/:id", async (req, res)=>{
 })
 
 app.listen(8080, () => {
-    console.log(`Server listening on port 8080`);
+  console.log(`Server listening on port 8080`);
 });

@@ -340,7 +340,7 @@
 </div>
         </div>
       
-    <form action="/save-trip" method="POST">
+  <form action="/save-trip" method="POST" onsubmit="checkEvent(event)">
     <input type="hidden" name="place" value="<%= queryParams.place %>">
     <input type="hidden" name="days" value="<%= queryParams.days %>">
     <input type="hidden" name="month" value="<%= queryParams.month %>">
@@ -348,10 +348,20 @@
     <input type="hidden" name="budget" value="<%= queryParams.budget %>">
     <input type="hidden" name="language" value="<%= queryParams.language %>">
     
-    <button type="submit" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+    <button id="savingBtn" type="submit" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
         💾 Save to My Trips
     </button>
-</form>
+  </form>
+  <script>
+    function checkEvent(e) {
+      // show.js mein aapne 'Completed!' set kiya hai (exclamation mark ke sath)
+      if(document.getElementById("loading-spinner").innerText !== "Completed!") {
+        e.preventDefault(); // Page refresh roko
+        alert("Please wait for itinerary to generate completely!");
+       }
+    }
+  </script>
+
    </div>
    <div id="verf_notes">
    </div>

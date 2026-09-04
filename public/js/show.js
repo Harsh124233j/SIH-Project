@@ -201,6 +201,7 @@ function updateUI(data) {
     }
 }
 if (typeof window.savedItinerary !== 'undefined') {
+    document.getElementById("loading-spinner").innerText = "Completed!";
     updateUI(window.savedItinerary); // Direct object pass kiya hai
 } else {
     startStream();
