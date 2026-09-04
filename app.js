@@ -181,7 +181,7 @@ app.get("/showItinerary/:day", (req, res) => {
   }
   
   // rendering details 
-  res.render("showDetails.ejs", { dayItinerary, dayAccom });
+  res.render("showDetails.ejs", { dayItinerary, dayAccom, MAP_API_KEY: process.env.MAP_API_KEY });
 });
 
 
