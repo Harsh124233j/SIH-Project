@@ -12,7 +12,7 @@ const getPrompt = require("./getPrompt.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const NodeCache = require("node-cache");
-const appCache = new NodeCache({stdTTL : 86400});
+const appCache = new NodeCache({ stdTTL: 86400 });
 const { getWeatherAndPacking, getBookingLinks } = require("./bookingService.js");
 app.use(methodOverride("_method"));
 
@@ -25,27 +25,27 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 mongoose.connect("mongodb://127.0.0.1:27017/sih-travel")
-    .then(() => console.log("MongoDB Connected Successfully!"))
-    .catch(err => console.log("MongoDB Connection Error:", err));
+  .then(() => console.log("MongoDB Connected Successfully!"))
+  .catch(err => console.log("MongoDB Connection Error:", err));
 
 let user_id, place, months, days;
 // Home page work 
 //hi
 // Helper to extract userName from cookies manually
 function getUserFromCookie(req) {
-    if (req.headers.cookie) {
-        const match = req.headers.cookie.match(/(?:^|; )userName=([^;]*)/);
-        if (match) return decodeURIComponent(match[1]);
-    }
-    return null;
+  if (req.headers.cookie) {
+    const match = req.headers.cookie.match(/(?:^|; )userName=([^;]*)/);
+    if (match) return decodeURIComponent(match[1]);
+  }
+  return null;
 }
 
 app.get('/', (req, res) => {
-    res.render('home.ejs', { user: getUserFromCookie(req) });
+  res.render('home.ejs', { user: getUserFromCookie(req) });
 });
 
 app.get('/login', (req, res) => {
-    res.render('login.ejs');
+  res.render('login.ejs');
 });
 
 
@@ -55,27 +55,27 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/aboutus', (req, res) => {
-    res.render('about-us.ejs');
+  res.render('about-us.ejs');
 });
 
 app.get('/offbeat', (req, res) => {
-    res.render('offbeat.ejs', { user: getUserFromCookie(req) });
+  res.render('offbeat.ejs', { user: getUserFromCookie(req) });
 });
 
-app.get("/guide", (req, res)=>{
-    res.render("travel_tips.ejs");
+app.get("/guide", (req, res) => {
+  res.render("travel_tips.ejs");
 })
 
 
 // generator work 
-app.get("/generator", (req, res)=>{
-    res.render("generator.ejs");
+app.get("/generator", (req, res) => {
+  res.render("generator.ejs");
 })
 
 // result showing
-app.get("/showResults", (req, res)=>{
-    let {selectedCity, selectedBudget} = req.query;
-    res.render("result.ejs", {selectedCity, selectedBudget});
+app.get("/showResults", (req, res) => {
+  let { selectedCity, selectedBudget } = req.query;
+  res.render("result.ejs", { selectedCity, selectedBudget });
 })
 
 // ai-integration work
@@ -88,44 +88,44 @@ const openrouter = new OpenRouter({
 let finalAns;
 
 
-app.get("/showItinerary", (req, res)=>{
-      if((Object.keys(req.query).length) === 0){
-      console.log("Please select a valid date and place to visit !!");
-      return res.send("404! Page not found");
-    }
-  res.render("show.ejs", {queryParams : req.query});
+app.get("/showItinerary", (req, res) => {
+  if ((Object.keys(req.query).length) === 0) {
+    console.log("Please select a valid date and place to visit !!");
+    return res.send("404! Page not found");
+  }
+  res.render("show.ejs", { queryParams: req.query });
 });
 
 app.get("/mytrips", async (req, res) => {
-    const userName = getUserFromCookie(req);
-    if (!userName) {
-        return res.redirect("/login"); // Agar login nahi hai toh wapas bhej dein
-    }
-    try {
-        // Database se is user ki saari trips find karein (Latest pehle)
-        const userTrips = await Trip.find({ userName: userName }).sort({ savedAt: -1 });
-        
-        res.render("mytrips.ejs", { trips: userTrips, user: userName });
-    } catch (err) {
-        console.error(err);
-        res.send("Error loading your trips");
-    }
+  const userName = getUserFromCookie(req);
+  if (!userName) {
+    return res.redirect("/login"); // Agar login nahi hai toh wapas bhej dein
+  }
+  try {
+    // Database se is user ki saari trips find karein (Latest pehle)
+    const userTrips = await Trip.find({ userName: userName }).sort({ savedAt: -1 });
+
+    res.render("mytrips.ejs", { trips: userTrips, user: userName });
+  } catch (err) {
+    console.error(err);
+    res.send("Error loading your trips");
+  }
 });
 
-app.get("/api/streamItinerary", async (req, res)=>{
+app.get("/api/streamItinerary", async (req, res) => {
   res.setHeader("Content-type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
   try {
     const location = "Prayagraj";
-    let {place, month, days, noOfTravelers, budget, language} = req.query;
+    let { place, month, days, noOfTravelers, budget, language } = req.query;
 
     // Cache Key Generate
     const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}_${language}`.toLowerCase();
     //. Cache Check: Agar data mil jaye toh instantly return karein (0ms AI wait)
     if (appCache.has(cacheKey)) {
       const cachedData = appCache.get(cacheKey);
-      res.write(`data: ${JSON.stringify({type : 'full', data : cachedData})}\n\n`);
+      res.write(`data: ${JSON.stringify({ type: 'full', data: cachedData })}\n\n`);
       res.write("data: [DONE]\n\n");
       return res.end();
     }
@@ -159,19 +159,19 @@ app.get("/api/streamItinerary", async (req, res)=>{
     });
 
     let fullRawString = "";
-    for await(const chunk of completion){
+    for await (const chunk of completion) {
       const textChunk = chunk.choices[0]?.delta?.content || "";
-      if(textChunk){
+      if (textChunk) {
         fullRawString += textChunk;
         process.stdout.write(textChunk);
-        res.write(`data: ${JSON.stringify({type: 'chunk', text: textChunk})}\n\n`);
+        res.write(`data: ${JSON.stringify({ type: 'chunk', text: textChunk })}\n\n`);
       }
     }
 
     const cleanString = fullRawString.replace(/<think>[\s\S]*?<\/think>/gi, "").replace(/```json/gi, "").replace(/```/g, "").trim();
     const jsonMatch = cleanString.match(/\{[\s\S]*\}/);
 
-    if(jsonMatch){
+    if (jsonMatch) {
       const repairedJson = jsonrepair(jsonMatch[0]);
       finalAns = JSON.parse(repairedJson);
       appCache.set(cacheKey, finalAns);
@@ -179,7 +179,7 @@ app.get("/api/streamItinerary", async (req, res)=>{
 
     res.write("data: [DONE]\n\n");
     res.end();
-  }catch(err){
+  } catch (err) {
     console.error(err);
     res.write(`data: ${JSON.stringify({ type: 'error', message: "Failed to generate." })}\n\n`);
     res.end();
@@ -201,45 +201,45 @@ app.get("/api/booking-options", (req, res) => {
 });
 
 app.post("/save-trip", async (req, res) => {
-    // Cookie se user nikalna
-    const userName = getUserFromCookie(req);
-    if (!userName) {
-        return res.status(401).send("Please login to save trips.");
-    }
-    const { place, days, month, noOfTravelers, budget } = req.body;
-    
-    // Wahi same Cache Key banayen jo api/streamItinerary mein banai thi
-    const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}`.toLowerCase();
-    
-    // Cache se generated JSON (finalAns) nikalein
-    const generatedData = appCache.get(cacheKey);
-    if (!generatedData) {
-        return res.status(400).send("No itinerary found to save. Please generate again.");
-    }
-    try {
-        // Naya Trip document banakar MongoDB mein save karein
-        const newTrip = new Trip({
-            userName: userName,
-            place: place,
-            days: days,
-            month: month,
-            budgetType: budget,
-            itineraryData: generatedData
-        });
-        
-        await newTrip.save();
-        console.log("Trip saved successfully!");
-        res.redirect("/mytrips"); // Save hone ke baad My Trips page par bhej dein
-        
-    } catch (err) {
-        console.error("Error saving trip:", err);
-        res.status(500).send("Error saving trip");
-    }
+  // Cookie se user nikalna
+  const userName = getUserFromCookie(req);
+  if (!userName) {
+    return res.status(401).send("Please login to save trips.");
+  }
+  const { place, days, month, noOfTravelers, budget } = req.body;
+
+  // Wahi same Cache Key banayen jo api/streamItinerary mein banai thi
+  const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}`.toLowerCase();
+
+  // Cache se generated JSON (finalAns) nikalein
+  const generatedData = appCache.get(cacheKey);
+  if (!generatedData) {
+    return res.status(400).send("No itinerary found to save. Please generate again.");
+  }
+  try {
+    // Naya Trip document banakar MongoDB mein save karein
+    const newTrip = new Trip({
+      userName: userName,
+      place: place,
+      days: days,
+      month: month,
+      budgetType: budget,
+      itineraryData: generatedData
+    });
+
+    await newTrip.save();
+    console.log("Trip saved successfully!");
+    res.redirect("/mytrips"); // Save hone ke baad My Trips page par bhej dein
+
+  } catch (err) {
+    console.error("Error saving trip:", err);
+    res.status(500).send("Error saving trip");
+  }
 });
 
 // showing data for a particular day
 app.get("/showItinerary/:day", (req, res) => {
-    // if data for day 1 is called before generating itinerary then send to home
+  // if data for day 1 is called before generating itinerary then send to home
   if (!finalAns) {
     return res.send("404! Page not found");
   }
@@ -265,52 +265,52 @@ app.get("/showItinerary/:day", (req, res) => {
   const destination = (dayAccom && dayAccom.location) ? dayAccom.location : "Jaipur";
   const hotelName = (dayAccom && dayAccom.name) ? dayAccom.name : "";
   const bookingLinks = getBookingLinks({ origin: "Prayagraj", destination, hotelName });
-  
+
   // rendering details 
-  res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks });
+  res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks, MAP_API_KEY: process.env.MAP_API_KEY });
 });
 
 // 1. API route to Toggle (Add/Remove) Favorite via AJAX
 app.post("/api/favorites/toggle", async (req, res) => {
-    const userName = getUserFromCookie(req);
-    if (!userName) return res.status(401).json({ error: "Please login first" });
+  const userName = getUserFromCookie(req);
+  if (!userName) return res.status(401).json({ error: "Please login first" });
 
-    const { cityName, activityTitle, description } = req.body;
+  const { cityName, activityTitle, description } = req.body;
 
-    try {
-        // Pehle check karein ki kya ye jagah already user ki favorite hai?
-        const existingFav = await Favorite.findOne({ userName, activityTitle });
+  try {
+    // Pehle check karein ki kya ye jagah already user ki favorite hai?
+    const existingFav = await Favorite.findOne({ userName, activityTitle });
 
-        if (existingFav) {
-            // Agar already hai, toh iska matlab user ne Heart (Un-favorite) kiya hai -> Delete kar do
-            await Favorite.findByIdAndDelete(existingFav._id);
-            return res.json({ message: "Removed from favorites", status: "removed" });
-        } else {
-            // Agar nahi hai, toh Naya Favorite Save kar do
-            const newFav = new Favorite({ userName, cityName, activityTitle, description });
-            await newFav.save();
-            return res.json({ message: "Added to favorites", status: "added" });
-        }
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Server error" });
+    if (existingFav) {
+      // Agar already hai, toh iska matlab user ne Heart (Un-favorite) kiya hai -> Delete kar do
+      await Favorite.findByIdAndDelete(existingFav._id);
+      return res.json({ message: "Removed from favorites", status: "removed" });
+    } else {
+      // Agar nahi hai, toh Naya Favorite Save kar do
+      const newFav = new Favorite({ userName, cityName, activityTitle, description });
+      await newFav.save();
+      return res.json({ message: "Added to favorites", status: "added" });
     }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 // 2. Wishlist Page Route (Jahan saare favorites dikhenge)
 app.get("/wishlist", async (req, res) => {
-    const userName = getUserFromCookie(req);
-    if (!userName) return res.redirect("/login");
+  const userName = getUserFromCookie(req);
+  if (!userName) return res.redirect("/login");
 
-    try {
-        const favorites = await Favorite.find({ userName }).sort({ savedAt: -1 });
-        res.render("wishlist.ejs", { favorites, user: userName });
-    } catch (err) {
-        console.error(err);
-        res.send("Error loading wishlist");
-    }
+  try {
+    const favorites = await Favorite.find({ userName }).sort({ savedAt: -1 });
+    res.render("wishlist.ejs", { favorites, user: userName });
+  } catch (err) {
+    console.error(err);
+    res.send("Error loading wishlist");
+  }
 });
 
 app.listen(8080, () => {
-    console.log(`Server listening on port 8080`);
+  console.log(`Server listening on port 8080`);
 });

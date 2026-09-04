@@ -1,55 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Details</title>
-    <link rel="stylesheet" href="/css/detail.css">
-  </head>
-  <body>
-    <img src="/css/jer.jpg" alt="" class="body_img">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Details</title>
+  <link rel="stylesheet" href="/css/detail.css">
+</head>
+
+<body>
+  <img src="/css/jer.jpg" alt="" class="body_img">
   <!-- Header -->
   <header class="header-card">
-    <h1 class="header-title">Day <%= dayItinerary["day"] %>: <%= dayItinerary["title"] %></h1>
+    <h1 class="header-title">Day <%= dayItinerary["day"] %>: <%= dayItinerary["title"] %>
+    </h1>
   </header>
-
+  <div id="map" data-travel-routes='<%= JSON.stringify(dayItinerary.travel_between_locations || []) %>'
+    data-api-key="<%= MAP_API_KEY %>"></div>
   <!-- Schedule Section -->
   <div class="header-card cars" style="margin-top: 3rem;">
     <h2 class="header-title">Schedule</h2>
   </div>
 
   <div class="budget-list">
-    <% for(let sc of dayItinerary["schedule"]){ %>
-      <div class="budget-item">
-        <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <span class="label">Time :</span>
-          <span class="value"><%= sc["time"] %></span>
-        </p>
-        <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-          </svg>
-          <span class="label">Activity :</span>
-          <span class="value"><%= sc["activity"] %></span>
-        </p>
-        <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="8" y1="6" x2="21" y2="6"/>
-            <line x1="8" y1="12" x2="21" y2="12"/>
-            <line x1="8" y1="18" x2="21" y2="18"/>
-            <line x1="3" y1="6" x2="3.01" y2="6"/>
-            <line x1="3" y1="12" x2="3.01" y2="12"/>
-            <line x1="3" y1="18" x2="3.01" y2="18"/>
-          </svg>
-          <span class="label">Description :</span>
-          <span class="value"><%= sc["description"] %></span>
-        </p>
-      </div>
-    <% } %>
+    <% if(dayItinerary && dayItinerary["schedule"]){ %>
+      <% for(let sc of dayItinerary["schedule"]){ %>
+        <div class="budget-item">
+          <p class="budget-row">
+            <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span class="label">Time :</span>
+            <span class="value">
+              <%= sc["time"] %>
+            </span>
+          </p>
+          <p class="budget-row">
+            <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <span class="label">Activity :</span>
+            <span class="value">
+              <%= sc["activity"] %>
+            </span>
+          </p>
+          <p class="budget-row">
+            <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6" />
+              <line x1="8" y1="12" x2="21" y2="12" />
+              <line x1="8" y1="18" x2="21" y2="18" />
+              <line x1="3" y1="6" x2="3.01" y2="6" />
+              <line x1="3" y1="12" x2="3.01" y2="12" />
+              <line x1="3" y1="18" x2="3.01" y2="18" />
+            </svg>
+            <span class="label">Description :</span>
+            <span class="value">
+              <%= sc["description"] %>
+            </span>
+          </p>
+        </div>
+        <% } %>
+          <% } %>
   </div>
 
   <!-- Artisan Experience Section -->
@@ -60,28 +76,37 @@
   <div class="budget-list">
     <div class="budget-item">
       <p class="budget-row">
-        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
+        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
         </svg>
         <span class="label">Workshop Name :</span>
-        <span class="value"><%= dayItinerary["artisan_experience"]["workshop_name"] %></span>
+        <span class="value">
+          <%= dayItinerary["artisan_experience"]["workshop_name"] %>
+        </span>
       </p>
       <p class="budget-row">
-        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 19l7-7 3 3-7 7-3-3z"/>
-          <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19l7-7 3 3-7 7-3-3z" />
+          <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
         </svg>
         <span class="label">Craft Type :</span>
-        <span class="value"><%= dayItinerary["artisan_experience"]["craft_type"] %></span>
+        <span class="value">
+          <%= dayItinerary["artisan_experience"]["craft_type"] %>
+        </span>
       </p>
       <p class="budget-row">
-        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-          <polyline points="22 4 12 14.01 9 11.01"/>
+        <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
         </svg>
         <span class="label">Authenticity :</span>
-        <span class="value"><%= dayItinerary["artisan_experience"]["authenticity_details"] %></span>
+        <span class="value">
+          <%= dayItinerary["artisan_experience"]["authenticity_details"] %>
+        </span>
       </p>
     </div>
   </div>
@@ -95,63 +120,78 @@
     <% for(let option of dayItinerary["travel_between_locations"]){ %>
       <div class="budget-item">
         <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="10" r="3"/>
-            <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="10" r="3" />
+            <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z" />
           </svg>
           <span class="label">Route :</span>
-          <span class="value"><%= option["from"] %> &rarr; <%= option["to"] %></span>
+          <span class="value">
+            <%= option["from"] %> &rarr; <%= option["to"] %>
+          </span>
         </p>
         <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="4 17 10 11 4 5"/>
-            <line x1="12" y1="19" x2="20" y2="19"/>
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 17 10 11 4 5" />
+            <line x1="12" y1="19" x2="20" y2="19" />
           </svg>
           <span class="label">Distance & Time :</span>
-          <span class="value"><%= option["distance"] %> (<%= option["estimated_time"] %>)</span>
+          <span class="value">
+            <%= option["distance"] %> (<%= option["estimated_time"] %>)
+          </span>
         </p>
         <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="14" rx="2"/>
-            <path d="M3 10h18M7 18l-2 3M17 18l2 3"/>
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="14" rx="2" />
+            <path d="M3 10h18M7 18l-2 3M17 18l2 3" />
           </svg>
           <span class="label">Recommended Mode :</span>
-          <span class="value"><%= option["recommended_mode"] %></span>
+          <span class="value">
+            <%= option["recommended_mode"] %>
+          </span>
         </p>
         <% for(let opt of option["options"]){ %>
           <p class="budget-row" style="padding-left: 28px;">
-            <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="1"/>
+            <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="1" />
             </svg>
-            <span class="label"><%= opt["mode"] %> :</span>
-            <span class="value"><%= opt["fare"] %></span>
+            <span class="label">
+              <%= opt["mode"] %> :
+            </span>
+            <span class="value">
+              <%= opt["fare"] %>
+            </span>
           </p>
-        <% } %>
-
-        <div class="transit-quick-links">
-          <a href="https://www.google.com/maps/dir/?api=1&origin=<%= encodeURIComponent(option['from']) %>&destination=<%= encodeURIComponent(option['to']) %>" 
-             target="_blank" rel="noopener noreferrer" class="mini-transit-btn maps-btn">
-            🗺️ Google Maps Navigation
-          </a>
-          <% if(option['recommended_mode'].toLowerCase().includes('train') || option['recommended_mode'].toLowerCase().includes('rail')) { %>
-            <a href="https://www.confirmtkt.com/rts/search?from=<%= encodeURIComponent(option['from']) %>&to=<%= encodeURIComponent(option['to']) %>" 
-               target="_blank" rel="noopener noreferrer" class="mini-transit-btn train-btn">
-              🚆 Book Train on IRCTC/ConfirmTkt
-            </a>
-          <% } else if(option['recommended_mode'].toLowerCase().includes('bus')) { %>
-            <a href="https://www.redbus.in/bus-tickets/<%= encodeURIComponent(option['from'].toLowerCase()) %>-to-<%= encodeURIComponent(option['to'].toLowerCase()) %>" 
-               target="_blank" rel="noopener noreferrer" class="mini-transit-btn bus-btn">
-              🚌 Book Bus on RedBus
-            </a>
-          <% } else { %>
-            <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=<%= encodeURIComponent(option['to']) %>" 
-               target="_blank" rel="noopener noreferrer" class="mini-transit-btn cab-btn">
-              🚕 Check Cab Rates
-            </a>
           <% } %>
-        </div>
+
+            <div class="transit-quick-links">
+              <a href="https://www.google.com/maps/dir/?api=1&origin=<%= encodeURIComponent(option['from']) %>&destination=<%= encodeURIComponent(option['to']) %>"
+                target="_blank" rel="noopener noreferrer" class="mini-transit-btn maps-btn">
+                🗺️ Google Maps Navigation
+              </a>
+              <% if(option['recommended_mode'].toLowerCase().includes('train') ||
+                option['recommended_mode'].toLowerCase().includes('rail')) { %>
+                <a href="https://www.confirmtkt.com/rts/search?from=<%= encodeURIComponent(option['from']) %>&to=<%= encodeURIComponent(option['to']) %>"
+                  target="_blank" rel="noopener noreferrer" class="mini-transit-btn train-btn">
+                  🚆 Book Train on IRCTC/ConfirmTkt
+                </a>
+                <% } else if(option['recommended_mode'].toLowerCase().includes('bus')) { %>
+                  <a href="https://www.redbus.in/bus-tickets/<%= encodeURIComponent(option['from'].toLowerCase()) %>-to-<%= encodeURIComponent(option['to'].toLowerCase()) %>"
+                    target="_blank" rel="noopener noreferrer" class="mini-transit-btn bus-btn">
+                    🚌 Book Bus on RedBus
+                  </a>
+                  <% } else { %>
+                    <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=<%= encodeURIComponent(option['to']) %>"
+                      target="_blank" rel="noopener noreferrer" class="mini-transit-btn cab-btn">
+                      🚕 Check Cab Rates
+                    </a>
+                    <% } %>
+            </div>
       </div>
-    <% } %>
+      <% } %>
   </div>
 
   <!-- Accommodations Section -->
@@ -163,75 +203,94 @@
     <div class="budget-list">
       <div class="budget-item">
         <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
           </svg>
           <span class="label">Name :</span>
-          <span class="value"><%= dayAccom["name"] %> (<%= dayAccom["type"] %>)</span>
+          <span class="value">
+            <%= dayAccom["name"] %> (<%= dayAccom["type"] %>)
+          </span>
         </p>
         <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 3h12M6 8h12M6 13l8.5 8M6 13h3a4 4 0 0 0 0-8"/>
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3h12M6 8h12M6 13l8.5 8M6 13h3a4 4 0 0 0 0-8" />
           </svg>
           <span class="label">Price Per Night :</span>
-          <span class="value"><%= dayAccom["price_per_night"] %></span>
+          <span class="value">
+            <%= dayAccom["price_per_night"] %>
+          </span>
         </p>
         <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="10" r="3"/>
-            <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="10" r="3" />
+            <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z" />
           </svg>
           <span class="label">Location :</span>
-          <span class="value"><%= dayAccom["location"] %></span>
+          <span class="value">
+            <%= dayAccom["location"] %>
+          </span>
         </p>
         <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
+          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
           </svg>
           <span class="label">Facilities :</span>
-          <span class="value"><%= dayAccom["facilities"].join(", ") %></span>
+          <span class="value">
+            <%= dayAccom["facilities"].join(", ") %></span>
         </p>
-        <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="16" x2="12" y2="12"/>
-            <line x1="12" y1="8" x2="12.01" y2="8"/>
-          </svg>
-          <span class="label">Why Choose :</span>
-          <span class="value"><%= dayAccom["why_choose"] %></span>
+        <p class=" budget-row">
+              <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+              <span class="label">Why Choose :</span>
+              <span class="value">
+                <%= dayAccom["why_choose"] %>
+              </span>
         </p>
 
         <!-- REAL BOOKING ACTION BUTTONS -->
         <div class="booking-card-actions">
-          <a href="<%= (typeof bookingLinks !== 'undefined' && bookingLinks && bookingLinks.hotels) ? bookingLinks.hotels.bookingCom : 'https://www.booking.com/searchresults.html?ss=' + encodeURIComponent(dayAccom['name'] + ' ' + dayAccom['location']) %>" 
-             target="_blank" rel="noopener noreferrer" class="live-booking-btn bookingcom-btn">
+          <a href="<%= (typeof bookingLinks !== 'undefined' && bookingLinks && bookingLinks.hotels) ? bookingLinks.hotels.bookingCom : 'https://www.booking.com/searchresults.html?ss=' + encodeURIComponent(dayAccom['name'] + ' ' + dayAccom['location']) %>"
+            target="_blank" rel="noopener noreferrer" class="live-booking-btn bookingcom-btn">
             <span class="btn-emoji">🏨</span> Book on Booking.com <span class="arr-icon">&nearr;</span>
           </a>
-          <a href="<%= (typeof bookingLinks !== 'undefined' && bookingLinks && bookingLinks.hotels) ? bookingLinks.hotels.googleHotels : 'https://www.google.com/travel/hotels/' + encodeURIComponent(dayAccom['location']) + '?q=' + encodeURIComponent(dayAccom['name']) %>" 
-             target="_blank" rel="noopener noreferrer" class="live-booking-btn ghotels-btn">
+          <a href="<%= (typeof bookingLinks !== 'undefined' && bookingLinks && bookingLinks.hotels) ? bookingLinks.hotels.googleHotels : 'https://www.google.com/travel/hotels/' + encodeURIComponent(dayAccom['location']) + '?q=' + encodeURIComponent(dayAccom['name']) %>"
+            target="_blank" rel="noopener noreferrer" class="live-booking-btn ghotels-btn">
             <span class="btn-emoji">🔍</span> Compare Google Hotels <span class="arr-icon">&nearr;</span>
           </a>
-          <a href="<%= (typeof bookingLinks !== 'undefined' && bookingLinks && bookingLinks.hotels) ? bookingLinks.hotels.agoda : 'https://www.agoda.com/search?text=' + encodeURIComponent(dayAccom['name']) %>" 
-             target="_blank" rel="noopener noreferrer" class="live-booking-btn agoda-btn">
+          <a href="<%= (typeof bookingLinks !== 'undefined' && bookingLinks && bookingLinks.hotels) ? bookingLinks.hotels.agoda : 'https://www.agoda.com/search?text=' + encodeURIComponent(dayAccom['name']) %>"
+            target="_blank" rel="noopener noreferrer" class="live-booking-btn agoda-btn">
             <span class="btn-emoji">🏷️</span> Agoda Live Deals <span class="arr-icon">&nearr;</span>
           </a>
         </div>
       </div>
     </div>
-  <% }else{ %>
-    <div class="budget-list">
-      <div class="budget-item">
-        <p class="budget-row">
-          <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-          <span class="label">No Accommodation Required</span>
-        </p>
+    <% }else{ %>
+      <div class="budget-list">
+        <div class="budget-item">
+          <p class="budget-row">
+            <svg class="budget-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            <span class="label">No Accommodation Required</span>
+          </p>
+        </div>
       </div>
-    </div>
-  <% } %>
+      <% } %>
+
+
+        <script src="/js/map.js" defer></script>
 </body>
+
 </html>
