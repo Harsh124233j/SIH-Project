@@ -65,9 +65,14 @@ function updateUI(data) {
     }
 
     if (data.summary_table) {
+        const destParam = queryParams.get('place') || '';
+        const monthParam = queryParams.get('month') || '';
         const summaryHTML = data.summary_table.map((part) => {
+            const currentPlace = destParam || part["main_destination"] || '';
             return `
                 <form method="GET" class="day-card" action="/showItinerary/${part["day"]}">
+                    <input type="hidden" name="place" value="${currentPlace}">
+                    <input type="hidden" name="month" value="${monthParam}">
                     <div class="day-wrapper">
                         <div class="day-block">
                             <span class="day-number">${part["day"]}</span>

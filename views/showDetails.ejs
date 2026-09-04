@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="/css/detail.css">
 </head>
 
@@ -17,6 +18,90 @@
   </header>
   <div id="map" data-travel-routes='<%= JSON.stringify(dayItinerary.travel_between_locations || []) %>'
     data-api-key="<%= MAP_API_KEY %>"></div>
+
+  <!-- Live Weather Forecast & Smart Packing Advisor (Exclusive to Show Details) -->
+  <div class="header-card" style="margin-top: 2.5rem;">
+    <div class="weather-header-row">
+      <div>
+        <h2 class="header-title" id="weatherTitle">
+          <i class="fas fa-cloud-sun" style="color: #0284c7; margin-right: 8px;"></i>
+          Live Weather & Smart Packing Guide
+        </h2>
+        <p class="weather-subtitle" id="weatherSubtitle">
+          Destination: <strong><%= (typeof destination !== 'undefined' && destination) ? destination : 'Local Destination' %></strong>
+          <% if (typeof month !== 'undefined' && month) { %>
+            &bull; Travel Month: <strong><%= month %></strong>
+          <% } %>
+        </p>
+      </div>
+      <span class="weather-badge" id="weatherBadge">Forecast</span>
+    </div>
+  </div>
+
+  <div class="weather-packing-card">
+    <!-- Weather Snapshot Grid -->
+    <div class="weather-snapshot-grid">
+      <div class="weather-stat-box temp-box">
+        <span class="stat-icon-large" id="weatherIcon">🌤️</span>
+        <div class="stat-info">
+          <span class="stat-label">Expected Temp</span>
+          <span class="stat-value" id="weatherTemp">--°C</span>
+          <span class="stat-subtext" id="weatherCondition">Loading live data...</span>
+        </div>
+      </div>
+      
+      <div class="weather-stat-box">
+        <i class="fas fa-temperature-arrow-up stat-mini-icon" style="color: #f97316;"></i>
+        <div class="stat-info">
+          <span class="stat-label">Daily Range</span>
+          <span class="stat-value" id="weatherRange">--</span>
+          <span class="stat-subtext">Min / Max</span>
+        </div>
+      </div>
+
+      <div class="weather-stat-box">
+        <i class="fas fa-droplet stat-mini-icon" style="color: #0ea5e9;"></i>
+        <div class="stat-info">
+          <span class="stat-label">Humidity</span>
+          <span class="stat-value" id="weatherHumidity">--%</span>
+          <span class="stat-subtext">Relative Humidity</span>
+        </div>
+      </div>
+
+      <div class="weather-stat-box">
+        <i class="fas fa-wind stat-mini-icon" style="color: #64748b;"></i>
+        <div class="stat-info">
+          <span class="stat-label">Wind Speed</span>
+          <span class="stat-value" id="weatherWind">-- km/h</span>
+          <span class="stat-subtext" id="weatherSeason">Climate Norm</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weather Advisory Summary -->
+    <div class="weather-advice-box" id="weatherAdviceBox">
+      <i class="fas fa-info-circle info-icon"></i>
+      <div class="advice-content">
+        <strong>Seasonal Advisory: </strong>
+        <span id="weatherSummary">Analyzing local weather conditions for your journey...</span>
+      </div>
+    </div>
+
+    <!-- Smart Packing Checklist Header -->
+    <div class="packing-section-heading">
+      <div class="packing-heading-left">
+        <i class="fas fa-suitcase-rolling" style="color: #0284c7; font-size: 1.25rem;"></i>
+        <h3 class="packing-heading-title">Destination Smart Packing Checklist</h3>
+      </div>
+      <span class="packing-counter" id="packingCounter">0 / 0 packed</span>
+    </div>
+
+    <!-- Categorized Checklist Grid -->
+    <div class="packing-categories-grid" id="packingGrid">
+      <div class="packing-loading-skeleton">Loading smart packing checklist tailored for <%= (typeof destination !== 'undefined' && destination) ? destination : 'destination' %>...</div>
+    </div>
+  </div>
+
   <!-- Schedule Section -->
   <div class="header-card cars" style="margin-top: 3rem;">
     <h2 class="header-title">Schedule</h2>
@@ -291,6 +376,106 @@
 
 
         <script src="/js/map.js" defer></script>
+  <!-- Live Weather & Smart Packing Client Loader -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const city = "<%= (typeof destination !== 'undefined' && destination) ? destination : 'Jaipur' %>";
+      const month = "<%= (typeof month !== 'undefined' && month) ? month : '' %>";
+      
+      try {
+        const res = await fetch(`/api/weather?city=${encodeURIComponent(city)}&month=${encodeURIComponent(month)}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        
+        const iconEl = document.getElementById("weatherIcon");
+        const badgeEl = document.getElementById("weatherBadge");
+        const tempEl = document.getElementById("weatherTemp");
+        const condEl = document.getElementById("weatherCondition");
+        const rangeEl = document.getElementById("weatherRange");
+        const humEl = document.getElementById("weatherHumidity");
+        const windEl = document.getElementById("weatherWind");
+        const seasonEl = document.getElementById("weatherSeason");
+        const summaryEl = document.getElementById("weatherSummary");
+
+        if (iconEl) iconEl.textContent = data.icon || "🌤️";
+        if (badgeEl) {
+          badgeEl.textContent = data.isRainy ? "Monsoon / Rainy" : (data.season || (data.dataSource ? data.dataSource.split(" ")[0] : "Live Forecast"));
+          if (data.isRainy) badgeEl.classList.add("badge-rainy");
+        }
+        if (tempEl) tempEl.textContent = `${data.temperature}°C`;
+        if (condEl) condEl.textContent = data.condition || "Pleasant";
+        if (rangeEl) rangeEl.textContent = data.tempRange || `${data.temperature}°C`;
+        if (humEl) humEl.textContent = `${data.humidity}%`;
+        if (windEl) windEl.textContent = `${data.windSpeed} km/h`;
+        if (seasonEl) seasonEl.textContent = data.month || "Season";
+        if (summaryEl) summaryEl.textContent = data.summary || "";
+
+        const grid = document.getElementById("packingGrid");
+        if (!grid) return;
+        grid.innerHTML = "";
+
+        const cat = data.categorizedPacking || {};
+        const categories = [
+          { title: "Clothing & Layers", icon: "fa-tshirt", items: cat.clothing || [] },
+          { title: "Weather Gear & Protection", icon: "fa-umbrella", items: cat.weatherGear || [] },
+          { title: "Footwear & Mobility", icon: "fa-shoe-prints", items: cat.footwear || [] },
+          { title: "Essentials & Cultural Etiquette", icon: "fa-shield-halved", items: [...(cat.essentials || []), ...(cat.culturalTips || [])] }
+        ];
+
+        let totalItems = 0;
+        let checkedItems = 0;
+
+        function updateProgress() {
+          const counterEl = document.getElementById("packingCounter");
+          if (counterEl) {
+            counterEl.textContent = `${checkedItems} / ${totalItems} packed`;
+          }
+        }
+
+        categories.forEach(c => {
+          if (!c.items || c.items.length === 0) return;
+          totalItems += c.items.length;
+          const card = document.createElement("div");
+          card.className = "packing-category-card";
+          card.innerHTML = `
+            <div class="packing-cat-header">
+              <i class="fas ${c.icon}"></i>
+              <h4>${c.title}</h4>
+            </div>
+            <ul class="packing-items-list">
+              ${c.items.map(item => `
+                <li>
+                  <label class="packing-item-label">
+                    <input type="checkbox" class="pack-checkbox" />
+                    <span class="pack-text">${item}</span>
+                  </label>
+                </li>
+              `).join("")}
+            </ul>
+          `;
+          grid.appendChild(card);
+        });
+
+        grid.addEventListener("change", (e) => {
+          if (e.target && e.target.classList.contains("pack-checkbox")) {
+            const itemText = e.target.closest("label").querySelector(".pack-text");
+            if (e.target.checked) {
+              if (itemText) itemText.classList.add("item-packed");
+              checkedItems++;
+            } else {
+              if (itemText) itemText.classList.remove("item-packed");
+              checkedItems--;
+            }
+            updateProgress();
+          }
+        });
+
+        updateProgress();
+      } catch (e) {
+        console.warn("Could not load weather details:", e);
+      }
+    });
+  </script>
 </body>
 
 </html>
