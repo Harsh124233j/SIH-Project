@@ -227,7 +227,9 @@ body>* {
 #map {
   width: min(980px, calc(100% - 32px));
   height: 400px;
-  border-radius: 10px;
+  border: 1px solid #18314f;
+  border-radius: 24px;
+  overflow: hidden;
   margin-bottom: 2rem;
   margin-top: 2rem;
   margin-left: auto;
