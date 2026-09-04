@@ -54,64 +54,6 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-// In-memory OTP storage for verification (expires in 5 minutes)
-const otpStore = new Map();
-
-app.post('/api/auth/send-otp', (req, res) => {
-    const { contact } = req.body;
-    if (!contact) {
-        return res.status(400).json({ success: false, message: "Email or phone number is required." });
-    }
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    otpStore.set(contact.trim().toLowerCase(), {
-        otp,
-        expiresAt: Date.now() + 5 * 60 * 1000
-    });
-    console.log(`[AUTH] Generated OTP for ${contact}: ${otp}`);
-    res.json({
-        success: true,
-        message: `OTP sent successfully to ${contact}`,
-        otp,
-        expiresInSeconds: 300
-    });
-});
-
-app.post('/api/auth/verify-otp', (req, res) => {
-    const { contact, otp, userName } = req.body;
-    if (!contact || !otp) {
-        return res.status(400).json({ success: false, message: "Contact and OTP are required." });
-    }
-    const cleanContact = contact.trim().toLowerCase();
-    const stored = otpStore.get(cleanContact);
-
-    if ((stored && stored.otp === otp.trim() && stored.expiresAt > Date.now()) || otp.trim() === "123456") {
-        otpStore.delete(cleanContact);
-        const resolvedName = userName ? userName.trim() : (cleanContact.split('@')[0] || "Traveler");
-        res.setHeader('Set-Cookie', `userName=${encodeURIComponent(resolvedName)}; Path=/; SameSite=Lax`);
-        return res.json({
-            success: true,
-            message: "Verification successful!",
-            userName: resolvedName
-        });
-    }
-
-    return res.status(400).json({ success: false, message: "Invalid or expired OTP. Please try again." });
-});
-
-app.post('/api/auth/register', (req, res) => {
-    const { name, email, phone } = req.body;
-    if (!name || (!email && !phone)) {
-        return res.status(400).json({ success: false, message: "Name and contact are required." });
-    }
-    const resolvedName = name.trim();
-    res.setHeader('Set-Cookie', `userName=${encodeURIComponent(resolvedName)}; Path=/; SameSite=Lax`);
-    res.json({
-        success: true,
-        message: "Registration successful!",
-        userName: resolvedName
-    });
-});
-
 app.get('/aboutus', (req, res) => {
     res.render('about-us.ejs');
 });
