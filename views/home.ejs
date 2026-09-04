@@ -324,21 +324,22 @@
         userBtn.title = "Click to log out";
       }
 
-      const logoutBtn = document.getElementById('logout-btn');
+      if (userBtn) {
+        userBtn.addEventListener('click', (e) => {
+          // If clicked while logged in, log out cleanly
+          if (userBtn.textContent.includes('Welcome')) {
+            e.preventDefault();
 
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-          e.preventDefault();
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('userEmail');
+            sessionStorage.removeItem('userName');
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
 
-          sessionStorage.removeItem('isLoggedIn');
-          sessionStorage.removeItem('userEmail');
-          sessionStorage.removeItem('userName');
-          localStorage.removeItem('isLoggedIn');
-          localStorage.removeItem('userEmail');
-          localStorage.removeItem('userName');
-
-          document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-          window.location.href = '/logout';
+            document.cookie = "userName=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = '/logout';
+          }
         });
       }
     });
