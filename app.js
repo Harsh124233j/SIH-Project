@@ -108,6 +108,9 @@ app.get("/api/streamItinerary", async (req, res) => {
     //. Cache Check: Agar data mil jaye toh instantly return karein (0ms AI wait)
     if (appCache.has(cacheKey)) {
       const cachedData = appCache.get(cacheKey);
+      finalAns = cachedData;
+      finalAns.place = place;
+      finalAns.month = month;
       res.write(`data: ${JSON.stringify({ type: 'full', data: cachedData })}\n\n`);
       res.write("data: [DONE]\n\n");
       return res.end();
@@ -254,6 +257,8 @@ EXPECTED JSON SCHEMA:
     if (jsonMatch) {
       const repairedJson = jsonrepair(jsonMatch[0]);
       finalAns = JSON.parse(repairedJson);
+      finalAns.place = place;
+      finalAns.month = month;
       appCache.set(cacheKey, finalAns);
     }
 
@@ -268,10 +273,13 @@ EXPECTED JSON SCHEMA:
 
 // showing data for a particular day
 app.get("/showItinerary/:day", (req, res) => {
-  // if data for day 1 is called before generating itinerary then send to home
-if (!finalAns) {
-  return res.send("404! Page not found");
-}
+  if (!finalAns) {
+    if (mockData && mockData.itinerary) {
+      finalAns = mockData;
+    } else {
+      return res.send("404! Page not found");
+    }
+  }
 let { day } = req.params;
 const dayNum = Number(day);
 let dayItinerary;
@@ -291,12 +299,13 @@ for (let accom of finalAns["accommodations"]) {
 }
 
   // Generate real booking deep links for this day's accommodation and transit
-  const destination = (dayAccom && dayAccom.location) ? dayAccom.location : "Jaipur";
+  const destination = req.query.place || (finalAns && finalAns.place) || (dayAccom && dayAccom.location) || (dayItinerary && dayItinerary.main_destination) || "Jaipur";
+  const month = req.query.month || (finalAns && finalAns.month) || "";
   const hotelName = (dayAccom && dayAccom.name) ? dayAccom.name : "";
   const bookingLinks = getBookingLinks({ origin: "Prayagraj", destination, hotelName });
 
   // rendering details 
-  res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks, MAP_API_KEY: process.env.MAP_API_KEY });
+  res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks, destination, month, MAP_API_KEY: process.env.MAP_API_KEY });
 });
 
 
@@ -311,6 +320,18 @@ app.get("/api/booking-options", (req, res) => {
   const { origin = "Prayagraj", destination = "Jaipur", hotel = "", hubType = "" } = req.query;
   const links = getBookingLinks({ origin, destination, hotelName: hotel, hubType });
   res.json(links);
+});
+
+// Live Weather & Smart Packing Forecast API (Exclusive for showDetails.ejs)
+app.get("/api/weather", async (req, res) => {
+  const { city = "Jaipur", month = "", date = "" } = req.query;
+  try {
+    const weatherData = await getWeatherAndPacking(city, month, date);
+    res.json(weatherData);
+  } catch (err) {
+    console.error("Weather route error:", err);
+    res.status(500).json({ error: "Failed to load weather" });
+  }
 });
 
 app.get("/myTrips", async (req, res) => {
@@ -367,11 +388,21 @@ app.post("/save-trip", async (req, res) => {
     }
 });
 
-app.get("/myTrips", (req, res)=>{
-  const {place, month, days, noOfTravelers, budget, language} = req.query;
-
-  res.render("myTrips.ejs");
-})
+app.post("/myTrips/delete/:id", async (req, res) => {
+    const userName = getUserFromCookie(req);
+    if (!userName) {
+        return res.redirect("/login");
+    }
+    try {
+        const { id } = req.params;
+        await Trip.findOneAndDelete({ _id: id, userName: userName });
+        console.log(`Trip ${id} deleted for user ${userName}`);
+        res.redirect("/myTrips");
+    } catch (err) {
+        console.error("Error deleting trip:", err);
+        res.redirect("/myTrips");
+    }
+});
 
 app.get("/myTrips/saved/:id", async (req, res)=>{
   try{
@@ -381,7 +412,7 @@ app.get("/myTrips/saved/:id", async (req, res)=>{
       return res.send("Trip not found");
     }
     finalAns = trip.itineraryData;
-    res.render("show.ejs", {savedItinerary : trip.itineraryData, queryParams : {place : trip.place, days : trip.days}});
+    res.render("show.ejs", {savedItinerary : trip.itineraryData, queryParams : {place : trip.place, days : trip.days, month: trip.month, budget: trip.budgetType}});
   }catch(err){
     res.send("Error loading trip");
   }
