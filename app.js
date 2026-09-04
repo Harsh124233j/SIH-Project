@@ -1,6 +1,5 @@
 const { OpenRouter } = require("@openrouter/sdk");
-
-const User = require("./models/User");
+const Trip = require("./models/Trip");
 require("dotenv").config();
 const { jsonrepair } = require("jsonrepair");
 const mockData = require("./mockData.json");
@@ -28,7 +27,6 @@ mongoose.connect("mongodb://127.0.0.1:27017/sih-travel")
   .then(() => console.log("MongoDB Connected Successfully!"))
   .catch(err => console.log("MongoDB Connection Error:", err));
 
-let user_id, place, months, days;
 // Home page work 
 //hi
 // Helper to extract userName from cookies manually
@@ -89,21 +87,6 @@ app.get("/showItinerary", (req, res) => {
   res.render("show.ejs", { queryParams: req.query });
 });
 
-app.get("/mytrips", async (req, res) => {
-  const userName = getUserFromCookie(req);
-  if (!userName) {
-    return res.redirect("/login"); // Agar login nahi hai toh wapas bhej dein
-  }
-  try {
-    // Database se is user ki saari trips find karein (Latest pehle)
-    const userTrips = await Trip.find({ userName: userName }).sort({ savedAt: -1 });
-
-    res.render("mytrips.ejs", { trips: userTrips, user: userName });
-  } catch (err) {
-    console.error(err);
-    res.send("Error loading your trips");
-  }
-});
 
 app.get("/api/streamItinerary", async (req, res) => {
   res.setHeader("Content-type", "text/event-stream");
@@ -111,8 +94,8 @@ app.get("/api/streamItinerary", async (req, res) => {
   res.setHeader("Connection", "keep-alive");
   try {
     const location = "Prayagraj";
-    let { place, month, days, noOfTravelers, budget, language } = req.query;
-
+    const {place, month, days, noOfTravelers, budget, language} = req.query;
+    
     // Cache Key Generate
     const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}_${language}`.toLowerCase();
     //. Cache Check: Agar data mil jaye toh instantly return karein (0ms AI wait)
@@ -128,10 +111,10 @@ app.get("/api/streamItinerary", async (req, res) => {
     const request = getPrompt(conditions, language);
 
     //making the api call
-    const completion = await openrouter.chat.send({
+   const completion = await openrouter.chat.send({
       chatRequest: {
         max_tokens: 4000,
-        model: "openrouter/free",
+        model: "nvidia/nemotron-3-ultra-550b-a55b:free",
         response_format: {
           type: "json_object",
         },
@@ -139,8 +122,105 @@ app.get("/api/streamItinerary", async (req, res) => {
           {
             role: "system",
             // schema of the ai response 
-            content:
-              'You are a strict data-formatting API. Your only job is to generate a travel itinerary based on the user\'s constraints and return it strictly as a JSON object matching the exact schema provided below. Do not include conversational filler, greetings, or markdown code blocks outside the JSON.\n\n IMPORTANT: Write all descriptive text, summaries, and details in ${language}. BUT, keep all the JSON keys EXACTLY as they are in the schema below (in English). Only translate the string values.\n\n EXPECTED JSON SCHEMA:\n{\n  "trip_overview": "String - A short summary of the trip",\n  "transport_hubs": [\n    {\n      "hub_type": "String - Airport, Station, Bus Stand",\n      "name": "String",\n      "travel_to_main_destination": "String",\n      "estimated_fare": "String"\n    }\n  ],\n  "budget_estimate": {\n    "budget": {\n      "accommodation": "String",\n      "local_transport": "String",\n      "intercity_transport": "String",\n      "entry_tickets": "String",\n      "food": "String",\n      "misc": "String",\n      "total": "String"\n    },\n    "mid_range": {\n      "accommodation": "String",\n      "local_transport": "String",\n      "intercity_transport": "String",\n      "entry_tickets": "String",\n      "food": "String",\n      "misc": "String",\n      "total": "String"\n    },\n    "comfortable": {\n      "accommodation": "String",\n      "local_transport": "String",\n      "intercity_transport": "String",\n      "entry_tickets": "String",\n      "food": "String",\n      "misc": "String",\n      "total": "String"\n    }\n  },\n  "accommodations": [\n    {\n      "day": "Number",\n      "name": "String",\n      "type": "String - e.g., Homestay",\n      "price_per_night": "String",\n      "location": "String",\n      "facilities": ["String"],\n      "why_choose": "String",\n      "certifications_or_reviews": "String"\n    }\n  ],\n  "itinerary": [\n    {\n      "day": "Number",\n      "title": "String - Theme of the day",\n      "schedule": [\n        {\n          "time": "String - e.g., 09:00 AM - 11:30 AM",\n          "activity": "String",\n          "description": "String - Details including hidden gems"\n        }\n      ],\n      "artisan_experience": {\n        "workshop_name": "String - Verified name or type",\n        "craft_type": "String",\n        "authenticity_details": "String",\n        "practical_info": "String"\n      },\n      "travel_between_locations": [\n        {\n          "from": "String",\n          "to": "String",\n          "distance": "String",\n          "estimated_time": "String",\n          "recommended_mode": "String",\n          "options": [\n            {\n              "mode": "String - e.g., Local Bus, Private Taxi",\n              "fare": "String"\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  "verification_notes": "String - Note which prices/times are official vs estimated",\n  "summary_table": [\n    {\n      "day": "Number",\n      "main_destination": "String",\n      "key_activities": "String",\n      "overnight_stay": "String"\n    }\n  ]\n}',
+            content: `You are a strict data-formatting API. Your only job is to generate a travel itinerary based on the user's constraints and return it strictly as a JSON object matching the exact schema provided below. Do not include conversational filler, greetings, or markdown code blocks outside the JSON.
+DO NOT explain your reasoning. DO NOT use <think> tags. Directly output the JSON and nothing else.            
+IMPORTANT: Write all descriptive text, summaries, and details in ${language}. BUT, keep all the JSON keys EXACTLY as they are in the schema below (in English). Only translate the string values. Keep all translated descriptions concise (under 2 sentences) to ensure fast generation.
+EXPECTED JSON SCHEMA:
+{
+  "trip_overview": "String - A short summary of the trip",
+  "transport_hubs": [
+    {
+      "hub_type": "String - Airport, Station, Bus Stand",
+      "name": "String",
+      "travel_to_main_destination": "String",
+      "estimated_fare": "String"
+    }
+  ],
+  "budget_estimate": {
+    "budget": {
+      "accommodation": "String",
+      "local_transport": "String",
+      "intercity_transport": "String",
+      "entry_tickets": "String",
+      "food": "String",
+      "misc": "String",
+      "total": "String"
+    },
+    "mid_range": {
+      "accommodation": "String",
+      "local_transport": "String",
+      "intercity_transport": "String",
+      "entry_tickets": "String",
+      "food": "String",
+      "misc": "String",
+      "total": "String"
+    },
+    "comfortable": {
+      "accommodation": "String",
+      "local_transport": "String",
+      "intercity_transport": "String",
+      "entry_tickets": "String",
+      "food": "String",
+      "misc": "String",
+      "total": "String"
+    }
+  },
+  "accommodations": [
+    {
+      "day": "Number",
+      "name": "String",
+      "type": "String - e.g., Homestay",
+      "price_per_night": "String",
+      "location": "String",
+      "facilities": ["String"],
+      "why_choose": "String",
+      "certifications_or_reviews": "String"
+    }
+  ],
+  "itinerary": [
+    {
+      "day": "Number",
+      "title": "String - Theme of the day",
+      "schedule": [
+        {
+          "time": "String - e.g., 09:00 AM - 11:30 AM",
+          "activity": "String",
+          "description": "String - Details including hidden gems"
+        }
+      ],
+      "artisan_experience": {
+        "workshop_name": "String - Verified name or type",
+        "craft_type": "String",
+        "authenticity_details": "String",
+        "practical_info": "String"
+      },
+      "travel_between_locations": [
+        {
+          "from": "String",
+          "to": "String",
+          "distance": "String",
+          "estimated_time": "String",
+          "recommended_mode": "String",
+          "options": [
+            {
+              "mode": "String - e.g., Local Bus, Private Taxi",
+              "fare": "String"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "verification_notes": "String - Note which prices/times are official vs estimated",
+  "summary_table": [
+    {
+      "day": "Number",
+      "main_destination": "String",
+      "key_activities": "String",
+      "overnight_stay": "String"
+    }
+  ]
+}`,
           },
           {
             role: "user",
@@ -179,6 +259,39 @@ app.get("/api/streamItinerary", async (req, res) => {
   }
 });
 
+// showing data for a particular day
+app.get("/showItinerary/:day", (req, res) => {
+  // if data for day 1 is called before generating itinerary then send to home
+if (!finalAns) {
+  return res.send("404! Page not found");
+}
+let { day } = req.params;
+const dayNum = Number(day);
+let dayItinerary;
+let dayAccom;
+// finding itinerary of part day
+for (let portion of finalAns["itinerary"]) {
+  if (portion["day"] === dayNum) {
+    dayItinerary = portion;
+  }
+}
+// finding accomodations of part day
+for (let accom of finalAns["accommodations"]) {
+  if (accom["day"] === dayNum) {
+    dayAccom = accom;
+    break;
+  }
+}
+
+  // Generate real booking deep links for this day's accommodation and transit
+  const destination = (dayAccom && dayAccom.location) ? dayAccom.location : "Jaipur";
+  const hotelName = (dayAccom && dayAccom.name) ? dayAccom.name : "";
+  const bookingLinks = getBookingLinks({ origin: "Prayagraj", destination, hotelName });
+
+  // rendering details 
+  res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks, MAP_API_KEY: process.env.MAP_API_KEY });
+});
+
 
 // Dedicated Real-Time Booking Page
 app.get("/booking", (req, res) => {
@@ -193,116 +306,79 @@ app.get("/api/booking-options", (req, res) => {
   res.json(links);
 });
 
+app.get("/myTrips", async (req, res) => {
+    const userName = getUserFromCookie(req);
+    if (!userName) {
+        return res.redirect("/login"); // Agar login nahi hai toh wapas bhej dein
+    }
+    try {
+        // Database se is user ki saari trips find karein (Latest pehle)
+        const userTrips = await Trip.find({ userName: userName }).sort({ savedAt: -1 });
+        
+        res.render("mytrips.ejs", { trips: userTrips, user: userName });
+    } catch (err) {
+        console.error(err);
+        res.send("Error loading your trips");
+    }
+});
+
+
 app.post("/save-trip", async (req, res) => {
-  // Cookie se user nikalna
-  const userName = getUserFromCookie(req);
-  if (!userName) {
-    return res.status(401).send("Please login to save trips.");
-  }
-  const { place, days, month, noOfTravelers, budget } = req.body;
-
-  // Wahi same Cache Key banayen jo api/streamItinerary mein banai thi
-  const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}`.toLowerCase();
-
-  // Cache se generated JSON (finalAns) nikalein
-  const generatedData = appCache.get(cacheKey);
-  if (!generatedData) {
-    return res.status(400).send("No itinerary found to save. Please generate again.");
-  }
-  try {
-    // Naya Trip document banakar MongoDB mein save karein
-    const newTrip = new Trip({
-      userName: userName,
-      place: place,
-      days: days,
-      month: month,
-      budgetType: budget,
-      itineraryData: generatedData
-    });
-
-    await newTrip.save();
-    console.log("Trip saved successfully!");
-    res.redirect("/mytrips"); // Save hone ke baad My Trips page par bhej dein
-
-  } catch (err) {
-    console.error("Error saving trip:", err);
-    res.status(500).send("Error saving trip");
-  }
-});
-
-// showing data for a particular day
-app.get("/showItinerary/:day", (req, res) => {
-  // if data for day 1 is called before generating itinerary then send to home
-  if (!finalAns) {
-    return res.send("404! Page not found");
-  }
-  let { day } = req.params;
-  const dayNum = Number(day);
-  let dayItinerary;
-  let dayAccom;
-  // finding itinerary of part day
-  for (let portion of finalAns["itinerary"]) {
-    if (portion["day"] === dayNum) {
-      dayItinerary = portion;
+    // Cookie se user nikalna
+    const userName = getUserFromCookie(req);
+    if (!userName) {
+        return res.status(401).send("Please login to save trips.");
     }
-  }
-  // finding accomodations of part day
-  for (let accom of finalAns["accommodations"]) {
-    if (accom["day"] === dayNum) {
-      dayAccom = accom;
-      break;
+    const { place, days, month, noOfTravelers, budget , language} = req.body;
+    
+    // Wahi same Cache Key banayen jo api/streamItinerary mein banai thi
+    const cacheKey = `${place}_${days}_${month}_${noOfTravelers}_${budget}_${language}`.toLowerCase();
+    
+    // Cache se generated JSON (finalAns) nikalein
+    const generatedData = appCache.get(cacheKey);
+    if (!generatedData) {
+        return res.status(400).send("No itinerary found to save. Please generate again.");
     }
-  }
-
-  // Generate real booking deep links for this day's accommodation and transit
-  const destination = (dayAccom && dayAccom.location) ? dayAccom.location : "Jaipur";
-  const hotelName = (dayAccom && dayAccom.name) ? dayAccom.name : "";
-  const bookingLinks = getBookingLinks({ origin: "Prayagraj", destination, hotelName });
-
-  // rendering details 
-  res.render("showDetails.ejs", { dayItinerary, dayAccom, bookingLinks, MAP_API_KEY: process.env.MAP_API_KEY });
-});
-
-// 1. API route to Toggle (Add/Remove) Favorite via AJAX
-app.post("/api/favorites/toggle", async (req, res) => {
-  const userName = getUserFromCookie(req);
-  if (!userName) return res.status(401).json({ error: "Please login first" });
-
-  const { cityName, activityTitle, description } = req.body;
-
-  try {
-    // Pehle check karein ki kya ye jagah already user ki favorite hai?
-    const existingFav = await Favorite.findOne({ userName, activityTitle });
-
-    if (existingFav) {
-      // Agar already hai, toh iska matlab user ne Heart (Un-favorite) kiya hai -> Delete kar do
-      await Favorite.findByIdAndDelete(existingFav._id);
-      return res.json({ message: "Removed from favorites", status: "removed" });
-    } else {
-      // Agar nahi hai, toh Naya Favorite Save kar do
-      const newFav = new Favorite({ userName, cityName, activityTitle, description });
-      await newFav.save();
-      return res.json({ message: "Added to favorites", status: "added" });
+    try {
+        // Naya Trip document banakar MongoDB mein save karein
+        const newTrip = new Trip({
+            userName: userName,
+            place: place,
+            days: days,
+            month: month,
+            budgetType: budget,
+            itineraryData: generatedData
+        });
+        
+        await newTrip.save();
+        console.log("Trip saved successfully!");
+        res.redirect("/myTrips"); // Save hone ke baad My Trips page par bhej dein
+        
+    } catch (err) {
+        console.error("Error saving trip:", err);
+        res.status(500).send("Error saving trip");
     }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server error" });
-  }
 });
 
-// 2. Wishlist Page Route (Jahan saare favorites dikhenge)
-app.get("/wishlist", async (req, res) => {
-  const userName = getUserFromCookie(req);
-  if (!userName) return res.redirect("/login");
+app.get("/myTrips", (req, res)=>{
+  const {place, month, days, noOfTravelers, budget, language} = req.query;
 
-  try {
-    const favorites = await Favorite.find({ userName }).sort({ savedAt: -1 });
-    res.render("wishlist.ejs", { favorites, user: userName });
-  } catch (err) {
-    console.error(err);
-    res.send("Error loading wishlist");
+  res.render("myTrips.ejs");
+})
+
+app.get("/myTrips/saved/:id", async (req, res)=>{
+  try{
+    let {id} = req.params;
+    const trip = await Trip.findById(id);
+    if(!trip){
+      return res.send("Trip not found");
+    }
+    finalAns = trip.itineraryData;
+    res.render("show.ejs", {savedItinerary : trip.itineraryData, queryParams : {place : trip.place, days : trip.days}});
+  }catch(err){
+    res.send("Error loading trip");
   }
-});
+})
 
 app.listen(8080, () => {
   console.log(`Server listening on port 8080`);
