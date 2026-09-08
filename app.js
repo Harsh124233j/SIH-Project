@@ -1,4 +1,4 @@
-const { OpenRouter } = require("@openrouter/sdk");
+const { GoogleGenAI } = require("@google/genai");
 const Trip = require("./models/Trip");
 require("dotenv").config();
 const { jsonrepair } = require("jsonrepair");
@@ -83,9 +83,9 @@ app.get("/showResults", (req, res) => {
 // ai-integration work
 
 
-const openrouter = new OpenRouter({
+const ai = new GoogleGenAI({
   apiKey:
-    process.env.MY_API_KEY,
+    process.env.MY_API_KEY || process.env.GEMINI_API_KEY,
 });
 let finalAns;
 
@@ -124,19 +124,12 @@ app.get("/api/streamItinerary", async (req, res) => {
     // getting prompt from other file 
     const request = getPrompt(conditions, language);
 
-    //making the api call
-   const completion = await openrouter.chat.send({
-      chatRequest: {
-        max_tokens: 4000,
-        model: "nvidia/nemotron-3-ultra-550b-a55b:free",
-        response_format: {
-          type: "json_object",
-        },
-        messages: [
-          {
-            role: "system",
-            // schema of the ai response 
-            content: `You are a strict data-formatting API. Your only job is to generate a travel itinerary based on the user's constraints and return it strictly as a JSON object matching the exact schema provided below. Do not include conversational filler, greetings, or markdown code blocks outside the JSON.
+   //making the api call
+    const responseStream = await ai.models.generateContentStream({
+      model: "gemini-3.6-flash",
+      contents: request,
+      config: {
+        systemInstruction: `You are a strict data-formatting API. Your only job is to generate a travel itinerary based on the user's constraints and return it strictly as a JSON object matching the exact schema provided below. Do not include conversational filler, greetings, or markdown code blocks outside the JSON.
 DO NOT explain your reasoning. DO NOT use <think> tags. Directly output the JSON and nothing else.            
 IMPORTANT: Write all descriptive text, summaries, and details in ${language}. BUT, keep all the JSON keys EXACTLY as they are in the schema below (in English). Only translate the string values. Keep all translated descriptions concise (under 2 sentences) to ensure fast generation.
 EXPECTED JSON SCHEMA:
@@ -235,19 +228,13 @@ EXPECTED JSON SCHEMA:
     }
   ]
 }`,
-          },
-          {
-            role: "user",
-            content: request,
-          },
-        ],
-        stream: true,
-      },
+        responseMimeType: "application/json"
+      }
     });
 
     let fullRawString = "";
-    for await (const chunk of completion) {
-      const textChunk = chunk.choices[0]?.delta?.content || "";
+    for await (const chunk of responseStream) {
+      const textChunk = chunk.text || "";
       if (textChunk) {
         fullRawString += textChunk;
         process.stdout.write(textChunk);
